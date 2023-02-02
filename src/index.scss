@@ -1,0 +1,36 @@
+:root {
+  --light-blue: #5390c9;
+  --very-light-blue: #e4eaf3;
+  --dark-blue: #0a4b88;
+  --light-gray: #f1f1f1;
+  --dark: #292929;
+
+  --font-Roboto: "Roboto", sans-serif;
+  --font-spaceGrotesk: "Space Grotesk", sans-serif;
+
+  --fw-regular: 400;
+  --fw-meduim: 500;
+  --fw-bold: 700;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  font-size: 100%;
+}
+
+ul {
+  list-style-type: none;
+}
+
+body {
+  font-family: var(--font-Roboto);
+}
+
+.wrapper {
+  max-width: 1234px;
+  width: 90%;
+  margin: 0 auto;
+}
