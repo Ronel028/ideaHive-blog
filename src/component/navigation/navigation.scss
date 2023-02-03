@@ -3,17 +3,82 @@
   height: auto;
   background-color: var(--light-blue);
   padding: 20px 0;
+  position: fixed;
+  top: 0;
 
   .nav-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
+    .logo {
+      font-family: var(--font-spaceGrotesk);
+      font-weight: var(--fw-bold);
+      font-size: 24px;
+      color: var(--light-gray);
+    }
+
     // link for desktop design
     .nav-links-desktop {
-      display: flex;
+      display: none; //flex
       align-items: center;
       gap: 37px;
+
+      @media screen and (min-width: 744px) {
+        display: flex;
+      }
+
+      li {
+        .link-desktop {
+          color: var(--light-gray);
+          font-size: 1rem;
+          font-weight: var(--fw-regular);
+
+          &.link-btn {
+            background-color: var(--dark-blue);
+            padding: 9px 23px;
+            border-radius: 4px;
+          }
+        }
+      }
+    }
+
+    // menu btn
+    .menu-btn {
+      width: 30px;
+      height: 38px;
+      // background-color: rgb(173, 76, 76);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      overflow: hidden;
+      cursor: pointer;
+
+      input[type="checkbox"] {
+        display: none;
+      }
+      & > .line {
+        width: 100%;
+        height: 3px;
+        background-color: var(--light-gray);
+        transition: transform 0.2s ease-in-out;
+      }
+      input[type="checkbox"]:checked ~ .line1 {
+        transform: rotate(43deg) translate(8px, 8px);
+        transition: transform 0.2s ease-in-out;
+      }
+      input[type="checkbox"]:checked ~ .line2 {
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+      }
+      input[type="checkbox"]:checked ~ .line3 {
+        transform: rotate(-45deg) translate(7px, -6px);
+        transition: transform 0.2s ease-in-out;
+      }
+
+      @media screen and (min-width: 744px) {
+        display: none;
+      }
     }
   }
 }

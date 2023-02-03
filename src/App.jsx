@@ -1,12 +1,12 @@
-import Navigation from "./component/navigation/navigation";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/home/Home";
 import "./App.scss";
 
 function App() {
   return (
-    <div>
-      <Navigation />
-      <h1>Testing</h1>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+    </Routes>
   );
 }
 
