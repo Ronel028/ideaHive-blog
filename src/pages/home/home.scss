@@ -1,0 +1,35 @@
+.home {
+  .header {
+    .hero {
+      margin-top: 71px;
+      padding: 45px 36px;
+      background-color: var(--hero-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      h1 {
+        font-family: var(--font-spaceGrotesk);
+        font-size: clamp(1.875rem, 0.835rem + 4.8232vw, 2.8125rem);
+        color: var(--dark);
+        font-weight: var(--fw-bold);
+        margin-bottom: 18px;
+        @media screen and (min-width: 744px) {
+          font-size: clamp(2.8125rem, 1.7429rem + 2.6087vw, 3.75rem);
+        }
+      }
+      p {
+        font-size: clamp(1.1875rem, 0.9102rem + 1.2862vw, 1.4375rem);
+        color: var(--dark);
+        font-weight: var(--fw-regular);
+        margin-bottom: 27px;
+      }
+      .cta-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}

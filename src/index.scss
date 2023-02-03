@@ -1,5 +1,6 @@
 :root {
   --light-blue: #5390c9;
+  --hero-bg: #c0daf3;
   --very-light-blue: #e4eaf3;
   --dark-blue: #0a4b88;
   --light-gray: #f1f1f1;
@@ -37,4 +38,18 @@ body {
   max-width: 1234px;
   width: 90%;
   margin: 0 auto;
+}
+
+#btn {
+  height: 31px;
+  // width: 99px;
+  padding: 0 23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--dark-blue);
+  color: var(--light-gray);
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: var(--fw-regular);
 }
