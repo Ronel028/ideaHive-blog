@@ -94,12 +94,11 @@
     }
   }
 }
-
 // link for mobile view
 .nav-links-mobile {
   background-color: var(--very-light-blue);
   padding: 21px 23px;
-  position: absolute;
+  position: fixed;
   top: -100vh;
   left: 0;
   right: 0;

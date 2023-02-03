@@ -1,8 +1,9 @@
 .home {
+  // header
   .header {
     .hero {
       margin-top: 71px;
-      padding: 45px 36px;
+      padding: 144px 36px;
       background-color: var(--hero-bg);
       display: flex;
       flex-direction: column;
@@ -30,6 +31,18 @@
         align-items: center;
         justify-content: center;
       }
+    }
+  }
+  // featured blog section
+  .feature-section {
+    padding: 36px 0px;
+    overflow: hidden;
+
+    .featuredBlog-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(341px, 1fr));
+      row-gap: 42px;
+      column-gap: 30px;
     }
   }
 }

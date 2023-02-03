@@ -10,7 +10,7 @@
   --font-spaceGrotesk: "Space Grotesk", sans-serif;
 
   --fw-regular: 400;
-  --fw-meduim: 500;
+  --fw-medium: 500;
   --fw-bold: 700;
 }
 
@@ -32,6 +32,8 @@ a {
 
 body {
   font-family: var(--font-Roboto);
+  color: var(--dark);
+  background-color: var(--light-gray);
 }
 
 .wrapper {
@@ -41,9 +43,9 @@ body {
 }
 
 #btn {
-  height: 31px;
+  height: 41px;
   // width: 99px;
-  padding: 0 23px;
+  padding: 9px 23px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,4 +54,17 @@ body {
   border-radius: 4px;
   font-size: 1rem;
   font-weight: var(--fw-regular);
+
+  &:hover {
+    background-color: rgba(10, 75, 136, 0.7);
+  }
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 1rem;
+  font-weight: var(--fw-bold);
+  margin-bottom: 28px;
 }
