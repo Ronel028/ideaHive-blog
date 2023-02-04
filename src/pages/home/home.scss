@@ -55,7 +55,7 @@
       grid-template-rows: repeat(2, auto);
       row-gap: 54px;
 
-      @media screen and (min-width: 800px) {
+      @media screen and (min-width: 1000px) {
         grid-template-columns: 1fr 378px;
         grid-template-rows: auto;
         column-gap: 41px;
@@ -63,8 +63,15 @@
       }
 
       .discover-container {
-        @media screen and (min-width: 800px) {
+        @media screen and (min-width: 1000px) {
+          margin-top: calc(20px + 28px);
           grid-area: category;
+        }
+        .sticky {
+          @media screen and (min-width: 1000px) {
+            position: sticky;
+            top: 100px;
+          }
         }
         h3 {
           font-size: 1rem;
@@ -86,8 +93,14 @@
         }
       }
       .blog-post-container {
-        @media screen and (min-width: 800px) {
+        @media screen and (min-width: 1000px) {
           grid-area: blog;
+        }
+        .blog {
+          display: grid;
+          grid-template-rows: auto;
+          grid-template-columns: 1fr;
+          row-gap: 53px;
         }
       }
     }

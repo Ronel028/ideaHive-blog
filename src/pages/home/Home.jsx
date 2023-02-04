@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Navigation from "../../component/navigation/navigation";
 import FeaturedBlog from "../../component/featured-blog/Featured-blog";
+import Blog from "../../component/blog/Blog";
 import featureBlogLogo from "../../assets/featured-blog.svg";
 import sampleProfile1 from "../../assets/sample-profile-1.jpeg";
 import sampleProfile2 from "../../assets/sample-profile-2.jpeg";
@@ -71,26 +72,28 @@ const Home = () => {
       <section className="blog-section">
         <div className="wrapper blog-container">
           <div className="discover-container">
-            <h3>Discover more what matters to you</h3>
-            <div className="topic-container">
-              <Link to="/programming" className="topic">
-                Programming
-              </Link>
-              <Link to="/technology" className="topic">
-                Technology
-              </Link>
-              <Link to="/science" className="topic">
-                Science
-              </Link>
-              <Link to="/space" className="topic">
-                Space
-              </Link>
-              <Link to="/self" className="topic">
-                Self Improvement
-              </Link>
-              <Link to="/ai" className="topic">
-                Artificial Inteligence
-              </Link>
+            <div className="sticky">
+              <h3>Discover more what matters to you</h3>
+              <div className="topic-container">
+                <Link to="/programming" className="topic">
+                  Programming
+                </Link>
+                <Link to="/technology" className="topic">
+                  Technology
+                </Link>
+                <Link to="/science" className="topic">
+                  Science
+                </Link>
+                <Link to="/space" className="topic">
+                  Space
+                </Link>
+                <Link to="/self" className="topic">
+                  Self Improvement
+                </Link>
+                <Link to="/ai" className="topic">
+                  Artificial Inteligence
+                </Link>
+              </div>
             </div>
           </div>
           <div className="blog-post-container">
@@ -98,6 +101,19 @@ const Home = () => {
               <img src={featureBlogLogo} alt="featureBlog logo" />
               Blog posts
             </h3>
+            <div className="blog">
+              <Blog />
+              <Blog />
+              <Blog />
+              <Blog />
+              <Blog />
+              <Blog />
+              <Blog />
+              <Blog />
+              <Blog />
+              <Blog />
+              <Blog />
+            </div>
           </div>
         </div>
       </section>
