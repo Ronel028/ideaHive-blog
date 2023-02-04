@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import chatGpt from "../../assets/chatGpt.jpeg";
 import sampleImage2 from "../../assets/sample-profile-2.jpeg";
 import "./blog.scss";
@@ -14,14 +15,16 @@ const Blog = () => {
           </div>
           <h3>John Doe</h3>
         </div>
-        <h2 className="blog-title">
-          ChatGPT in an iOS Shortcut — Worlds Smartest HomeKit Voice Assistant
-        </h2>
-        <p className="blog-desc">
-          Ever since I tried ChatGPT and GPT-3, everything else feels painfully
-          dumb and useless: Siri, Alexa, Google Home and all.
-        </p>
-        <p className="date-publish">Dec. 2, 2023</p>
+        <Link to="/blog-info" className="blog-info">
+          <h2 className="blog-title">
+            ChatGPT in an iOS Shortcut — Worlds Smartest HomeKit Voice Assistant
+          </h2>
+          <p className="blog-desc">
+            Ever since I tried ChatGPT and GPT-3, everything else feels
+            painfully dumb and useless: Siri, Alexa, Google Home and all.
+          </p>
+        </Link>
+        <p className="date-publish">Publish - Dec. 2, 2023</p>
       </div>
     </div>
   );

@@ -17,12 +17,12 @@
     }
     @media screen and (min-width: 744px) {
       grid-area: image;
-      height: auto;
+      height: 158px;
+      align-self: center;
     }
     img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
     }
   }
   .blog-description {
@@ -43,17 +43,33 @@
         }
       }
     }
-    .blog-title {
-      font-size: 1.5rem;
-      font-weight: var(--fw-bold);
-    }
-    .blog-desc {
-      font-size: 0.8125rem;
-      font-weight: var(--fw-medium);
+    .blog-info {
+      display: block;
+      color: var(--dark);
       margin-bottom: 13px;
+      .blog-title {
+        font-size: 1.5rem;
+        font-weight: var(--fw-bold);
+        max-height: 56px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -moz-box-orient: vertical;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .blog-desc {
+        font-size: 0.8125rem;
+        font-weight: var(--fw-medium);
+        max-height: 56px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -moz-box-orient: vertical;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
     }
     .date-publish {
-      font-size: 0.8125rem;
+      font-size: 0.6875rem;
       font-weight: var(--fw-regular);
       font-style: italic;
     }
