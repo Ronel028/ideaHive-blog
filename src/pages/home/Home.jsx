@@ -71,7 +71,7 @@ const Home = () => {
       {/* blog post */}
       <section className="blog-section">
         <div className="wrapper blog-container">
-          <div className="discover-container">
+          <aside className="discover-container">
             <div className="sticky">
               <h3>Discover more what matters to you</h3>
               <div className="topic-container">
@@ -95,7 +95,7 @@ const Home = () => {
                 </Link>
               </div>
             </div>
-          </div>
+          </aside>
           <div className="blog-post-container">
             <h3 className="title">
               <img src={featureBlogLogo} alt="featureBlog logo" />
