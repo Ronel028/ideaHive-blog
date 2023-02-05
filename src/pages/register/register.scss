@@ -10,8 +10,11 @@
 
   .register {
     background-color: var(--light-gray);
-    box-shadow: 4px 6px 9px 1px rgba(41, 41, 41, 0.5);
-    -webkit-box-shadow: 4px 6px 9px 1px rgba(41, 41, 41, 0.5);
+    border-radius: 4px;
+    background: var(--light-gray);
+    box-shadow: 17px 17px 34px #949494, -17px -17px 34px #ffffff; //
+    // box-shadow: 4px 6px 9px 1px rgba(41, 41, 41, 0.5);
+    // -webkit-box-shadow: 4px 6px 9px 1px rgba(41, 41, 41, 0.5);
     padding: 35px 13px;
 
     @media screen and (min-width: 600px) {
@@ -36,6 +39,9 @@
       margin-bottom: 34px;
       .login-link {
         font-weight: var(--fw-bold);
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
     .register-form {
