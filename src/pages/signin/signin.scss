@@ -1,4 +1,4 @@
-.register-container {
+.signin-container {
   width: 100%;
   height: auto;
   min-height: 100vh;
@@ -8,7 +8,7 @@
   justify-content: center;
   padding: calc(100vh - 90vh) 0;
 
-  .register {
+  .signin {
     background-color: var(--light-gray);
     border-radius: 4px;
     background: var(--light-gray);
@@ -35,14 +35,14 @@
       font-size: clamp(0.75rem, 0.7015rem + 0.2255vw, 0.875rem);
       font-weight: var(--fw-regular);
       margin-bottom: 34px;
-      .login-link {
+      .signup-link {
         font-weight: var(--fw-bold);
         &:hover {
           text-decoration: underline;
         }
       }
     }
-    .register-form {
+    .signin-form {
       & > .input-container {
         display: flex;
         flex-direction: column;
@@ -64,7 +64,7 @@
           font-weight: var(--fw-regular);
         }
       }
-      .register-btn {
+      .signin-btn {
         width: 100%;
         display: flex;
         justify-content: flex-end;

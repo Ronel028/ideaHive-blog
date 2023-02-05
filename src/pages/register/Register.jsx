@@ -28,6 +28,11 @@ const Register = () => {
             <label htmlFor="password">Password</label>
             <input type="password" name="password" id="password" />
           </div>
+          <div className="register-btn">
+            <button type="submit" id="btn">
+              Create account
+            </button>
+          </div>
         </form>
       </div>
     </main>
