@@ -1,5 +1,7 @@
 :root {
+  --blue: #1f5a90;
   --light-blue: #5390c9;
+  --grayish-blue: #6b7986;
   --hero-bg: #c0daf3;
   --very-light-blue: #e4eaf3;
   --dark-blue: #0a4b88;
@@ -74,4 +76,8 @@ body {
   font-size: 1rem;
   font-weight: var(--fw-bold);
   margin-bottom: 28px;
+}
+.sticky {
+  position: sticky;
+  top: 100px;
 }
