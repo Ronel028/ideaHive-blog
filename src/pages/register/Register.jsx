@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import "./register.scss";
 const Register = () => {
   return (
-    <main className="register-container">
+    <motion.main
+      className="register-container"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 1 }}
+    >
       <div className="wrapper register">
         <h1>Create an account</h1>
         <p>
@@ -35,7 +41,7 @@ const Register = () => {
           </div>
         </form>
       </div>
-    </main>
+    </motion.main>
   );
 };
 

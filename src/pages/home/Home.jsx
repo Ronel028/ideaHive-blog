@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import Navigation from "../../component/navigation/navigation";
 import FeaturedBlog from "../../component/featured-blog/Featured-blog";
 import Blog from "../../component/blog/Blog";
@@ -12,7 +13,12 @@ import sampleProfile6 from "../../assets/sample-profile-6.jpeg";
 import "./home.scss";
 const Home = () => {
   return (
-    <div className="home">
+    <motion.div
+      className="home"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 1 }}
+    >
       <header className="header">
         <Navigation />
         <main className="hero">
@@ -117,7 +123,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-    </div>
+    </motion.div>
   );
 };
 

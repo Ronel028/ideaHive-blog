@@ -1,10 +1,17 @@
+import { motion } from "framer-motion";
+import useResetScroll from "../../hook/useResetScroll";
 import Navigation from "../../component/navigation/navigation";
 import sampleProfile from "../../assets/sample-profile-2.jpeg";
 import sampleBlogImage from "../../assets/chatGpt.jpeg";
 import "./blogContent.scss";
 const BlogContent = () => {
+  useResetScroll();
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 1 }}
+    >
       <header>
         <Navigation />
       </header>
@@ -65,7 +72,7 @@ const BlogContent = () => {
           </div>
         </div>
       </main>
-    </>
+    </motion.div>
   );
 };
 
