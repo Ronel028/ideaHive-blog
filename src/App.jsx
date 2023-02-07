@@ -4,6 +4,7 @@ import Register from "./pages/register/Register";
 import Signin from "./pages/signin/Signin";
 import Story from "./pages/blog/Story";
 import BlogContent from "./pages/blogContent/BlogContent";
+import Profile from "./pages/profile/Profile";
 import "./App.scss";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Route path="/signin" element={<Signin />} />
       <Route path="/story" element={<Story />} />
       <Route path="/blog-info" element={<BlogContent />} />
+      <Route path="/profile-info" element={<Profile />} />
     </Routes>
   );
 }

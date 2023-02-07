@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import useResetScroll from "../../hook/useResetScroll";
 import Navigation from "../../component/navigation/navigation";
 import FeaturedBlog from "../../component/featured-blog/Featured-blog";
 import Blog from "../../component/blog/Blog";
@@ -12,6 +13,7 @@ import sampleProfile5 from "../../assets/sample-profile-5.jpeg";
 import sampleProfile6 from "../../assets/sample-profile-6.jpeg";
 import "./home.scss";
 const Home = () => {
+  useResetScroll();
   return (
     <motion.div
       className="home"

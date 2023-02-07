@@ -1,0 +1,104 @@
+.profile-main {
+  padding: 71px 0;
+  .profile-container {
+    margin-top: 39px;
+    padding: 27px 20px;
+    box-shadow: 3px 3px 8px -1px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 3px 3px 8px -1px rgba(0, 0, 0, 0.5);
+    .profile-title {
+      display: flex;
+      flex-direction: column;
+      gap: 19px;
+      margin-bottom: 60px;
+      @media screen and (min-width: 744px) {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+      h3 {
+        font-size: clamp(1.5625rem, 1.383rem + 0.8323vw, 2rem);
+      }
+      .edit-profile-container {
+        .edit-profile {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          color: var(--dark-blue);
+          font-size: 0.8125rem;
+        }
+      }
+    }
+    .profile {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 33px;
+      .profile-image {
+        width: 96px;
+        height: auto;
+        @media screen and (min-width: 389px) {
+          height: 96px;
+        }
+        img {
+          width: 100%;
+          height: auto;
+          @media screen and (min-width: 389px) {
+            height: 100%;
+          }
+        }
+      }
+      .profile-name {
+        display: flex;
+        flex-direction: column;
+        .name {
+          font-size: 1.25rem;
+          font-weight: var(--fw-bold);
+          margin-bottom: 1px;
+        }
+        .email {
+          font-size: 0.8125rem;
+          font-weight: var(--fw-regular);
+          flex: 1;
+        }
+        .join {
+          font-size: 0.8125rem;
+          font-weight: var(--fw-regular);
+        }
+      }
+    }
+    .about-container {
+      padding: 25px 0;
+      border-top: 1px solid var(--line-color);
+      border-bottom: 1px solid var(--line-color);
+      margin-bottom: 33px;
+      .about {
+        font-size: 1.375rem;
+        font-weight: var(--fw-bold);
+        margin-bottom: 25px;
+      }
+      p {
+        font-size: 0.875rem;
+        font-weight: var(--fw-regular);
+        line-height: 20px;
+        max-width: 475px;
+      }
+    }
+    .profile-blog {
+      h2 {
+        font-size: 1.375rem;
+        font-weight: var(--fw-bold);
+        margin-bottom: 25px;
+      }
+      .blog {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        row-gap: 47px;
+        @media screen and (min-width: 900px) {
+          grid-template-columns: repeat(2, 1fr);
+          grid-template-rows: auto;
+          column-gap: 48px;
+        }
+      }
+    }
+  }
+}
