@@ -1,0 +1,111 @@
+.update-content-main {
+  padding: calc(71px + 60px) 0;
+  .blog-content {
+    @media screen and (min-width: 900px) {
+      display: grid;
+      grid-template-columns: 1fr 371px;
+      column-gap: 84px;
+    }
+    .blog-content-left {
+      .profile-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 39px;
+        .profile {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          .image-container {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            img {
+              width: 100%;
+              height: 100%;
+              border-radius: inherit;
+            }
+          }
+          .name-container {
+            h5 {
+              font-size: 1rem;
+              font-weight: var(--fw-medium);
+              margin-bottom: 5px;
+            }
+            p {
+              font-size: 0.8125rem;
+              font-style: italic;
+              font-weight: var(--fw-regular);
+            }
+          }
+        }
+        .action {
+          display: flex;
+          align-items: center;
+          gap: 26px;
+          .update-blog {
+            height: 24px;
+          }
+          .delete-blog {
+            background-color: transparent;
+            cursor: pointer;
+          }
+        }
+      }
+      .content {
+        h1 {
+          font-size: 2rem;
+          font-weight: var(--fw-bold);
+          margin-bottom: 27px;
+        }
+        p {
+          font-size: 1.125rem;
+          font-weight: var(--fw-regular);
+          line-height: 29px;
+          margin-bottom: 27px;
+        }
+        .blog-image-container {
+          width: 100%;
+          height: auto;
+          margin-bottom: 27px;
+          @media screen and (min-width: 1000px) {
+            height: 464px;
+          }
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+    .blog-content-right {
+      display: none;
+      @media screen and (min-width: 900px) {
+        display: block;
+        padding-left: 24px;
+        border-left: 1px solid #d7d7d7;
+      }
+      .image-container {
+        width: 88px;
+        height: 88px;
+        border-radius: 50%;
+        margin-bottom: 12px;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: inherit;
+        }
+      }
+      h5 {
+        font-size: 1rem;
+        font-weight: var(--fw-medium);
+        margin-bottom: 25px;
+      }
+      .about {
+        font-size: 0.875rem;
+        font-weight: var(--fw-regular);
+      }
+    }
+  }
+}

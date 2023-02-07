@@ -59,10 +59,10 @@ const Profile = () => {
           <div className="profile-blog">
             <h2>Blog</h2>
             <main className="blog">
-              <Blog />
-              <Blog />
-              <Blog />
-              <Blog />
+              <Blog contentLink="blog-update" />
+              <Blog contentLink="blog-update" />
+              <Blog contentLink="blog-update" />
+              <Blog contentLink="blog-update" />
             </main>
           </div>
         </div>

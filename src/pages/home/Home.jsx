@@ -110,17 +110,17 @@ const Home = () => {
               Blog posts
             </h3>
             <div className="blog">
-              <Blog />
-              <Blog />
-              <Blog />
-              <Blog />
-              <Blog />
-              <Blog />
-              <Blog />
-              <Blog />
-              <Blog />
-              <Blog />
-              <Blog />
+              <Blog contentLink="blog-content" />
+              <Blog contentLink="blog-content" />
+              <Blog contentLink="blog-content" />
+              <Blog contentLink="blog-content" />
+              <Blog contentLink="blog-content" />
+              <Blog contentLink="blog-content" />
+              <Blog contentLink="blog-content" />
+              <Blog contentLink="blog-content" />
+              <Blog contentLink="blog-content" />
+              <Blog contentLink="blog-content" />
+              <Blog contentLink="blog-content" />
             </div>
           </div>
         </div>

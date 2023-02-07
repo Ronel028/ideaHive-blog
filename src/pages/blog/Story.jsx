@@ -56,18 +56,18 @@ const Story = () => {
           </div>
         </aside>
         <main className="blog">
-          <Blog />
-          <Blog />
-          <Blog />
-          <Blog />
-          <Blog />
-          <Blog />
-          <Blog />
-          <Blog />
-          <Blog />
-          <Blog />
-          <Blog />
-          <Blog />
+          <Blog contentLink="blog-content" />
+          <Blog contentLink="blog-content" />
+          <Blog contentLink="blog-content" />
+          <Blog contentLink="blog-content" />
+          <Blog contentLink="blog-content" />
+          <Blog contentLink="blog-content" />
+          <Blog contentLink="blog-content" />
+          <Blog contentLink="blog-content" />
+          <Blog contentLink="blog-content" />
+          <Blog contentLink="blog-content" />
+          <Blog contentLink="blog-content" />
+          <Blog contentLink="blog-content" />
         </main>
       </div>
     </motion.div>

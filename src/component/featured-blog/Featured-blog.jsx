@@ -9,7 +9,7 @@ const FeaturedBlog = (props) => {
         </div>
         <h4>{props.bloggerName}</h4>
       </div>
-      <Link to="/story" className="blog-title">
+      <Link to="/blog-content" className="blog-title">
         {props.blogTitle}
       </Link>
       <p className="blog-publish">publish - Jun 6, 2022</p>

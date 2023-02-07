@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import chatGpt from "../../assets/chatGpt.jpeg";
 import sampleImage2 from "../../assets/sample-profile-2.jpeg";
 import "./blog.scss";
-const Blog = () => {
+const Blog = (props) => {
   return (
     <div className="blog-info-container">
       <div className="image-container">
@@ -15,7 +15,7 @@ const Blog = () => {
           </div>
           <h3>John Doe</h3>
         </div>
-        <Link to="/blog-info" className="blog-info">
+        <Link to={`/${props.contentLink}`} className="blog-info">
           <h2 className="blog-title">
             ChatGPT in an iOS Shortcut — Worlds Smartest HomeKit Voice Assistant
           </h2>
