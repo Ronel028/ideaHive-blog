@@ -1,7 +1,7 @@
 .nav {
   width: 100%;
-  // height: auto;
-  height: 71px;
+  height: auto;
+  // height: 71px;
   background-color: var(--light-blue);
   padding: 20px 0;
   position: fixed;
@@ -30,7 +30,6 @@
       @media screen and (min-width: 744px) {
         display: flex;
       }
-
       li {
         .link-desktop {
           color: var(--light-gray);
@@ -46,6 +45,69 @@
             &:hover {
               background-color: rgba(10, 75, 136, 0.7);
             }
+          }
+          // if user login show this style
+          &.write-desktop {
+            background-color: var(--dark-blue);
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            padding: 12px 14px;
+            border-radius: 4px;
+          }
+        }
+      }
+      li.login-profile {
+        position: relative;
+        .profile-desktop {
+          background-color: transparent;
+          display: flex;
+          align-items: center;
+          gap: 7px;
+          border: 1px solid var(--dark-blue);
+          border-radius: 30px;
+          padding: 7px 15px;
+          cursor: pointer;
+          .profile-container {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            img {
+              width: 100%;
+              height: 100%;
+              border-radius: inherit;
+            }
+          }
+          #profile {
+            display: none;
+          }
+          #profile:checked ~ .menu-profile-desktop {
+            display: flex;
+          }
+        }
+        .menu-profile-desktop {
+          width: 207px;
+          height: auto;
+          background-color: var(--light-gray);
+          padding: 19px 15px;
+          position: absolute;
+          top: 59px;
+          right: 0px;
+          border-radius: 4px;
+          display: none;
+          flex-direction: column;
+          gap: 19px;
+          box-shadow: 2px 1px 9px 2px rgba(0, 0, 0, 0.5);
+          -webkit-box-shadow: 2px 1px 9px 2px rgba(0, 0, 0, 0.5);
+          animation: animate 0.2s ease-in-out;
+          .user,
+          .create-new,
+          .sign-out {
+            color: var(--dark);
+          }
+          .sign-out {
+            background-color: transparent;
+            text-align: left;
           }
         }
       }
@@ -126,5 +188,17 @@
     font-size: 1rem;
     font-weight: var(--fw-regular);
     color: var(--dark);
+  }
+}
+
+// animation
+@keyframes animate {
+  from {
+    opacity: 0;
+    display: none;
+  }
+  to {
+    opacity: 1;
+    display: flex;
   }
 }

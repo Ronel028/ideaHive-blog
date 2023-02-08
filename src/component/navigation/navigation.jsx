@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import sampleImage1 from "../../assets/sample-profile-1.jpeg";
 import "./navigation.scss";
 
 const Navigation = () => {
@@ -35,6 +36,45 @@ const Navigation = () => {
               </Link>
             </li>
             <li>
+              <Link to="contact" className="link-desktop write-desktop">
+                <svg
+                  width="18"
+                  height="19"
+                  viewBox="0 0 18 19"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15.75 2C4.5 2 3 12.5 2.25 17H3.7485C4.248 14.5003 5.49825 13.1255 7.5 12.875C10.5 12.5 12.75 9.875 13.5 7.625L12.375 6.875L13.125 6.125C13.875 5.375 14.628 4.25 15.75 2Z"
+                    fill="#F1F1F1"
+                  />
+                </svg>
+                Write
+              </Link>
+            </li>
+            <li className="login-profile">
+              <label
+                htmlFor="profile"
+                to="contact"
+                className="link-desktop profile-desktop"
+              >
+                <input type="checkbox" id="profile" />
+                Hi, John Doe
+                <div className="profile-container">
+                  <img src={sampleImage1} alt="" />
+                </div>
+                <div className="menu-profile-desktop">
+                  <Link to="/profile-info" className="user">
+                    User Profile
+                  </Link>
+                  <Link to="/signup" className="create-new">
+                    Create new account
+                  </Link>
+                  <button className="sign-out">Sign out</button>
+                </div>
+              </label>
+            </li>
+            {/* <li>
               <Link to="/signin" className="link-desktop">
                 Sign in
               </Link>
@@ -43,7 +83,7 @@ const Navigation = () => {
               <Link to="/signup" className="link-desktop link-btn">
                 Sign up
               </Link>
-            </li>
+            </li> */}
           </ul>
           {/* link for desktop */}
 
