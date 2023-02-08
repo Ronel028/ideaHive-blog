@@ -51,10 +51,11 @@
             background-color: var(--dark-blue);
             display: flex;
             align-items: center;
-            gap: 3px;
-            padding: 12px 14px;
+            gap: 8px;
+            padding: 9px 14px;
             border-radius: 4px;
             transition: background 0.2s ease-in-out;
+            font-size: 0.875rem;
             &:hover {
               background-color: rgba(10, 75, 136, 0.7);
             }
@@ -65,17 +66,18 @@
         position: relative;
         .profile-desktop {
           background-color: transparent;
+          font-size: 0.875rem;
           display: flex;
           align-items: center;
           gap: 7px;
           border: 1px solid var(--dark-blue);
           border-radius: 30px;
-          padding: 7px 15px;
+          padding: 6px 15px;
           cursor: pointer;
           transition: background 0.2s ease-in-out;
           .profile-container {
-            width: 30px;
-            height: 30px;
+            width: 25px;
+            height: 25px;
             border-radius: 50%;
             img {
               width: 100%;
@@ -99,7 +101,7 @@
           background-color: var(--light-gray);
           padding: 19px 15px;
           position: absolute;
-          top: 59px;
+          top: 51px;
           right: 0px;
           border-radius: 4px;
           display: none;
@@ -196,6 +198,9 @@
     font-size: 1rem;
     font-weight: var(--fw-regular);
     color: var(--dark);
+  }
+  .signout-mobile {
+    background-color: transparent;
   }
 }
 
