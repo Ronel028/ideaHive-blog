@@ -31,18 +31,27 @@ const Register = () => {
         "Content-Type": "multipart/form-data",
       },
     });
-    setError(regUser.data.error);
+    if (regUser.data.error) {
+      setError(regUser.data.error);
+    } else {
+      console.log(regUser.data);
+    }
   };
 
   // render error message
-  const errorMsg = (errorList) => {
-    if (errorList.length > 0) {
+  const errorMsg = () => {
+    if (error.length > 0) {
       return (
-        <ul id="error-message">
-          {errorList.map((err) => (
+        <motion.ul
+          id="error-message"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 1 }}
+        >
+          {error.map((err) => (
             <li key={err}>{err}</li>
           ))}
-        </ul>
+        </motion.ul>
       );
     } else {
       return "";
@@ -65,7 +74,7 @@ const Register = () => {
           </Link>
         </p>
         {/* error message */}
-        {errorMsg(error)}
+        {errorMsg()}
 
         <form className="register-form" onSubmit={registerUser}>
           <div className="input-container fname">
