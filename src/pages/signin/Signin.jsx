@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
 import "./signin.scss";
 const Signin = () => {
+  const navigate = useNavigate();
   const [inputVal, setInputVal] = useState({
     email: "",
     password: "",
   });
   const [error, setError] = useState("");
+  const [loader, setLoader] = useState(false);
 
+  // get the input value and save to state
   const getInputVal = (e) => {
     const { name, value } = e.target;
     setInputVal({
@@ -17,21 +20,32 @@ const Signin = () => {
       [name]: value,
     });
   };
+  // get the input value and save to state
 
+  // signin user
   const signin = async (e) => {
     e.preventDefault();
-    const signinUser = await axios.post("/user/signin", inputVal, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (signinUser.data.msg) {
-      window.location = "/";
-    } else {
-      setError(signinUser.data.error);
+    try {
+      setLoader(true);
+      const signinUser = await axios.post("/user/signin", inputVal, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (signinUser.data.msg) {
+        setLoader(false);
+        navigate("/");
+      } else {
+        throw signinUser.data.error;
+      }
+    } catch (error) {
+      setError(error);
     }
+    setLoader(false);
   };
+  // signin user
 
+  // return jsx syntax to display the error message if failed to login
   const displayError = () => {
     if (error.length > 0) {
       return (
@@ -63,6 +77,17 @@ const Signin = () => {
       return "";
     }
   };
+  // return jsx syntax to display the error message if failed to login
+
+  // loader
+  const displayLoader = () => {
+    if (loader) {
+      return <span className="loader"></span>;
+    } else {
+      return "";
+    }
+  };
+  // loader
 
   return (
     <motion.main
@@ -82,6 +107,7 @@ const Signin = () => {
 
         {/* signin error */}
         {displayError()}
+        {/* signin error */}
 
         <form className="signin-form" onSubmit={signin}>
           <div className="input-container email">
@@ -105,6 +131,7 @@ const Signin = () => {
           <div className="signin-btn">
             <button type="submit" id="btn">
               Sign in
+              {displayLoader()}
             </button>
           </div>
         </form>

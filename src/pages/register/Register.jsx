@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
 import "./register.scss";
 const Register = () => {
+  const navigate = useNavigate();
   const [inputVal, setInputVal] = useState({
     fname: "",
     lname: "",
@@ -34,7 +35,7 @@ const Register = () => {
     if (regUser.data.error) {
       setError(regUser.data.error);
     } else {
-      console.log(regUser.data);
+      navigate("/signin");
     }
   };
 

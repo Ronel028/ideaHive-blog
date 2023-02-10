@@ -100,14 +100,14 @@ button {
   li {
     position: relative;
     margin-left: 17px;
-    color: var(--error-color);
+    color: var(--dark);
     font-size: 14px;
     &::before {
       content: "";
       width: 5px;
       height: 5px;
       border-radius: 50%;
-      background-color: var(--error-color);
+      background-color: var(--dark);
       position: absolute;
       top: 50%;
       left: -15px;
