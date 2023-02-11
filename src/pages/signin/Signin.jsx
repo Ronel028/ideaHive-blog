@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
@@ -11,6 +11,19 @@ const Signin = () => {
   });
   const [error, setError] = useState("");
   const [loader, setLoader] = useState(false);
+
+  // use this function to validate this page if login or not
+  useEffect(() => {
+    const getSession = async () => {
+      const checkSession = await axios.get("/user/verified");
+      console.log(checkSession.data);
+      if (checkSession.data.isLogin) {
+        navigate("/");
+      }
+    };
+    getSession();
+  }, []);
+  // use this function to validate this page if login or not
 
   // get the input value and save to state
   const getInputVal = (e) => {

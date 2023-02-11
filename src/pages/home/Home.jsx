@@ -1,5 +1,7 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import axios from "axios";
 import useResetScroll from "../../hook/useResetScroll";
 import Navigation from "../../component/navigation/navigation";
 import FeaturedBlog from "../../component/featured-blog/Featured-blog";
@@ -14,6 +16,17 @@ import sampleProfile6 from "../../assets/sample-profile-6.jpeg";
 import "./home.scss";
 const Home = () => {
   useResetScroll();
+  const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState(false);
+
+  const getSession = async () => {
+    const checkSession = await axios.get("/user/verified");
+    if (checkSession.data.isLogin) {
+      setIsLogin(checkSession.data.isLogin);
+    }
+  };
+  getSession();
+
   return (
     <motion.div
       className="home"
@@ -22,7 +35,7 @@ const Home = () => {
       exit={{ opacity: 1 }}
     >
       <header className="header">
-        <Navigation />
+        <Navigation isLogin={isLogin} />
         <main className="hero">
           <div className="wrapper">
             <h1>Discover insights and inspiration</h1>
