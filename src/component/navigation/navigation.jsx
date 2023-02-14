@@ -2,9 +2,12 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import sampleImage1 from "../../assets/sample-profile-1.jpeg";
+import userAuth from "../../hook/userAuth";
 import "./navigation.scss";
 
-const Navigation = (props) => {
+const Navigation = () => {
+  const navigate = useNavigate();
+  const [userProfile] = userAuth("/user/verified"); //berify if the user is login
   const [displayMenu, setDisplayMenu] = useState(false);
 
   const handleChange = () => {
@@ -12,7 +15,7 @@ const Navigation = (props) => {
   };
 
   const useLogin = () => {
-    if (props.isLogin) {
+    if (userProfile.isLogin) {
       return (
         <>
           <li>
@@ -39,7 +42,7 @@ const Navigation = (props) => {
               className="link-desktop profile-desktop"
             >
               <input type="checkbox" id="profile" />
-              Hi, John Doe
+              Hi, {`${userProfile.fname} ${userProfile.lname}`}
               <div className="profile-container">
                 <img src={sampleImage1} alt="" />
               </div>
@@ -50,7 +53,9 @@ const Navigation = (props) => {
                 <Link to="/signup" className="create-new">
                   Create new account
                 </Link>
-                <button className="sign-out">Sign out</button>
+                <button className="sign-out" onClick={signoutUser}>
+                  Sign out
+                </button>
               </div>
             </label>
           </li>
@@ -71,6 +76,20 @@ const Navigation = (props) => {
           </li>
         </>
       );
+    }
+  };
+
+  // function for signout user
+  const signoutUser = async () => {
+    try {
+      const signout = await axios.get("/user/signout");
+      if (signout.data.isLogout) {
+        navigate("/signin");
+      } else {
+        throw signout.data.error;
+      }
+    } catch (error) {
+      window.alert(error);
     }
   };
 

@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { motion } from "framer-motion";
+import moment from "moment";
 import useResetScroll from "../../hook/useResetScroll";
 import Blog from "../../component/blog/Blog";
 import Navigation from "../../component/navigation/navigation";
@@ -8,6 +11,31 @@ import "./profile.scss";
 
 const Profile = () => {
   useResetScroll(); // reset the window location set to top when this page is active
+  const [user, setUser] = useState({
+    fname: "",
+    lname: "",
+    email: "",
+    dateJoined: "",
+    about: "",
+  });
+
+  useEffect(() => {
+    const userProfile = async () => {
+      const userData = await axios.get("/user/info");
+      setUser({
+        ...user,
+        fname: userData.data.userData[0].fname,
+        lname: userData.data.userData[0].lname,
+        email: userData.data.userData[0].email,
+        dateJoined: userData.data.userData[0].dateJoined,
+        about: userData.data.userData[0].about,
+      });
+    };
+    userProfile();
+  }, []);
+
+  console.log(user);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -44,17 +72,16 @@ const Profile = () => {
               <img src={sampleProfile3} alt="" />
             </div>
             <div className="profile-name">
-              <h4 className="name">John Doe</h4>
-              <p className="email">johndoe@gmail.com</p>
-              <p className="join">Join - Feb. 20, 2022</p>
+              <h4 className="name">{`${user.fname} ${user.lname}`}</h4>
+              <p className="email">{user.email}</p>
+              <p className="join">
+                Join - {moment(user.dateJoined).format("ll")}
+              </p>
             </div>
           </div>
           <div className="about-container">
             <h2 className="about">About</h2>
-            <p>
-              Senior Web Developer, Creative Technologistwith over 12 years
-              experience | JavaScript, HTML, CSS, Artificial Intelligence
-            </p>
+            <p>{user.about === "" ? "N/A" : user.about}</p>
           </div>
           <div className="profile-blog">
             <h2>Blog</h2>

@@ -17,15 +17,6 @@ import "./home.scss";
 const Home = () => {
   useResetScroll();
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(false);
-
-  const getSession = async () => {
-    const checkSession = await axios.get("/user/verified");
-    if (checkSession.data.isLogin) {
-      setIsLogin(checkSession.data.isLogin);
-    }
-  };
-  getSession();
 
   return (
     <motion.div
@@ -35,7 +26,7 @@ const Home = () => {
       exit={{ opacity: 1 }}
     >
       <header className="header">
-        <Navigation isLogin={isLogin} />
+        <Navigation />
         <main className="hero">
           <div className="wrapper">
             <h1>Discover insights and inspiration</h1>

@@ -7,7 +7,9 @@ export default defineConfig({
     proxy: {
       "/user/register": "http://localhost:3000",
       "/user/signin": "http://localhost:3000",
+      "/user/signout": "http://localhost:3000",
       "/user/verified": "http://localhost:3000",
+      "/user/info": "http://localhost:3000",
     },
   },
   css: {
