@@ -6,7 +6,7 @@ import moment from "moment";
 import useResetScroll from "../../hook/useResetScroll";
 import Blog from "../../component/blog/Blog";
 import Navigation from "../../component/navigation/navigation";
-import sampleProfile3 from "../../assets/sample-profile-3.jpeg";
+import altProfile from "../../assets/profile-alt.jpeg";
 import "./profile.scss";
 
 const Profile = () => {
@@ -69,7 +69,7 @@ const Profile = () => {
           </div>
           <div className="profile">
             <div className="profile-image">
-              <img src={sampleProfile3} alt="" />
+              <img src={altProfile} alt="" />
             </div>
             <div className="profile-name">
               <h4 className="name">{`${user.fname} ${user.lname}`}</h4>

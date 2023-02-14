@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import sampleImage1 from "../../assets/sample-profile-1.jpeg";
+import profileAlt from "../../assets/profile-alt.jpeg";
 import userAuth from "../../hook/userAuth";
 import "./navigation.scss";
 
@@ -44,7 +44,7 @@ const Navigation = () => {
               <input type="checkbox" id="profile" />
               Hi, {`${userProfile.fname} ${userProfile.lname}`}
               <div className="profile-container">
-                <img src={sampleImage1} alt="" />
+                <img src={profileAlt} alt="" />
               </div>
               <div className="menu-profile-desktop">
                 <Link to="/profile-info" className="user">
