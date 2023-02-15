@@ -14,7 +14,7 @@ const Navigation = () => {
     setDisplayMenu((currentState) => !currentState);
   };
 
-  const useLoginDesktop = () => {
+  const isLoginDesktop = () => {
     if (userProfile.isLogin) {
       return (
         <>
@@ -173,7 +173,7 @@ const Navigation = () => {
               </Link>
             </li>
             {/* display this if user is login */}
-            {useLoginDesktop()}
+            {isLoginDesktop()}
           </ul>
           {/* link for desktop */}
 
