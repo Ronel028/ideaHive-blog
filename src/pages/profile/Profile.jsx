@@ -50,7 +50,7 @@ const Profile = () => {
           <div className="profile-title">
             <h3>Profile Information</h3>
             <div className="edit-profile-container">
-              <Link to="/edit-profile" className="edit-profile">
+              <Link to="/update-profile" className="edit-profile">
                 <svg
                   width="18"
                   height="18"
