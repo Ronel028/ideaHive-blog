@@ -12,11 +12,13 @@ import "./profile.scss";
 const Profile = () => {
   useResetScroll(); // reset the window location set to top when this page is active
   const [user, setUser] = useState({
+    userID: "",
     fname: "",
     lname: "",
     email: "",
     dateJoined: "",
     about: "",
+    profileImage: "",
   });
 
   useEffect(() => {
@@ -24,17 +26,17 @@ const Profile = () => {
       const userData = await axios.get("/user/info");
       setUser({
         ...user,
+        userID: userData.data.userData[0].id,
         fname: userData.data.userData[0].fname,
         lname: userData.data.userData[0].lname,
         email: userData.data.userData[0].email,
         dateJoined: userData.data.userData[0].dateJoined,
         about: userData.data.userData[0].about,
+        profileImage: userData.data.userData[0].profileImage,
       });
     };
     userProfile();
   }, []);
-
-  console.log(user);
 
   return (
     <motion.div
@@ -69,7 +71,12 @@ const Profile = () => {
           </div>
           <div className="profile">
             <div className="profile-image">
-              <img src={altProfile} alt="" />
+              <img
+                src={
+                  user.profileImage === null ? altProfile : user.profileImage
+                }
+                alt=""
+              />
             </div>
             <div className="profile-name">
               <h4 className="name">{`${user.fname} ${user.lname}`}</h4>
@@ -81,7 +88,7 @@ const Profile = () => {
           </div>
           <div className="about-container">
             <h2 className="about">About</h2>
-            <p>{user.about === "" ? "N/A" : user.about}</p>
+            <p>{user.about === null ? "N/A" : user.about}</p>
           </div>
           <div className="profile-blog">
             <h2>Blog</h2>

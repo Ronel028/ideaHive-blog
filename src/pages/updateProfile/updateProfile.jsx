@@ -1,10 +1,58 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { motion } from "framer-motion";
+import getUserData from "../../hook/getUserData";
 import Navigation from "../../component/navigation/navigation";
 import profileALt from "../../assets/profile-alt.jpeg";
 import "./updateProfile.scss";
 
 const UpdateProfile = () => {
+  const [user, setUser] = getUserData("/user/info");
+
+  // const [user, setUser] = useState({
+  //   userID: "",
+  //   fname: "",
+  //   lname: "",
+  //   email: "",
+  //   about: "",
+  //   profileImage: "",
+  //   dob: "",
+  // });
+
+  // useEffect(() => {
+  //   const userProfile = async () => {
+  //     const userData = await axios.get("/user/info");
+  //     setUser({
+  //       ...user,
+  //       userID: userData.data.userData[0].id,
+  //       fname: userData.data.userData[0].fname,
+  //       lname: userData.data.userData[0].lname,
+  //       email: userData.data.userData[0].email,
+  //       about: userData.data.userData[0].about,
+  //       profileImage: userData.data.userData[0].profileImage,
+  //       dob: userData.data.userData[0].birthDay,
+  //     });
+  //   };
+  //   userProfile();
+  // }, []);
+
+  // getting user input
+  const userInput = (e) => {
+    const { name, value } = e.target;
+    setUser({
+      ...user,
+      [name]: value,
+    });
+  };
+
+  console.log(user);
+
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 1 }}
+    >
       <Navigation />
       <main className="main update-user-main">
         <div className="wrapper update-user-container">
@@ -47,12 +95,16 @@ const UpdateProfile = () => {
                       name="fname"
                       id="fname"
                       placeholder="First name"
+                      value={user.fname}
+                      onChange={userInput}
                     />
                     <input
                       type="text"
                       name="lname"
                       id="lname"
                       placeholder="Last name"
+                      value={user.lname}
+                      onChange={userInput}
                     />
                   </div>
                 </div>
@@ -64,11 +116,19 @@ const UpdateProfile = () => {
                       name="email"
                       id="email"
                       placeholder="Email address"
+                      value={user.email}
+                      onChange={userInput}
                     />
                   </div>
                   <div className="dob">
                     <label htmlFor="dob">Date of birth</label>
-                    <input type="date" name="dob" id="dob" />
+                    <input
+                      type="date"
+                      name="dob"
+                      id="dob"
+                      value={user.dob === null ? "" : user.dob}
+                      onChange={userInput}
+                    />
                   </div>
                 </div>
                 <div className="about">
@@ -78,6 +138,8 @@ const UpdateProfile = () => {
                     id="about"
                     rows="5"
                     placeholder="Tell me something a little bit about yourself"
+                    value={user.about === null ? "" : user.about}
+                    onChange={userInput}
                   ></textarea>
                 </div>
               </div>
@@ -91,7 +153,7 @@ const UpdateProfile = () => {
           </form>
         </div>
       </main>
-    </>
+    </motion.div>
   );
 };
 
