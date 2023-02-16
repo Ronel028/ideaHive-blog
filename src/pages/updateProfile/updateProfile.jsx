@@ -8,33 +8,7 @@ import "./updateProfile.scss";
 
 const UpdateProfile = () => {
   const [user, setUser] = getUserData("/user/info");
-
-  // const [user, setUser] = useState({
-  //   userID: "",
-  //   fname: "",
-  //   lname: "",
-  //   email: "",
-  //   about: "",
-  //   profileImage: "",
-  //   dob: "",
-  // });
-
-  // useEffect(() => {
-  //   const userProfile = async () => {
-  //     const userData = await axios.get("/user/info");
-  //     setUser({
-  //       ...user,
-  //       userID: userData.data.userData[0].id,
-  //       fname: userData.data.userData[0].fname,
-  //       lname: userData.data.userData[0].lname,
-  //       email: userData.data.userData[0].email,
-  //       about: userData.data.userData[0].about,
-  //       profileImage: userData.data.userData[0].profileImage,
-  //       dob: userData.data.userData[0].birthDay,
-  //     });
-  //   };
-  //   userProfile();
-  // }, []);
+  const [imagePreviewer, setImagePreviewer] = useState(""); //storage for image to preview
 
   // getting user input
   const userInput = (e) => {
@@ -44,8 +18,31 @@ const UpdateProfile = () => {
       [name]: value,
     });
   };
+  // getting user input
 
-  console.log(user);
+  // function for updating profile
+  const updateProfile = (e) => {
+    e.preventDefault();
+    console.log(user);
+  };
+  // function for updating profile
+
+  // handle image value and image previewer
+  const handleImage = (e) => {
+    const image = e.target.files[0];
+    const reader = new FileReader();
+
+    setUser({
+      ...user,
+      profileImage: e.target.files[0],
+    });
+
+    reader.addEventListener("load", () => {
+      setImagePreviewer(reader.result);
+    });
+    reader.readAsDataURL(image);
+  };
+  // handle image value and image previewer
 
   return (
     <motion.div
@@ -64,11 +61,18 @@ const UpdateProfile = () => {
             <p>Here you can edit public information about yourself.</p>
           </div>
           {/* inputs */}
-          <form className="update-fields">
+          <form
+            method="POST"
+            className="update-fields"
+            onSubmit={updateProfile}
+          >
             <div className="input-container">
               <div className="update-image-container">
                 <div className="image-container">
-                  <img src={profileALt} alt="" />
+                  <img
+                    src={imagePreviewer === "" ? profileALt : imagePreviewer}
+                    alt=""
+                  />
                 </div>
                 <label htmlFor="profile-pic" className="profile-pic">
                   <svg
@@ -83,7 +87,12 @@ const UpdateProfile = () => {
                       fill="#F1F1F1"
                     />
                   </svg>
-                  <input type="file" name="profile" id="profile-pic" />
+                  <input
+                    type="file"
+                    name="profileImage"
+                    id="profile-pic"
+                    onChange={handleImage}
+                  />
                 </label>
               </div>
               <div className="inputs">
