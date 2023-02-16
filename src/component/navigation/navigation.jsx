@@ -44,7 +44,14 @@ const Navigation = () => {
               <input type="checkbox" id="profile" />
               Hi, {`${userProfile.fname} ${userProfile.lname}`}
               <div className="profile-container">
-                <img src={profileAlt} alt="" />
+                <img
+                  src={
+                    userProfile.profileImage === null
+                      ? profileAlt
+                      : userProfile.profileImage
+                  }
+                  alt=""
+                />
               </div>
               <div className="menu-profile-desktop">
                 <Link to="/account-settings" className="user">

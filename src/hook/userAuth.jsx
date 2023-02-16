@@ -7,6 +7,7 @@ const userAuth = (url) => {
     fname: "",
     lname: "",
     email: "",
+    profileImage: "",
   });
 
   useEffect(() => {
@@ -18,6 +19,7 @@ const userAuth = (url) => {
           isLogin: checkSession.data.isLogin,
           fname: checkSession.data.user[0].fname,
           lname: checkSession.data.user[0].lname,
+          profileImage: checkSession.data.user[0].profileImage,
         });
       }
     };
