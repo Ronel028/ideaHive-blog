@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
@@ -66,9 +66,6 @@ const UpdateProfile = () => {
   };
   // handle image value and image previewer
 
-  // const dateOfBirth = new Date(user.dob);
-  // console.log(dateOfBirth);
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -95,7 +92,13 @@ const UpdateProfile = () => {
               <div className="update-image-container">
                 <div className="image-container">
                   <img
-                    src={imagePreviewer === "" ? profileALt : imagePreviewer}
+                    src={
+                      imagePreviewer === ""
+                        ? user.profileImage === null
+                          ? profileALt
+                          : user.profileImage
+                        : imagePreviewer
+                    }
                     alt=""
                   />
                 </div>
