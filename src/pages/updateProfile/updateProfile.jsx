@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
 import getUserData from "../../hook/getUserData";
@@ -7,6 +8,7 @@ import profileALt from "../../assets/profile-alt.jpeg";
 import "./updateProfile.scss";
 
 const UpdateProfile = () => {
+  const navigate = useNavigate();
   const [user, setUser] = getUserData("/user/info");
   const [imagePreviewer, setImagePreviewer] = useState(""); //storage for image to preview
 
@@ -21,9 +23,29 @@ const UpdateProfile = () => {
   // getting user input
 
   // function for updating profile
-  const updateProfile = (e) => {
+  const updateProfile = async (e) => {
     e.preventDefault();
-    console.log(user);
+    try {
+      const formData = new FormData();
+      Object.entries(user).forEach(([name, value]) => {
+        formData.append(name, value);
+      });
+
+      console.log("updating...");
+      const updateUser = await axios.post("/user/update", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      if (updateUser.data.msg) {
+        console.log("updating finish");
+        navigate("/account-settings");
+      } else {
+        throw updateUser.data.error;
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   // function for updating profile
 
@@ -43,6 +65,9 @@ const UpdateProfile = () => {
     reader.readAsDataURL(image);
   };
   // handle image value and image previewer
+
+  // const dateOfBirth = new Date(user.dob);
+  // console.log(dateOfBirth);
 
   return (
     <motion.div
@@ -129,13 +154,13 @@ const UpdateProfile = () => {
                       onChange={userInput}
                     />
                   </div>
-                  <div className="dob">
-                    <label htmlFor="dob">Date of birth</label>
+                  <div className="birthDay">
+                    <label htmlFor="birthDay">Date of birth</label>
                     <input
                       type="date"
-                      name="dob"
-                      id="dob"
-                      value={user.dob === null ? "" : user.dob}
+                      name="birthDay"
+                      id="birthDay"
+                      defaultValue={user.birthDay === null ? "" : user.birthDay}
                       onChange={userInput}
                     />
                   </div>

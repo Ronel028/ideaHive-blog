@@ -10,6 +10,7 @@ export default defineConfig({
       "/user/signout": "http://localhost:3000",
       "/user/verified": "http://localhost:3000",
       "/user/info": "http://localhost:3000",
+      "/user/update": "http://localhost:3000",
     },
   },
   css: {

@@ -7,10 +7,9 @@ const getUserData = (url) => {
     fname: "",
     lname: "",
     email: "",
-    dateJoined: "",
     about: "",
     profileImage: "",
-    dob: "",
+    birthDay: "",
   });
 
   useEffect(() => {
@@ -22,10 +21,9 @@ const getUserData = (url) => {
         fname: userData.data.userData[0].fname,
         lname: userData.data.userData[0].lname,
         email: userData.data.userData[0].email,
-        dateJoined: userData.data.userData[0].dateJoined,
         about: userData.data.userData[0].about,
         profileImage: userData.data.userData[0].profileImage,
-        dob: userData.data.userData[0].birthDay,
+        birthDay: userData.data.userData[0].birthDay,
       });
     };
     getUser();
