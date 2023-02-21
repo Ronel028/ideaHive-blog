@@ -7,7 +7,7 @@ import "./navigation.scss";
 
 const Navigation = () => {
   const navigate = useNavigate();
-  const [userProfile] = userAuth("/user/verified"); //berify if the user is login
+  const [userProfile] = userAuth("/user/verified"); //verify if the user is login
   const [displayMenu, setDisplayMenu] = useState(false);
 
   const handleChange = () => {
