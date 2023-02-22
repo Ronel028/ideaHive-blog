@@ -4,6 +4,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import getUserData from "../../hook/getUserData";
 import Navigation from "../../component/navigation/navigation";
+import ChangePassword from "../../component/changePassword/changePassword";
 import profileALt from "../../assets/profile-alt.jpeg";
 import "./updateProfile.scss";
 
@@ -66,6 +67,11 @@ const UpdateProfile = () => {
   };
   // handle image value and image previewer
 
+  // show modal
+  const [show, setShow] = useState(false);
+  const closeModal = () => setShow(false);
+  const showModal = () => setShow(true);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -73,6 +79,15 @@ const UpdateProfile = () => {
       exit={{ opacity: 1 }}
     >
       <Navigation />
+
+      {/* change password */}
+      <ChangePassword
+        showModal={showModal}
+        closeModal={closeModal}
+        show={show}
+      />
+      {/* change password */}
+
       <main className="main update-user-main">
         <div className="wrapper update-user-container">
           <div className="title">
@@ -182,7 +197,13 @@ const UpdateProfile = () => {
               </div>
             </div>
             <div className="profile-btn-container">
-              <button className="change-password-btn">Change password</button>
+              <button
+                className="change-password-btn"
+                type="button"
+                onClick={showModal}
+              >
+                Change password
+              </button>
               <button type="submit" className="save-profile-btn">
                 Save profile
               </button>

@@ -7,7 +7,6 @@ import BlogContent from "./pages/blogContent/BlogContent";
 import Profile from "./pages/profile/Profile";
 import BlogUpdate from "./pages/blogUpdate/blogUpdate";
 import UpdateProfile from "./pages/updateProfile/updateProfile";
-import "./App.scss";
 
 function App() {
   return (
