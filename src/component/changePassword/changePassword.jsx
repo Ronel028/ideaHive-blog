@@ -1,12 +1,81 @@
-import Button from "react-bootstrap/Button";
+import { useState } from "react";
+import axios from "axios";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import Loading from "../spinner/spinner";
 import "./changePassword.scss";
 
 const ChangePassword = (props) => {
+  const [password, setPassword] = useState({
+    password: "",
+    retypePassword: "",
+  });
+  const [error, setError] = useState("");
+  const [isLoad, setIsLoad] = useState(false);
+
+  const getPasswordValue = (e) => {
+    setPassword({
+      ...password,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const updatePassword = async (e) => {
+    e.preventDefault();
+    setIsLoad(true);
+    const updatePass = await axios.post("/user/update-password", password, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (updatePass.data.err) {
+      setError(updatePass.data.err);
+    } else {
+      setPassword({
+        ...password,
+        password: "",
+        retypePassword: "",
+      });
+      props.setShowModal(false);
+      setError("");
+      props.setAlertPassChange(true);
+    }
+    setIsLoad(false);
+  };
+
+  // updare password error
+  const errorUpdatePassword = () => {
+    if (error.length > 0) {
+      return (
+        <div className="change-password-error">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22ZM12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20ZM11 15H13V17H11V15ZM11 7H13V13H11V7Z"
+              fill="#292929"
+            />
+          </svg>
+          {error}
+        </div>
+      );
+    } else {
+      return "";
+    }
+  };
+  // updare password error
+
+  // update password loader active
+  const isLoading = isLoad ? <Loading /> : "";
+  // update password loader active
+
   return (
     <>
-      <Modal show={props.show} onHide={props.closeModal}>
+      <Modal show={props.show} onHide={props.closeModal} backdrop="static">
         <Modal.Header closeButton>
           <Modal.Title className="modal-title">
             <svg
@@ -28,19 +97,38 @@ const ChangePassword = (props) => {
             Update your password
           </Modal.Title>
         </Modal.Header>
-        <Form>
+        <Form onSubmit={updatePassword}>
           <Modal.Body>
+            {/* loading display */}
+            {isLoading}
+            {/* loading display */}
+            {/* error message */}
+            {errorUpdatePassword()}
+            {/* error message */}
+
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="password" />
+              <Form.Control
+                type="password"
+                placeholder="password"
+                name="password"
+                value={password.password}
+                onChange={getPasswordValue}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Retype password</Form.Label>
-              <Form.Control type="email" placeholder="Retype password" />
+              <Form.Control
+                type="password"
+                placeholder="Retype password"
+                name="retypePassword"
+                value={password.retypePassword}
+                onChange={getPasswordValue}
+              />
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <button className="change-password-btn">Save Changes</button>
+            <button className="change-password-btn">Update password</button>
           </Modal.Footer>
         </Form>
       </Modal>

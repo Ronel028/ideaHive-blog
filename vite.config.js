@@ -11,6 +11,7 @@ export default defineConfig({
       "/user/verified": "http://localhost:3000",
       "/user/info": "http://localhost:3000",
       "/user/update": "http://localhost:3000",
+      "/user/update-password": "http://localhost:3000",
     },
   },
   css: {

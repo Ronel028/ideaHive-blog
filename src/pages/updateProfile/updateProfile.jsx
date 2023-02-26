@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import getUserData from "../../hook/getUserData";
 import Navigation from "../../component/navigation/navigation";
 import ChangePassword from "../../component/changePassword/changePassword";
+import AlertMessage from "../../component/alert/alert";
 import profileALt from "../../assets/profile-alt.jpeg";
 import "./updateProfile.scss";
 
@@ -71,6 +72,20 @@ const UpdateProfile = () => {
   const [show, setShow] = useState(false);
   const closeModal = () => setShow(false);
   const showModal = () => setShow(true);
+  // show modal
+
+  // password change message
+  const [alertPassChange, setAlertPassChange] = useState(false);
+  const passwordMsgChange = alertPassChange ? (
+    <AlertMessage
+      variant="success"
+      message="Password change success"
+      setAlertPassChange={setAlertPassChange}
+    />
+  ) : (
+    ""
+  );
+  // password change message
 
   return (
     <motion.div
@@ -85,6 +100,8 @@ const UpdateProfile = () => {
         showModal={showModal}
         closeModal={closeModal}
         show={show}
+        setShowModal={setShow}
+        setAlertPassChange={setAlertPassChange}
       />
       {/* change password */}
 
@@ -93,6 +110,7 @@ const UpdateProfile = () => {
           <div className="title">
             <h2>Account settings</h2>
           </div>
+          {passwordMsgChange}
           <div className="user-information">
             <h3>User information</h3>
             <p>Here you can edit public information about yourself.</p>
