@@ -6,6 +6,7 @@ import getUserData from "../../hook/getUserData";
 import Navigation from "../../component/navigation/navigation";
 import ChangePassword from "../../component/changePassword/changePassword";
 import AlertMessage from "../../component/alert/alert";
+import LoadingLG from "../../component/loadingLG/loading";
 import profileALt from "../../assets/profile-alt.jpeg";
 import "./updateProfile.scss";
 
@@ -13,6 +14,7 @@ const UpdateProfile = () => {
   const navigate = useNavigate();
   const [user, setUser] = getUserData("/user/info");
   const [imagePreviewer, setImagePreviewer] = useState(""); //storage for image to preview
+  const [loading, setLoading] = useState(false);
 
   // getting user input
   const userInput = (e) => {
@@ -33,14 +35,14 @@ const UpdateProfile = () => {
         formData.append(name, value);
       });
 
-      console.log("updating...");
+      setLoading(true);
       const updateUser = await axios.post("/user/update", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
       if (updateUser.data.msg) {
-        console.log("updating finish");
+        setLoading(false);
         navigate("/account-settings");
       } else {
         throw updateUser.data.error;
@@ -87,12 +89,20 @@ const UpdateProfile = () => {
   );
   // password change message
 
+  // main loading active
+  const loadingActive = loading ? <LoadingLG /> : "";
+  // main loading active
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 1 }}
     >
+      {/* loading animation */}
+      {loadingActive}
+      {/* loading animation */}
+
       <Navigation />
 
       {/* change password */}
