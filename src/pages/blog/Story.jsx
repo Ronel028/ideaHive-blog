@@ -8,6 +8,7 @@ import sampleProfile1 from "../../assets/sample-profile-1.jpeg";
 import "./story.scss";
 const Story = () => {
   useResetScroll();
+
   return (
     <motion.div
       initial={{ opacity: 0 }}

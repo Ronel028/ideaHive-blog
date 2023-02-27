@@ -16,7 +16,6 @@ const Signin = () => {
   useEffect(() => {
     const getSession = async () => {
       const checkSession = await axios.get("/user/verified");
-      console.log(checkSession.data);
       if (checkSession.data.isLogin) {
         navigate("/");
       }
@@ -47,7 +46,7 @@ const Signin = () => {
       });
       if (signinUser.data.msg) {
         setLoader(false);
-        navigate("/");
+        window.location.href = "/";
       } else {
         throw signinUser.data.error;
       }

@@ -1,21 +1,22 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { userContext } from "../../context/userContext";
 import profileAlt from "../../assets/profile-alt.jpeg";
-import userAuth from "../../hook/userAuth";
 import "./navigation.scss";
 
 const Navigation = () => {
   const navigate = useNavigate();
-  const [userProfile] = userAuth("/user/verified"); //verify if the user is login
   const [displayMenu, setDisplayMenu] = useState(false);
+
+  const { user } = useContext(userContext);
 
   const handleChange = () => {
     setDisplayMenu((currentState) => !currentState);
   };
 
   const isLoginDesktop = () => {
-    if (userProfile.isLogin) {
+    if (user.isLogin) {
       return (
         <>
           <li>
@@ -42,13 +43,11 @@ const Navigation = () => {
               className="link-desktop profile-desktop"
             >
               <input type="checkbox" id="profile" />
-              Hi, {`${userProfile.fname} ${userProfile.lname}`}
+              Hi, {`${user.fname} ${user.lname}`}
               <div className="profile-container">
                 <img
                   src={
-                    userProfile.profileImage === null
-                      ? profileAlt
-                      : userProfile.profileImage
+                    user.profileImage === null ? profileAlt : user.profileImage
                   }
                   alt=""
                 />
@@ -87,7 +86,7 @@ const Navigation = () => {
   };
 
   const isLoginMobile = () => {
-    if (userProfile.isLogin) {
+    if (user.isLogin) {
       return (
         <>
           <li>

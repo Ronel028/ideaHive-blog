@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { userContext } from "../../context/userContext";
 import getUserData from "../../hook/getUserData";
 import Navigation from "../../component/navigation/navigation";
 import ChangePassword from "../../component/changePassword/changePassword";
@@ -11,16 +12,26 @@ import profileALt from "../../assets/profile-alt.jpeg";
 import "./updateProfile.scss";
 
 const UpdateProfile = () => {
+  const { user, setUser } = useContext(userContext);
   const navigate = useNavigate();
-  const [user, setUser] = getUserData("/user/info");
+  const [inputVal, setInputVal] = getUserData("/user/info");
   const [imagePreviewer, setImagePreviewer] = useState(""); //storage for image to preview
   const [loading, setLoading] = useState(false);
+  const [tempImage, setTempImage] = useState(null);
+
+  useEffect(() => {
+    return () => {
+      if (tempImage) {
+        URL.revokeObjectURL(tempImage);
+      }
+    };
+  }, [inputVal.profileImage, tempImage]);
 
   // getting user input
   const userInput = (e) => {
     const { name, value } = e.target;
-    setUser({
-      ...user,
+    setInputVal({
+      ...inputVal,
       [name]: value,
     });
   };
@@ -31,7 +42,7 @@ const UpdateProfile = () => {
     e.preventDefault();
     try {
       const formData = new FormData();
-      Object.entries(user).forEach(([name, value]) => {
+      Object.entries(inputVal).forEach(([name, value]) => {
         formData.append(name, value);
       });
 
@@ -43,7 +54,17 @@ const UpdateProfile = () => {
       });
       if (updateUser.data.msg) {
         setLoading(false);
-        navigate("/account-settings");
+        console.log(inputVal);
+        setUser({
+          ...user,
+          fname: inputVal.fname,
+          lname: inputVal.lname,
+          email: inputVal.email,
+          about: inputVal.about,
+          profileImage: tempImage,
+          birthDay: inputVal.birthDay,
+        });
+        // navigate("/account-settings");
       } else {
         throw updateUser.data.error;
       }
@@ -58,10 +79,11 @@ const UpdateProfile = () => {
     const image = e.target.files[0];
     const reader = new FileReader();
 
-    setUser({
-      ...user,
+    setInputVal({
+      ...inputVal,
       profileImage: e.target.files[0],
     });
+    setTempImage(URL.createObjectURL(e.target.files[0]));
 
     reader.addEventListener("load", () => {
       setImagePreviewer(reader.result);
@@ -137,9 +159,9 @@ const UpdateProfile = () => {
                   <img
                     src={
                       imagePreviewer === ""
-                        ? user.profileImage === null
+                        ? inputVal.profileImage === null
                           ? profileALt
-                          : user.profileImage
+                          : inputVal.profileImage
                         : imagePreviewer
                     }
                     alt=""
@@ -175,7 +197,7 @@ const UpdateProfile = () => {
                       name="fname"
                       id="fname"
                       placeholder="First name"
-                      value={user.fname}
+                      value={inputVal.fname}
                       onChange={userInput}
                     />
                     <input
@@ -183,7 +205,7 @@ const UpdateProfile = () => {
                       name="lname"
                       id="lname"
                       placeholder="Last name"
-                      value={user.lname}
+                      value={inputVal.lname}
                       onChange={userInput}
                     />
                   </div>
@@ -196,7 +218,7 @@ const UpdateProfile = () => {
                       name="email"
                       id="email"
                       placeholder="Email address"
-                      value={user.email}
+                      value={inputVal.email}
                       onChange={userInput}
                     />
                   </div>
@@ -206,7 +228,9 @@ const UpdateProfile = () => {
                       type="date"
                       name="birthDay"
                       id="birthDay"
-                      defaultValue={user.birthDay === null ? "" : user.birthDay}
+                      defaultValue={
+                        inputVal.birthDay === null ? "" : inputVal.birthDay
+                      }
                       onChange={userInput}
                     />
                   </div>
@@ -218,7 +242,7 @@ const UpdateProfile = () => {
                     id="about"
                     rows="5"
                     placeholder="Tell me something a little bit about yourself"
-                    value={user.about === null ? "" : user.about}
+                    value={inputVal.about === null ? "" : inputVal.about}
                     onChange={userInput}
                   ></textarea>
                 </div>

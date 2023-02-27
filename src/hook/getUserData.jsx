@@ -3,6 +3,7 @@ import axios from "axios";
 
 const getUserData = (url) => {
   const [user, setUser] = useState({
+    isLogin: false,
     userID: "",
     fname: "",
     lname: "",
@@ -17,6 +18,7 @@ const getUserData = (url) => {
       const userData = await axios.get(url);
       setUser({
         ...user,
+        isLogin: userData.data.isLogin,
         userID: userData.data.userData[0].id,
         fname: userData.data.userData[0].fname,
         lname: userData.data.userData[0].lname,
