@@ -9,7 +9,7 @@ const Navigation = () => {
   // hooks
   const navigate = useNavigate();
   const [displayMenu, setDisplayMenu] = useState(false);
-  const { user } = useContext(userContext); // call the context api
+  const { user, setUser } = useContext(userContext); // call the context api
   // hooks
 
   const handleChange = () => {
@@ -101,7 +101,12 @@ const Navigation = () => {
             </Link>
           </li>
           <li>
-            <button className="link-mobile signout-mobile">Sign out</button>
+            <button
+              className="link-mobile signout-mobile"
+              onClick={signoutUser}
+            >
+              Sign out
+            </button>
           </li>
           <li>
             <Link to="/write-blog" className="link-mobile" id="btn">
@@ -145,6 +150,10 @@ const Navigation = () => {
     try {
       const signout = await axios.get("/user/signout");
       if (signout.data.isLogout) {
+        setUser({
+          ...user,
+          isLogin: false,
+        });
         navigate("/signin");
       } else {
         throw signout.data.error;

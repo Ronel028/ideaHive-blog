@@ -1,5 +1,6 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import moment from "moment";
 import { userContext } from "../../context/userContext";
@@ -10,8 +11,23 @@ import altProfile from "../../assets/profile-alt.jpeg";
 import "./profile.scss";
 
 const Profile = () => {
+  // hooks
   useResetScroll(); // reset the window location set to top when this page is active
+  const navigate = useNavigate();
   const { user } = useContext(userContext); //call the context api
+  // hooks
+
+  // use this function to validate this page if login or not
+  useEffect(() => {
+    const getSession = async () => {
+      const checkSession = await axios.get("/user/verified");
+      if (!checkSession.data.isLogin) {
+        navigate("/");
+      }
+    };
+    getSession();
+  }, []);
+  // use this function to validate this page if login or not
 
   return (
     <motion.div
