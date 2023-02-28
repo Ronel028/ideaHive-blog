@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { motion } from "framer-motion";
 import moment from "moment";
+import { userContext } from "../../context/userContext";
 import useResetScroll from "../../hook/useResetScroll";
 import Blog from "../../component/blog/Blog";
 import Navigation from "../../component/navigation/navigation";
@@ -11,32 +11,7 @@ import "./profile.scss";
 
 const Profile = () => {
   useResetScroll(); // reset the window location set to top when this page is active
-  const [user, setUser] = useState({
-    userID: "",
-    fname: "",
-    lname: "",
-    email: "",
-    dateJoined: "",
-    about: "",
-    profileImage: "",
-  });
-
-  useEffect(() => {
-    const userProfile = async () => {
-      const userData = await axios.get("/user/info");
-      setUser({
-        ...user,
-        userID: userData.data.userData[0].id,
-        fname: userData.data.userData[0].fname,
-        lname: userData.data.userData[0].lname,
-        email: userData.data.userData[0].email,
-        dateJoined: userData.data.userData[0].dateJoined,
-        about: userData.data.userData[0].about,
-        profileImage: userData.data.userData[0].profileImage,
-      });
-    };
-    userProfile();
-  }, []);
+  const { user } = useContext(userContext); //call the context api
 
   return (
     <motion.div

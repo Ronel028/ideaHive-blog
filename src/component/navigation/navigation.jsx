@@ -6,10 +6,11 @@ import profileAlt from "../../assets/profile-alt.jpeg";
 import "./navigation.scss";
 
 const Navigation = () => {
+  // hooks
   const navigate = useNavigate();
   const [displayMenu, setDisplayMenu] = useState(false);
-
-  const { user } = useContext(userContext);
+  const { user } = useContext(userContext); // call the context api
+  // hooks
 
   const handleChange = () => {
     setDisplayMenu((currentState) => !currentState);

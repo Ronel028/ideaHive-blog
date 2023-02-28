@@ -1,16 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { userContext } from "../../context/userContext";
 import "./signin.scss";
 const Signin = () => {
+  // hooks
   const navigate = useNavigate();
+  const { user, setUser } = useContext(userContext); // call the context api
   const [inputVal, setInputVal] = useState({
     email: "",
     password: "",
   });
   const [error, setError] = useState("");
   const [loader, setLoader] = useState(false);
+  // hooks
 
   // use this function to validate this page if login or not
   useEffect(() => {
@@ -44,9 +48,19 @@ const Signin = () => {
           "Content-Type": "application/json",
         },
       });
-      if (signinUser.data.msg) {
+      if (signinUser.data.isLogin) {
         setLoader(false);
-        window.location.href = "/";
+        setUser({
+          ...user,
+          isLogin: signinUser.data.isLogin,
+          fname: signinUser.data.userData[0].fname,
+          lname: signinUser.data.userData[0].lname,
+          email: signinUser.data.userData[0].email,
+          about: signinUser.data.userData[0].about,
+          profileImage: signinUser.data.userData[0].profileImage,
+          birthDay: signinUser.data.userData[0].birthDay,
+        });
+        navigate("/");
       } else {
         throw signinUser.data.error;
       }

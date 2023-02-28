@@ -12,13 +12,16 @@ import profileALt from "../../assets/profile-alt.jpeg";
 import "./updateProfile.scss";
 
 const UpdateProfile = () => {
-  const { user, setUser } = useContext(userContext);
+  // hooks
+  const { user, setUser } = useContext(userContext); //call the context api
   const navigate = useNavigate();
-  const [inputVal, setInputVal] = getUserData("/user/info");
+  const [inputVal, setInputVal] = getUserData("/user/info"); //getting user data to display in the ui to update
   const [imagePreviewer, setImagePreviewer] = useState(""); //storage for image to preview
   const [loading, setLoading] = useState(false);
-  const [tempImage, setTempImage] = useState(null);
+  const [tempImage, setTempImage] = useState(null); //image storage for URL.createObjectURL()
+  // hooks
 
+  // use this to releases an existing object URL which was previously created by calling URL.createObjectURL()
   useEffect(() => {
     return () => {
       if (tempImage) {
@@ -26,6 +29,7 @@ const UpdateProfile = () => {
       }
     };
   }, [inputVal.profileImage, tempImage]);
+  // use this to releases an existing object URL which was previously created by calling URL.createObjectURL()
 
   // getting user input
   const userInput = (e) => {
@@ -36,6 +40,24 @@ const UpdateProfile = () => {
     });
   };
   // getting user input
+
+  // handle image value and image previewer
+  const handleImage = (e) => {
+    const image = e.target.files[0];
+    const reader = new FileReader();
+
+    setInputVal({
+      ...inputVal,
+      profileImage: e.target.files[0],
+    });
+    setTempImage(URL.createObjectURL(e.target.files[0]));
+
+    reader.addEventListener("load", () => {
+      setImagePreviewer(reader.result);
+    });
+    reader.readAsDataURL(image);
+  };
+  // handle image value and image previewer
 
   // function for updating profile
   const updateProfile = async (e) => {
@@ -61,10 +83,10 @@ const UpdateProfile = () => {
           lname: inputVal.lname,
           email: inputVal.email,
           about: inputVal.about,
-          profileImage: tempImage,
+          profileImage: tempImage === null ? user.profileImage : tempImage,
           birthDay: inputVal.birthDay,
         });
-        // navigate("/account-settings");
+        navigate("/account-settings");
       } else {
         throw updateUser.data.error;
       }
@@ -73,24 +95,6 @@ const UpdateProfile = () => {
     }
   };
   // function for updating profile
-
-  // handle image value and image previewer
-  const handleImage = (e) => {
-    const image = e.target.files[0];
-    const reader = new FileReader();
-
-    setInputVal({
-      ...inputVal,
-      profileImage: e.target.files[0],
-    });
-    setTempImage(URL.createObjectURL(e.target.files[0]));
-
-    reader.addEventListener("load", () => {
-      setImagePreviewer(reader.result);
-    });
-    reader.readAsDataURL(image);
-  };
-  // handle image value and image previewer
 
   // show modal
   const [show, setShow] = useState(false);
@@ -142,7 +146,11 @@ const UpdateProfile = () => {
           <div className="title">
             <h2>Account settings</h2>
           </div>
+
+          {/* display if password change success */}
           {passwordMsgChange}
+          {/* display if password change success */}
+
           <div className="user-information">
             <h3>User information</h3>
             <p>Here you can edit public information about yourself.</p>
