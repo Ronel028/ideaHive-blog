@@ -28,9 +28,7 @@ const ChangePassword = (props) => {
         "Content-Type": "application/json",
       },
     });
-    if (updatePass.data.err) {
-      setError(updatePass.data.err);
-    } else {
+    if (updatePass.data.msg === "success") {
       setPassword({
         ...password,
         password: "",
@@ -39,6 +37,8 @@ const ChangePassword = (props) => {
       props.setShowModal(false);
       setError("");
       props.setAlertPassChange(true);
+    } else {
+      setError(updatePass.data.msg);
     }
     setIsLoad(false);
   };
