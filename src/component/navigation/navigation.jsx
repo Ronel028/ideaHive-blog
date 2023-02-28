@@ -21,7 +21,7 @@ const Navigation = () => {
       return (
         <>
           <li>
-            <Link to="contact" className="link-desktop write-desktop">
+            <Link to="/post-blog" className="link-desktop write-desktop">
               <svg
                 width="16"
                 height="16"

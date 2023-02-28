@@ -7,6 +7,7 @@ import BlogContent from "./pages/blogContent/BlogContent";
 import Profile from "./pages/profile/Profile";
 import BlogUpdate from "./pages/blogUpdate/blogUpdate";
 import UpdateProfile from "./pages/updateProfile/updateProfile";
+import AddBlog from "./pages/addBlog/addBlog";
 import { userContext } from "./context/userContext";
 import getUserData from "./hook/getUserData";
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/account-settings" element={<Profile />} />
         <Route path="/update-profile" element={<UpdateProfile />} />
         <Route path="/blog-update" element={<BlogUpdate />} />
+        <Route path="/post-blog" element={<AddBlog />} />
       </Routes>
     </userContext.Provider>
   );
