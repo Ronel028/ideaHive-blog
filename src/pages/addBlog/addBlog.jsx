@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -14,9 +14,14 @@ const AddBlog = () => {
   // hooks
   useResetScroll(); // reset the window location set to top when this page is active
   const navigate = useNavigate();
-  const [editorValue, setEditorValue] = useState("");
-
-  // console.log(editorValue);
+  const [inputVal, setInputVal] = useState({
+    blogTitle: "",
+    featuredImage: "",
+    category: "",
+    summary: "",
+    blogContent: "",
+  });
+  // hooks
 
   // use this function to validate this page if login or not
   useEffect(() => {
@@ -28,7 +33,9 @@ const AddBlog = () => {
     };
     getSession();
   }, []);
+  // use this function to validate this page if login or not
 
+  // toolbars for quill markdown editor
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, 4, 5, 6, false] }], //header
@@ -47,11 +54,30 @@ const AddBlog = () => {
       ["clean"], // remove formatting button
     ],
   };
+  // toolbars for quill markdown editor
 
-  // function for getting value from markdown editor
-  const handleChange = (e) => {
-    console.log(e);
+  // function for getting value from markdown editor and other input
+  const editorValue = (e) => {
+    setInputVal({
+      ...inputVal,
+      blogContent: e,
+    });
   };
+  const getInputValue = (e) => {
+    setInputVal({
+      ...inputVal,
+      [e.target.name]:
+        e.target.name === "featuredImage" ? e.target.files[0] : e.target.value,
+    });
+  };
+  // function for getting value from markdown editor and other input
+
+  // save new blog post
+  const saveBlogPost = (e) => {
+    e.preventDefault();
+    console.log(inputVal);
+  };
+  // save new blog post
 
   return (
     <motion.div
@@ -72,24 +98,26 @@ const AddBlog = () => {
             <p>Here you can post your own blog.</p>
           </div>
           {/* form */}
-          <Form className="form">
+          <Form className="form" onSubmit={saveBlogPost}>
             <div className="input-container">
-              <Form.Group className="mb-3" controlId="blog-title">
+              <Form.Group className="mb-3" controlId="blogTitle">
                 <Form.Label className="label">Blog title</Form.Label>
                 <Form.Control
                   type="text"
                   className="input"
-                  name="blog-title"
+                  name="blogTitle"
                   placeholder="Blog title..."
+                  onChange={getInputValue}
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="featured-image">
+              <Form.Group className="mb-3" controlId="featuredImage">
                 <Form.Label className="label">Featured image</Form.Label>
                 <Form.Control
                   type="file"
                   className="input"
-                  name="featured-image"
+                  name="featuredImage"
                   placeholder="featured image..."
+                  onChange={getInputValue}
                 />
               </Form.Group>
             </div>
@@ -99,8 +127,9 @@ const AddBlog = () => {
                 aria-label="Default select example"
                 className="input"
                 name="category"
+                onChange={getInputValue}
               >
-                <option disabled>Select Category</option>
+                <option value="">Select Category</option>
                 <option value="Programming">Programming</option>
                 <option value="Technology">Technology</option>
                 <option value="Space">Space</option>
@@ -120,6 +149,7 @@ const AddBlog = () => {
                 className="input"
                 name="summary"
                 placeholder="Short summary..."
+                onChange={getInputValue}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -127,14 +157,14 @@ const AddBlog = () => {
               <ReactQuill
                 modules={modules}
                 theme="snow"
-                value={editorValue}
-                onChange={handleChange}
+                value={inputVal.blogContent}
+                onChange={editorValue}
               />
             </Form.Group>
             <div className="post-btn-container">
-              <button type="submit" className="cancel-btn">
+              <Link to="/" className="cancel-btn">
                 Cancel
-              </button>
+              </Link>
               <button type="submit" className="post-btn">
                 Post
               </button>
