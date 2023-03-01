@@ -47,9 +47,7 @@ const Navigation = () => {
               Hi, {`${user.fname} ${user.lname}`}
               <div className="profile-container">
                 <img
-                  src={
-                    user.profileImage === null ? profileAlt : user.profileImage
-                  }
+                  src={user.Image === "N/A" ? profileAlt : user.Image}
                   alt=""
                 />
               </div>
@@ -109,7 +107,7 @@ const Navigation = () => {
             </button>
           </li>
           <li>
-            <Link to="/write-blog" className="link-mobile" id="btn">
+            <Link to="/post-blog" className="link-mobile" id="btn">
               <svg
                 width="18"
                 height="19"

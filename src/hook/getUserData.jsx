@@ -9,7 +9,7 @@ const getUserData = (url) => {
     lname: "",
     email: "",
     about: "",
-    profileImage: "",
+    Image: "",
     birthDay: "",
   });
 
@@ -24,7 +24,7 @@ const getUserData = (url) => {
         lname: userData.data.userData[0].lname,
         email: userData.data.userData[0].email,
         about: userData.data.userData[0].about,
-        profileImage: userData.data.userData[0].profileImage,
+        Image: userData.data.userData[0].profileImage,
         birthDay: userData.data.userData[0].birthDay,
       });
     };

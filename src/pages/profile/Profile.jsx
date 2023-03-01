@@ -63,9 +63,7 @@ const Profile = () => {
           <div className="profile">
             <div className="profile-image">
               <img
-                src={
-                  user.profileImage === null ? altProfile : user.profileImage
-                }
+                src={user.Image === "N/A" ? altProfile : user.Image}
                 alt=""
               />
             </div>
@@ -79,7 +77,7 @@ const Profile = () => {
           </div>
           <div className="about-container">
             <h2 className="about">About</h2>
-            <p>{user.about === null ? "N/A" : user.about}</p>
+            <p>{user.about === "N/A" ? "N/A" : user.about}</p>
           </div>
           <div className="profile-blog">
             <h2>Blog</h2>

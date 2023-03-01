@@ -57,7 +57,7 @@ const Signin = () => {
           lname: signinUser.data.userData[0].lname,
           email: signinUser.data.userData[0].email,
           about: signinUser.data.userData[0].about,
-          profileImage: signinUser.data.userData[0].profileImage,
+          Image: signinUser.data.userData[0].profileImage,
           birthDay: signinUser.data.userData[0].birthDay,
         });
         navigate("/");

@@ -28,7 +28,7 @@ const UpdateProfile = () => {
         URL.revokeObjectURL(tempImage);
       }
     };
-  }, [inputVal.profileImage, tempImage]);
+  }, [inputVal.Image, tempImage]);
   // use this to releases an existing object URL which was previously created by calling URL.createObjectURL()
 
   // getting user input
@@ -48,7 +48,7 @@ const UpdateProfile = () => {
 
     setInputVal({
       ...inputVal,
-      profileImage: e.target.files[0],
+      Image: e.target.files[0],
     });
     setTempImage(URL.createObjectURL(e.target.files[0]));
 
@@ -76,14 +76,13 @@ const UpdateProfile = () => {
       });
       if (updateUser.data.msg) {
         setLoading(false);
-        console.log(inputVal);
         setUser({
           ...user,
           fname: inputVal.fname,
           lname: inputVal.lname,
           email: inputVal.email,
           about: inputVal.about,
-          profileImage: tempImage === null ? user.profileImage : tempImage,
+          Image: tempImage === null ? user.Image : tempImage,
           birthDay: inputVal.birthDay,
         });
         navigate("/account-settings");
@@ -167,9 +166,9 @@ const UpdateProfile = () => {
                   <img
                     src={
                       imagePreviewer === ""
-                        ? inputVal.profileImage === null
+                        ? inputVal.Image === "N/A"
                           ? profileALt
-                          : inputVal.profileImage
+                          : inputVal.Image
                         : imagePreviewer
                     }
                     alt=""
@@ -237,7 +236,7 @@ const UpdateProfile = () => {
                       name="birthDay"
                       id="birthDay"
                       defaultValue={
-                        inputVal.birthDay === null ? "" : inputVal.birthDay
+                        inputVal.birthDay === "N/A" ? "" : inputVal.birthDay
                       }
                       onChange={userInput}
                     />
@@ -250,7 +249,7 @@ const UpdateProfile = () => {
                     id="about"
                     rows="5"
                     placeholder="Tell me something a little bit about yourself"
-                    value={inputVal.about === null ? "" : inputVal.about}
+                    value={inputVal.about === "N/A" ? "" : inputVal.about}
                     onChange={userInput}
                   ></textarea>
                 </div>
