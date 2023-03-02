@@ -16,7 +16,7 @@ const AddBlog = () => {
   const navigate = useNavigate();
   const [inputVal, setInputVal] = useState({
     blogTitle: "",
-    featuredImage: "",
+    Image: "N/A",
     category: "",
     summary: "",
     blogContent: "",
@@ -67,15 +67,24 @@ const AddBlog = () => {
     setInputVal({
       ...inputVal,
       [e.target.name]:
-        e.target.name === "featuredImage" ? e.target.files[0] : e.target.value,
+        e.target.name === "Image" ? e.target.files[0] : e.target.value,
     });
   };
   // function for getting value from markdown editor and other input
 
   // save new blog post
-  const saveBlogPost = (e) => {
+  const saveBlogPost = async (e) => {
     e.preventDefault();
-    console.log(inputVal);
+    const formData = new FormData();
+    Object.entries(inputVal).forEach(([name, value]) => {
+      formData.append(name, value);
+    });
+    const insertNewBlog = await axios.post("/blog/add-blog", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    console.log(insertNewBlog);
   };
   // save new blog post
 
@@ -115,7 +124,7 @@ const AddBlog = () => {
                 <Form.Control
                   type="file"
                   className="input"
-                  name="featuredImage"
+                  name="Image"
                   placeholder="featured image..."
                   onChange={getInputValue}
                 />

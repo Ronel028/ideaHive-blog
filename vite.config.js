@@ -12,6 +12,7 @@ export default defineConfig({
       "/user/info": "http://localhost:3000",
       "/user/update": "http://localhost:3000",
       "/user/update-password": "http://localhost:3000",
+      "/blog/add-blog": "http://localhost:3000",
     },
   },
   css: {
