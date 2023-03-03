@@ -4,7 +4,7 @@ function AlertMessage(props) {
   return (
     <Alert
       variant={props.variant}
-      onClose={() => props.setAlertPassChange(false)}
+      onClose={() => props.setAlertChange(false)}
       dismissible
     >
       <p>{props.message}</p>

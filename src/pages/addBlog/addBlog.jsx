@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import useResetScroll from "../../hook/useResetScroll";
 import Navigation from "../../component/navigation/navigation";
+import LoadingLG from "../../component/loadingLG/loading";
+import AlertMessage from "../../component/alert/alert";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "./addBlog.scss";
@@ -14,6 +15,7 @@ const AddBlog = () => {
   // hooks
   useResetScroll(); // reset the window location set to top when this page is active
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [inputVal, setInputVal] = useState({
     blogTitle: "",
     Image: "N/A",
@@ -72,6 +74,19 @@ const AddBlog = () => {
   };
   // function for getting value from markdown editor and other input
 
+  // publish blog success message
+  const [publishBlogMsg, setPublishBlogMsg] = useState(false);
+  const publishMsg = publishBlogMsg ? (
+    <AlertMessage
+      variant="success"
+      message="Great job! Your blog has been successfully published and can be viewed by readers."
+      setAlertChange={setPublishBlogMsg}
+    />
+  ) : (
+    ""
+  );
+  // publish blog success message
+
   // save new blog post
   const saveBlogPost = async (e) => {
     e.preventDefault();
@@ -79,14 +94,29 @@ const AddBlog = () => {
     Object.entries(inputVal).forEach(([name, value]) => {
       formData.append(name, value);
     });
+    setLoading(true);
     const insertNewBlog = await axios.post("/blog/add-blog", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
-    console.log(insertNewBlog);
+    if (insertNewBlog.data.msg === "success") {
+      console.log(insertNewBlog.data);
+      setLoading(false);
+      setPublishBlogMsg(true);
+    } else {
+      alert(console.log(insertNewBlog.data.msg));
+    }
   };
   // save new blog post
+
+  //loading active while uploading your blog
+  const loadingActive = loading ? (
+    <LoadingLG loadingWord="Your blog post is being published, this might take a moment..." />
+  ) : (
+    ""
+  );
+  //loading active while uploading your blog */
 
   return (
     <motion.div
@@ -94,6 +124,9 @@ const AddBlog = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 1 }}
     >
+      {/* loading active while uploading your blog */}
+      {loadingActive}
+      {/* loading active while uploading your blog */}
       <header>
         <Navigation />
       </header>
@@ -102,6 +135,9 @@ const AddBlog = () => {
           <div className="title title-page">
             <h2>Post blog</h2>
           </div>
+          {/* publish blog message */}
+          {publishMsg}
+          {/* publish blog message */}
           <div className="sub-heading">
             <h3>Create new blog</h3>
             <p>Here you can post your own blog.</p>
@@ -117,6 +153,7 @@ const AddBlog = () => {
                   name="blogTitle"
                   placeholder="Blog title..."
                   onChange={getInputValue}
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="featuredImage">
@@ -159,6 +196,7 @@ const AddBlog = () => {
                 name="summary"
                 placeholder="Short summary..."
                 onChange={getInputValue}
+                required
               />
             </Form.Group>
             <Form.Group className="mb-3">

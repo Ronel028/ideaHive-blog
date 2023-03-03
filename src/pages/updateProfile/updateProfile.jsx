@@ -107,7 +107,7 @@ const UpdateProfile = () => {
     <AlertMessage
       variant="success"
       message="Password change success"
-      setAlertPassChange={setAlertPassChange}
+      setAlertChange={setAlertPassChange}
     />
   ) : (
     ""
@@ -115,7 +115,11 @@ const UpdateProfile = () => {
   // password change message
 
   // main loading active
-  const loadingActive = loading ? <LoadingLG /> : "";
+  const loadingActive = loading ? (
+    <LoadingLG loadingWord="Saving your changes, just a moment..." />
+  ) : (
+    ""
+  );
   // main loading active
 
   return (
