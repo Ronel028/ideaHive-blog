@@ -14,7 +14,6 @@ import sampleProfile6 from "../../assets/sample-profile-6.jpeg";
 import "./home.scss";
 const Home = () => {
   useResetScroll();
-  const navigate = useNavigate();
 
   return (
     <motion.div

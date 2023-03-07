@@ -35,9 +35,9 @@ const Profile = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 1 }}
     >
-      <header>
-        <Navigation />
-      </header>
+      {/* <header> */}
+      <Navigation />
+      {/* </header> */}
       <main className="profile-main">
         <div className="wrapper profile-container">
           <div className="profile-title">

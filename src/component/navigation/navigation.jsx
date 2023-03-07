@@ -162,7 +162,7 @@ const Navigation = () => {
   };
 
   return (
-    <div>
+    <>
       <nav className="nav">
         <div className="wrapper nav-container">
           <Link to="/" className="logo">
@@ -229,7 +229,7 @@ const Navigation = () => {
         </ul>
         <ul className="auth">{isLoginMobile()}</ul>
       </div>
-    </div>
+    </>
   );
 };
 
