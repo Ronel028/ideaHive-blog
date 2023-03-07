@@ -16,13 +16,13 @@ const AddBlog = () => {
   useResetScroll(); // reset the window location set to top when this page is active
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [inputVal, setInputVal] = useState({
+  const [blogInput, setBlogInput] = useState({
     blogTitle: "",
     Image: "N/A",
-    category: "",
+    category: "N/A",
     summary: "",
-    blogContent: "",
   });
+  const [markdown, setMarkdown] = useState(""); //state for store and getting markdown value
   // hooks
 
   // use this function to validate this page if login or not
@@ -58,16 +58,9 @@ const AddBlog = () => {
   };
   // toolbars for quill markdown editor
 
-  // function for getting value from markdown editor and other input
-  const editorValue = (e) => {
-    setInputVal({
-      ...inputVal,
-      blogContent: e,
-    });
-  };
   const getInputValue = (e) => {
-    setInputVal({
-      ...inputVal,
+    setBlogInput({
+      ...blogInput,
       [e.target.name]:
         e.target.name === "Image" ? e.target.files[0] : e.target.value,
     });
@@ -91,9 +84,10 @@ const AddBlog = () => {
   const saveBlogPost = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    Object.entries(inputVal).forEach(([name, value]) => {
+    Object.entries(blogInput).forEach(([name, value]) => {
       formData.append(name, value);
     });
+    formData.append("blogContent", markdown);
     setLoading(true);
     const insertNewBlog = await axios.post("/blog/add-blog", formData, {
       headers: {
@@ -104,6 +98,14 @@ const AddBlog = () => {
       console.log(insertNewBlog.data);
       setLoading(false);
       setPublishBlogMsg(true);
+      setBlogInput({
+        ...blogInput,
+        blogTitle: "",
+        Image: "N/A",
+        category: "N/A",
+        summary: "",
+      });
+      setMarkdown("");
     } else {
       alert(console.log(insertNewBlog.data.msg));
     }
@@ -152,6 +154,7 @@ const AddBlog = () => {
                   className="input"
                   name="blogTitle"
                   placeholder="Blog title..."
+                  value={blogInput.blogTitle}
                   onChange={getInputValue}
                   required
                 />
@@ -173,6 +176,7 @@ const AddBlog = () => {
                 aria-label="Default select example"
                 className="input"
                 name="category"
+                value={blogInput.category}
                 onChange={getInputValue}
               >
                 <option value="">Select Category</option>
@@ -195,6 +199,7 @@ const AddBlog = () => {
                 className="input"
                 name="summary"
                 placeholder="Short summary..."
+                value={blogInput.summary}
                 onChange={getInputValue}
                 required
               />
@@ -204,8 +209,8 @@ const AddBlog = () => {
               <ReactQuill
                 modules={modules}
                 theme="snow"
-                value={inputVal.blogContent}
-                onChange={editorValue}
+                value={markdown}
+                onChange={setMarkdown}
               />
             </Form.Group>
             <div className="post-btn-container">
