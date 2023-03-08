@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import moment from "moment";
 import "./featured-blog.scss";
 const FeaturedBlog = (props) => {
   return (
@@ -12,7 +13,9 @@ const FeaturedBlog = (props) => {
       <Link to="/blog-content" className="blog-title">
         {props.blogTitle}
       </Link>
-      <p className="blog-publish">publish - Jun 6, 2022</p>
+      <p className="blog-publish">
+        publish - {moment(props.blogPublish).format("LL")}
+      </p>
     </div>
   );
 };

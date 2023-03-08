@@ -2,14 +2,19 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import toast, { Toaster } from "react-hot-toast";
 import Form from "react-bootstrap/Form";
 import useResetScroll from "../../hook/useResetScroll";
 import Navigation from "../../component/navigation/navigation";
 import LoadingLG from "../../component/loadingLG/loading";
-import AlertMessage from "../../component/alert/alert";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "./addBlog.scss";
+
+const blogPublishMsg = (msg) =>
+  toast(msg, {
+    icon: "👏",
+  });
 
 const AddBlog = () => {
   // hooks
@@ -40,7 +45,7 @@ const AddBlog = () => {
   // toolbars for quill markdown editor
   const modules = {
     toolbar: [
-      [{ header: [1, 2, 3, 4, 5, 6, false] }], //header
+      [{ header: [false] }], //header
       ["bold", "italic", "underline", "strike", "blockquote", "code-block"], //toggle button
       [
         { list: "ordered" },
@@ -67,19 +72,6 @@ const AddBlog = () => {
   };
   // function for getting value from markdown editor and other input
 
-  // publish blog success message
-  const [publishBlogMsg, setPublishBlogMsg] = useState(false);
-  const publishMsg = publishBlogMsg ? (
-    <AlertMessage
-      variant="success"
-      message="Great job! Your blog has been successfully published and can be viewed by readers."
-      setAlertChange={setPublishBlogMsg}
-    />
-  ) : (
-    ""
-  );
-  // publish blog success message
-
   // save new blog post
   const saveBlogPost = async (e) => {
     e.preventDefault();
@@ -97,7 +89,7 @@ const AddBlog = () => {
     if (insertNewBlog.data.msg === "success") {
       console.log(insertNewBlog.data);
       setLoading(false);
-      setPublishBlogMsg(true);
+      blogPublishMsg("Great job! Your blog has been published");
       setBlogInput({
         ...blogInput,
         blogTitle: "",
@@ -138,7 +130,13 @@ const AddBlog = () => {
             <h2>Post blog</h2>
           </div>
           {/* publish blog message */}
-          {publishMsg}
+          <Toaster
+            position="top-right"
+            reverseOrder={false}
+            toastOptions={{
+              duration: 4000,
+            }}
+          />
           {/* publish blog message */}
           <div className="sub-heading">
             <h3>Create new blog</h3>

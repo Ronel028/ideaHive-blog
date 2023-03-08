@@ -1,19 +1,67 @@
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import axios from "axios";
 import useResetScroll from "../../hook/useResetScroll";
 import Navigation from "../../component/navigation/navigation";
 import FeaturedBlog from "../../component/featured-blog/Featured-blog";
 import Blog from "../../component/blog/Blog";
 import featureBlogLogo from "../../assets/featured-blog.svg";
-import sampleProfile1 from "../../assets/sample-profile-1.jpeg";
-import sampleProfile2 from "../../assets/sample-profile-2.jpeg";
-import sampleProfile3 from "../../assets/sample-profile-3.jpeg";
-import sampleProfile4 from "../../assets/sample-profile-4.jpeg";
-import sampleProfile5 from "../../assets/sample-profile-5.jpeg";
-import sampleProfile6 from "../../assets/sample-profile-6.jpeg";
 import "./home.scss";
+
 const Home = () => {
   useResetScroll();
+
+  const [blogList, setBlogList] = useState([]);
+
+  useEffect(() => {
+    const getBlogList = async () => {
+      const blogList = await axios.get("/blog/get-blog");
+      // console.log(blogList);
+      setBlogList(blogList.data.blogData);
+    };
+    getBlogList();
+  }, []);
+
+  console.table(blogList);
+
+  // blog list for featured blog
+  const featuredBlog =
+    blogList.length > 0
+      ? blogList
+          .filter((item, index) => index < 6)
+          .map((blog, index) => {
+            return (
+              <FeaturedBlog
+                key={index}
+                profilePic={blog.profileImage}
+                bloggerName={`${blog.fname} ${blog.lname}`}
+                blogTitle={blog.blogTitle}
+                blogPublish={blog.datePosted}
+              />
+            );
+          })
+      : "";
+  // blog list for featured blog
+
+  // blog list
+  const blogPost =
+    blogList.length > 0
+      ? blogList.map((blog, index) => {
+          return (
+            <Blog
+              key={index}
+              contentLink="blog-content"
+              featuredImage={blog.featuredImage}
+              profileImage={blog.profileImage}
+              name={`${blog.fname} ${blog.lname}`}
+              blogTitle={blog.blogTitle}
+              blogSummary={blog.summary}
+              datePosted={blog.datePosted}
+            />
+          );
+        })
+      : "";
 
   return (
     <motion.div
@@ -43,38 +91,7 @@ const Home = () => {
             <img src={featureBlogLogo} alt="featureBlog logo" />
             Featured blog posts
           </h3>
-          <div className="featuredBlog-container">
-            <FeaturedBlog
-              profilePic={sampleProfile1}
-              bloggerName="Roland Bell"
-              blogTitle="UX lessons from a poet who invented social media in the 18th century"
-            />
-            <FeaturedBlog
-              profilePic={sampleProfile2}
-              bloggerName="Tom Copper"
-              blogTitle="Ukraine War, 1 February 2023: Operational Level"
-            />
-            <FeaturedBlog
-              profilePic={sampleProfile3}
-              bloggerName="Two Techie Vibes"
-              blogTitle="Algorithms Unlocked: How They’re Shaping Our Everyday Lives"
-            />
-            <FeaturedBlog
-              profilePic={sampleProfile4}
-              bloggerName="Jyoti lyer"
-              blogTitle="Good bot design means never having to say, “I’m sorry, I didn’t get that”"
-            />
-            <FeaturedBlog
-              profilePic={sampleProfile5}
-              bloggerName="Slvan Hermon"
-              blogTitle="An out of Google experience"
-            />
-            <FeaturedBlog
-              profilePic={sampleProfile6}
-              bloggerName="Ryan Holiday"
-              blogTitle="What We’re Reading: Your recommendations from across Medium"
-            />
-          </div>
+          <div className="featuredBlog-container">{featuredBlog}</div>
         </div>
       </section>
       {/* blog post */}
@@ -111,17 +128,8 @@ const Home = () => {
               Blog posts
             </h3>
             <div className="blog">
-              <Blog contentLink="blog-content" />
-              <Blog contentLink="blog-content" />
-              <Blog contentLink="blog-content" />
-              <Blog contentLink="blog-content" />
-              <Blog contentLink="blog-content" />
-              <Blog contentLink="blog-content" />
-              <Blog contentLink="blog-content" />
-              <Blog contentLink="blog-content" />
-              <Blog contentLink="blog-content" />
-              <Blog contentLink="blog-content" />
-              <Blog contentLink="blog-content" />
+              {blogPost}
+              {/* <Blog contentLink="blog-content" /> */}
             </div>
           </div>
         </div>
