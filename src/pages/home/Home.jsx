@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
+import { userContext } from "../../context/userContext";
 import useResetScroll from "../../hook/useResetScroll";
 import Navigation from "../../component/navigation/navigation";
 import FeaturedBlog from "../../component/featured-blog/Featured-blog";
@@ -10,58 +11,53 @@ import featureBlogLogo from "../../assets/featured-blog.svg";
 import "./home.scss";
 
 const Home = () => {
+  // hook
   useResetScroll();
-
-  const [blogList, setBlogList] = useState([]);
-
-  useEffect(() => {
-    const getBlogList = async () => {
-      const blogList = await axios.get("/blog/get-blog");
-      // console.log(blogList);
-      setBlogList(blogList.data.blogData);
-    };
-    getBlogList();
-  }, []);
-
-  console.table(blogList);
+  const { blogList } = useContext(userContext);
+  // hook
 
   // blog list for featured blog
   const featuredBlog =
-    blogList.length > 0
-      ? blogList
-          .filter((item, index) => index < 6)
-          .map((blog, index) => {
-            return (
-              <FeaturedBlog
-                key={index}
-                profilePic={blog.profileImage}
-                bloggerName={`${blog.fname} ${blog.lname}`}
-                blogTitle={blog.blogTitle}
-                blogPublish={blog.datePosted}
-              />
-            );
-          })
-      : "";
+    blogList.length > 0 ? (
+      blogList
+        .filter((item, index) => index < 6)
+        .map((blog, index) => {
+          return (
+            <FeaturedBlog
+              key={index}
+              profilePic={blog.profileImage}
+              bloggerName={`${blog.fname} ${blog.lname}`}
+              blogTitle={blog.blogTitle}
+              blogPublish={blog.datePosted}
+            />
+          );
+        })
+    ) : (
+      <p>No blog post available</p>
+    );
   // blog list for featured blog
 
   // blog list
   const blogPost =
-    blogList.length > 0
-      ? blogList.map((blog, index) => {
-          return (
-            <Blog
-              key={index}
-              contentLink="blog-content"
-              featuredImage={blog.featuredImage}
-              profileImage={blog.profileImage}
-              name={`${blog.fname} ${blog.lname}`}
-              blogTitle={blog.blogTitle}
-              blogSummary={blog.summary}
-              datePosted={blog.datePosted}
-            />
-          );
-        })
-      : "";
+    blogList.length > 0 ? (
+      blogList.map((blog, index) => {
+        return (
+          <Blog
+            key={index}
+            contentLink="blog-content"
+            featuredImage={blog.featuredImage}
+            profileImage={blog.profileImage}
+            name={`${blog.fname} ${blog.lname}`}
+            blogTitle={blog.blogTitle}
+            blogSummary={blog.summary}
+            datePosted={blog.datePosted}
+          />
+        );
+      })
+    ) : (
+      <p>No blog post available</p>
+    );
+  // blog list
 
   return (
     <motion.div
@@ -127,10 +123,7 @@ const Home = () => {
               <img src={featureBlogLogo} alt="featureBlog logo" />
               Blog posts
             </h3>
-            <div className="blog">
-              {blogPost}
-              {/* <Blog contentLink="blog-content" /> */}
-            </div>
+            <div className="blog">{blogPost}</div>
           </div>
         </div>
       </section>

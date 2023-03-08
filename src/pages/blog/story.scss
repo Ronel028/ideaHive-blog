@@ -26,7 +26,7 @@
 .story-list {
   @media screen and (min-width: 900px) {
     display: grid;
-    grid-template-columns: 316px 1fr;
+    grid-template-columns: 1fr;
     grid-template-rows: 1fr;
   }
   .featured-blog {
@@ -45,8 +45,16 @@
     }
   }
   .blog {
-    display: flex;
-    flex-direction: column;
-    gap: 49px;
+    // display: flex;
+    // flex-direction: column;
+    // gap: 49px;
+    display: grid;
+    row-gap: 49px;
+    @media screen and (min-width: 900px) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: auto;
+      gap: 49px;
+    }
   }
 }

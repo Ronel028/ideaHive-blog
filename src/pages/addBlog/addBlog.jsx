@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
 import Form from "react-bootstrap/Form";
+import { userContext } from "../../context/userContext";
 import useResetScroll from "../../hook/useResetScroll";
+import getBlogData from "../../hook/getBlogList";
 import Navigation from "../../component/navigation/navigation";
 import LoadingLG from "../../component/loadingLG/loading";
 import ReactQuill from "react-quill";
@@ -28,6 +30,7 @@ const AddBlog = () => {
     summary: "",
   });
   const [markdown, setMarkdown] = useState(""); //state for store and getting markdown value
+  const { blogList, setBlogList } = useContext(userContext);
   // hooks
 
   // use this function to validate this page if login or not
@@ -87,7 +90,7 @@ const AddBlog = () => {
       },
     });
     if (insertNewBlog.data.msg === "success") {
-      console.log(insertNewBlog.data);
+      console.log(insertNewBlog.data.blogList);
       setLoading(false);
       blogPublishMsg("Great job! Your blog has been published");
       setBlogInput({
@@ -98,6 +101,7 @@ const AddBlog = () => {
         summary: "",
       });
       setMarkdown("");
+      setBlogList(insertNewBlog.data.blogList);
     } else {
       alert(console.log(insertNewBlog.data.msg));
     }

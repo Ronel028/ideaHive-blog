@@ -26,7 +26,7 @@ const Story = () => {
         </main>
       </header>
       <div className="wrapper story-list">
-        <aside className="featured-blog">
+        {/* <aside className="featured-blog">
           <div className="sticky">
             <h3 className="title">
               <img src={featureBlogLogo} alt="featureBlog logo" />
@@ -55,7 +55,7 @@ const Story = () => {
               />
             </div>
           </div>
-        </aside>
+        </aside> */}
         <main className="blog">
           <Blog contentLink="blog-content" />
           <Blog contentLink="blog-content" />

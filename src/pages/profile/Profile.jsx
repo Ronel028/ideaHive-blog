@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -15,6 +15,7 @@ const Profile = () => {
   useResetScroll(); // reset the window location set to top when this page is active
   const navigate = useNavigate();
   const { user } = useContext(userContext); //call the context api
+  const [userBlog, setUserBlog] = useState([]);
   // hooks
 
   // use this function to validate this page if login or not
@@ -28,6 +29,38 @@ const Profile = () => {
     getSession();
   }, []);
   // use this function to validate this page if login or not
+
+  useEffect(() => {
+    const userBlogList = async () => {
+      const userBlog = await axios.get("/blog/user-blog");
+      setUserBlog(userBlog.data.userBlog);
+    };
+    userBlogList();
+  }, []);
+
+  console.table(userBlog);
+
+  // blog list component
+  const userBlogCom =
+    userBlog.length > 0 ? (
+      userBlog.map((blog, index) => {
+        return (
+          <Blog
+            key={index}
+            contentLink="blog-update"
+            featuredImage={blog.featuredImage}
+            profileImage={blog.profileImage}
+            name={`${blog.fname} ${blog.lname}`}
+            blogTitle={blog.blogTitle}
+            blogSumary={blog.summary}
+            datePosted={blog.datePosted}
+          />
+        );
+      })
+    ) : (
+      <p>No blog post available</p>
+    );
+  // blog list component
 
   return (
     <motion.div
@@ -81,12 +114,7 @@ const Profile = () => {
           </div>
           <div className="profile-blog">
             <h2>Blog</h2>
-            <main className="blog">
-              <Blog contentLink="blog-update" />
-              <Blog contentLink="blog-update" />
-              <Blog contentLink="blog-update" />
-              <Blog contentLink="blog-update" />
-            </main>
+            <main className="blog">{userBlogCom}</main>
           </div>
         </div>
       </main>

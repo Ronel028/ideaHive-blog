@@ -14,6 +14,7 @@ export default defineConfig({
       "/user/update-password": "http://localhost:3000",
       "/blog/add-blog": "http://localhost:3000",
       "/blog/get-blog": "http://localhost:3000",
+      "/blog/user-blog": "http://localhost:3000",
     },
   },
   css: {
