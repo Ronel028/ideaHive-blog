@@ -24,6 +24,7 @@
 }
 
 .story-list {
+  padding-bottom: 23px;
   @media screen and (min-width: 900px) {
     display: grid;
     grid-template-columns: 1fr;

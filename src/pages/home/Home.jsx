@@ -19,8 +19,9 @@ const Home = () => {
   // blog list for featured blog
   const featuredBlog =
     blogList.length > 0 ? (
-      blogList
-        .filter((item, index) => index < 6)
+      [...blogList]
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 6)
         .map((blog, index) => {
           return (
             <FeaturedBlog

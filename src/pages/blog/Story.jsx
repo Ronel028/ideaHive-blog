@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { motion } from "framer-motion";
+import { userContext } from "../../context/userContext";
 import useResetScroll from "../../hook/useResetScroll";
 import Navigation from "../../component/navigation/navigation";
 import FeaturedBlog from "../../component/featured-blog/Featured-blog";
@@ -7,7 +9,32 @@ import featureBlogLogo from "../../assets/featured-blog.svg";
 import sampleProfile1 from "../../assets/sample-profile-1.jpeg";
 import "./story.scss";
 const Story = () => {
+  // hook
   useResetScroll();
+  const { blogList, setBlogList } = useContext(userContext);
+  // hook
+
+  console.table(blogList);
+
+  // display blog list
+  const blogs =
+    blogList.length > 0
+      ? blogList.map((blog, index) => {
+          return (
+            <Blog
+              key={index}
+              contentLink="blog-content"
+              featuredImage={blog.featuredImage}
+              profileImage={blog.profileImage}
+              name={`${blog.fname} ${blog.lname}`}
+              blogTitle={blog.blogTitle}
+              blogSummary={blog.summary}
+              datePosted={blog.datePosted}
+            />
+          );
+        })
+      : "";
+  // display blog list
 
   return (
     <motion.div
@@ -56,20 +83,7 @@ const Story = () => {
             </div>
           </div>
         </aside> */}
-        <main className="blog">
-          <Blog contentLink="blog-content" />
-          <Blog contentLink="blog-content" />
-          <Blog contentLink="blog-content" />
-          <Blog contentLink="blog-content" />
-          <Blog contentLink="blog-content" />
-          <Blog contentLink="blog-content" />
-          <Blog contentLink="blog-content" />
-          <Blog contentLink="blog-content" />
-          <Blog contentLink="blog-content" />
-          <Blog contentLink="blog-content" />
-          <Blog contentLink="blog-content" />
-          <Blog contentLink="blog-content" />
-        </main>
+        <main className="blog">{blogs}</main>
       </div>
     </motion.div>
   );
