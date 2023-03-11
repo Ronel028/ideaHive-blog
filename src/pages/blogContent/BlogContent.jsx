@@ -1,11 +1,49 @@
+import { useEffect, useState, useContext } from "react";
 import { motion } from "framer-motion";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
+import moment from "moment";
+import { userContext } from "../../context/userContext";
 import useResetScroll from "../../hook/useResetScroll";
 import Navigation from "../../component/navigation/navigation";
-import sampleProfile from "../../assets/sample-profile-2.jpeg";
-import sampleBlogImage from "../../assets/chatGpt.jpeg";
 import "./blogContent.scss";
 const BlogContent = () => {
   useResetScroll();
+
+  const { blogList, setBlogList } = useContext(userContext);
+
+  // console.log(blogList);
+  const [blogContent, setBlogContent] = useState({
+    fname: "",
+    lname: "",
+    about: "",
+    profileImage: "",
+    datePosted: "",
+    blogTitle: "",
+    blogContent: "",
+  });
+
+  const search = useLocation().search;
+  const blogID = new URLSearchParams(search).get("blogID");
+  console.log(blogID);
+
+  useEffect(() => {
+    const getBlog = async () => {
+      const blog = await axios.get(`/blog/blog-content?blogID=${blogID}`);
+      setBlogContent({
+        ...blogContent,
+        fname: blog.data.blog[0].fname,
+        lname: blog.data.blog[0].lname,
+        about: blog.data.blog[0].about,
+        profileImage: blog.data.blog[0].profileImage,
+        datePosted: blog.data.blog[0].datePosted,
+        blogTitle: blog.data.blog[0].blogTitle,
+        blogContent: blog.data.blog[0].blogContent,
+      });
+    };
+    getBlog();
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -20,54 +58,28 @@ const BlogContent = () => {
           <div className="blog-content-left">
             <div className="profile-container">
               <div className="image-container">
-                <img src={sampleProfile} alt="" />
+                <img src={blogContent.profileImage} alt="" />
               </div>
               <div className="name-container">
-                <h5>John Doe</h5>
-                <p>Publish - Jan. 2, 2022</p>
+                <h5>{`${blogContent.fname} ${blogContent.lname}`}</h5>
+                <p>Publish - {moment(blogContent.datePosted).format("LL")}</p>
               </div>
             </div>
             <div className="content">
-              <h1>
-                ChatGPT in an iOS Shortcut — Worlds Smartest HomeKit Voice
-                Assistant
-              </h1>
-              <p>
-                Ever since I tried ChatGPT and GPT-3, everything else feels
-                painfully dumb and useless: Siri, Alexa, Google Home and all
-                other “smart” assistants.
-              </p>
-              <div className="blog-image-container">
-                <img src={sampleBlogImage} alt="" />
-              </div>
-              <p>
-                I have a fully built HomeKit smart home with dozens of lights,
-                thermostats, underfloor heating, ventilation unit, cameras and a
-                lot more, so I thought it would be great if I could replace Siri
-                with GPT-3.
-              </p>
-              <p>
-                “Programming” the Home Assistant GPT-3, and especially ChatGPT
-                are language models trained on conversational data which means
-                they are extremely good at understanding and responding to human
-                instructions. If you tried any of these chat bots, you know how
-                easily you can ask questions and get responses in a wide range
-                of formats. The complication is that when it comes to
-                controlling a smart home you have very specific components to
-                address and interact with. How can you solve this problem?
-              </p>
+              <h1>{blogContent.blogTitle}</h1>
+              <div
+                className="markdown-output"
+                dangerouslySetInnerHTML={{ __html: blogContent.blogContent }}
+              ></div>
             </div>
           </div>
           <div className="blog-content-right">
             <div className="sticky">
               <div className="image-container">
-                <img src={sampleProfile} alt="" />
+                <img src={blogContent.profileImage} alt="" />
               </div>
               <h5>John Doe</h5>
-              <p className="about">
-                Senior Web Developer, Creative Technologist with over 12 years
-                experience | JavaScript, HTML, CSS, Artificial Intelligence
-              </p>
+              <p className="about">{blogContent.about}</p>
             </div>
           </div>
         </div>

@@ -15,7 +15,7 @@ const Profile = () => {
   useResetScroll(); // reset the window location set to top when this page is active
   const navigate = useNavigate();
   const { user } = useContext(userContext); //call the context api
-  const [userBlog, setUserBlog] = useState([]);
+  const [userBlog, setUserBlog] = useState([]); // storage for user blog post
   // hooks
 
   // use this function to validate this page if login or not
@@ -33,7 +33,11 @@ const Profile = () => {
   useEffect(() => {
     const userBlogList = async () => {
       const userBlog = await axios.get("/blog/user-blog");
-      setUserBlog(userBlog.data.userBlog);
+      if (userBlog.data.msg === "success") {
+        setUserBlog(userBlog.data.userBlog);
+      } else {
+        alert(userBlog.data.msg);
+      }
     };
     userBlogList();
   }, []);

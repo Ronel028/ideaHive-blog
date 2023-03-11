@@ -14,16 +14,14 @@ const Story = () => {
   const { blogList, setBlogList } = useContext(userContext);
   // hook
 
-  console.table(blogList);
-
   // display blog list
   const blogs =
     blogList.length > 0
       ? blogList.map((blog, index) => {
           return (
             <Blog
-              key={index}
-              contentLink="blog-content"
+              key={blog.id}
+              contentLink={`blog-content?blogID=${blog.id}`}
               featuredImage={blog.featuredImage}
               profileImage={blog.profileImage}
               name={`${blog.fname} ${blog.lname}`}

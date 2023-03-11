@@ -48,7 +48,7 @@ const AddBlog = () => {
   // toolbars for quill markdown editor
   const modules = {
     toolbar: [
-      [{ header: [false] }], //header
+      //[{ header: [false] }], //header
       ["bold", "italic", "underline", "strike", "blockquote", "code-block"], //toggle button
       [
         { list: "ordered" },

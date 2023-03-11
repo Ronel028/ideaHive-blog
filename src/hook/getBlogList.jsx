@@ -7,7 +7,11 @@ const getBlogData = (url) => {
   useEffect(() => {
     const getUser = async () => {
       const userData = await axios.get(url);
-      setBlogList(userData.data.blogData);
+      if (userData.data.msg === "success") {
+        setBlogList(userData.data.blogData);
+      } else {
+        alert(userData.data.msg);
+      }
     };
     getUser();
   }, []);

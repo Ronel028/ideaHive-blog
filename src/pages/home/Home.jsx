@@ -26,6 +26,7 @@ const Home = () => {
           return (
             <FeaturedBlog
               key={index}
+              userID={blog.id}
               profilePic={blog.profileImage}
               bloggerName={`${blog.fname} ${blog.lname}`}
               blogTitle={blog.blogTitle}
@@ -45,7 +46,7 @@ const Home = () => {
         return (
           <Blog
             key={index}
-            contentLink="blog-content"
+            contentLink={`blog-content?blogID=${blog.id}`}
             featuredImage={blog.featuredImage}
             profileImage={blog.profileImage}
             name={`${blog.fname} ${blog.lname}`}
