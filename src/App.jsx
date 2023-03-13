@@ -7,7 +7,7 @@ import Signin from "./pages/signin/Signin";
 import Story from "./pages/blog/Story";
 import BlogContent from "./pages/blogContent/BlogContent";
 import Profile from "./pages/profile/Profile";
-import BlogUpdate from "./pages/blogUpdate/blogUpdate";
+import ManageBlog from "./pages/manageBlog/manageBlog";
 import UpdateProfile from "./pages/updateProfile/updateProfile";
 import AddBlog from "./pages/addBlog/addBlog";
 import { userContext } from "./context/userContext";
@@ -28,7 +28,7 @@ function App() {
         <Route path="/blog-content" element={<BlogContent />} />
         <Route path="/account-settings" element={<Profile />} />
         <Route path="/update-profile" element={<UpdateProfile />} />
-        <Route path="/blog-update" element={<BlogUpdate />} />
+        <Route path="/manage-blog" element={<ManageBlog />} />
         <Route path="/post-blog" element={<AddBlog />} />
       </Routes>
     </userContext.Provider>

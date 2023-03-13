@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import moment from "moment";
+import DOMPurify from "dompurify";
 import { userContext } from "../../context/userContext";
 import useResetScroll from "../../hook/useResetScroll";
 import Navigation from "../../component/navigation/navigation";
@@ -69,7 +70,9 @@ const BlogContent = () => {
               <h1>{blogContent.blogTitle}</h1>
               <div
                 className="markdown-output"
-                dangerouslySetInnerHTML={{ __html: blogContent.blogContent }}
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(blogContent.blogContent),
+                }}
               ></div>
             </div>
           </div>
