@@ -17,6 +17,7 @@ export default defineConfig({
       "/blog/user-blog": "http://localhost:3000",
       "/blog/blog-content": "http://localhost:3000",
       "/blog/delete-blog": "http://localhost:3000",
+      "/blog/update-blog": "http://localhost:3000",
     },
   },
   css: {
