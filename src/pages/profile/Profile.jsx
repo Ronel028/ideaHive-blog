@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import moment from "moment";
 import { userContext } from "../../context/userContext";
 import useResetScroll from "../../hook/useResetScroll";
+import { useTokenCheck } from "../../hook/tokenCheck";
 import Blog from "../../component/blog/Blog";
 import Navigation from "../../component/navigation/navigation";
 import altProfile from "../../assets/profile-alt.jpeg";
@@ -19,15 +20,7 @@ const Profile = () => {
   // hooks
 
   // use this function to validate this page if login or not
-  useEffect(() => {
-    const getSession = async () => {
-      const checkSession = await axios.get("/user/verified");
-      if (!checkSession.data.isLogin) {
-        navigate("/");
-      }
-    };
-    getSession();
-  }, []);
+  useTokenCheck();
   // use this function to validate this page if login or not
 
   // get user's blog and display to the user's profile page

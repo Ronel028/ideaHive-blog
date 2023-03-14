@@ -4,6 +4,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { userContext } from "../../context/userContext";
 import getUserData from "../../hook/getUserData";
+import { useTokenCheck } from "../../hook/tokenCheck";
 import Navigation from "../../component/navigation/navigation";
 import ChangePassword from "../../component/changePassword/changePassword";
 import AlertMessage from "../../component/alert/alert";
@@ -20,6 +21,10 @@ const UpdateProfile = () => {
   const [loading, setLoading] = useState(false);
   const [tempImage, setTempImage] = useState(null); //image storage for URL.createObjectURL()
   // hooks
+
+  // use this function to validate this page if login or not
+  useTokenCheck();
+  // use this function to validate this page if login or not
 
   // use this to releases an existing object URL which was previously created by calling URL.createObjectURL()
   useEffect(() => {

@@ -7,6 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 import DOMPurify from "dompurify";
 import { userContext } from "../../context/userContext";
 import useResetScroll from "../../hook/useResetScroll";
+import { useTokenCheck } from "../../hook/tokenCheck";
 import Navigation from "../../component/navigation/navigation";
 import LoadingLG from "../../component/loadingLG/loading";
 import profileAlt from "../../assets/profile-alt.jpeg";
@@ -38,6 +39,10 @@ const ManageBlog = () => {
   const [deleteLoading, setDeleteLoading] = useState(false);
   // hooks
 
+  // use this function to validate this page if login or not
+  useTokenCheck();
+  // use this function to validate this page if login or not
+
   // get blog id from url
   const blogId = new URLSearchParams(searchParams).get("blogId");
   // get blog id from url
@@ -45,17 +50,25 @@ const ManageBlog = () => {
   // get blog data using id
   useEffect(() => {
     const getBlogDataById = async () => {
-      const blogData = await axios.get(`/blog/blog-content?blogID=${blogId}`);
-      setBlog({
-        ...blog,
-        fname: blogData.data.blog[0].fname,
-        lname: blogData.data.blog[0].lname,
-        profileImage: blogData.data.blog[0].profileImage,
-        about: blogData.data.blog[0].about,
-        datePosted: blogData.data.blog[0].datePosted,
-        blogTitle: blogData.data.blog[0].blogTitle,
-        blogContent: blogData.data.blog[0].blogContent,
-      });
+      try {
+        const blogData = await axios.get(`/blog/blog-content?blogID=${blogId}`);
+        if (blogData.data.blog.length > 0) {
+          setBlog({
+            ...blog,
+            fname: blogData.data.blog[0].fname,
+            lname: blogData.data.blog[0].lname,
+            profileImage: blogData.data.blog[0].profileImage,
+            about: blogData.data.blog[0].about,
+            datePosted: blogData.data.blog[0].datePosted,
+            blogTitle: blogData.data.blog[0].blogTitle,
+            blogContent: blogData.data.blog[0].blogContent,
+          });
+        } else {
+          throw blogData.data.msg;
+        }
+      } catch (error) {
+        navigate("/account-settings");
+      }
     };
     getBlogDataById();
   }, []);
@@ -144,7 +157,10 @@ const ManageBlog = () => {
                 </div>
               </div>
               <div className="action">
-                <Link to="/update" className="update-blog">
+                <Link
+                  to={`/update-blog?blogId=${blogId}`}
+                  className="update-blog"
+                >
                   <svg
                     width="24"
                     height="24"

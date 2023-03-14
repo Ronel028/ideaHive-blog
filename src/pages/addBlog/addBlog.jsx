@@ -6,6 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Form from "react-bootstrap/Form";
 import { userContext } from "../../context/userContext";
 import useResetScroll from "../../hook/useResetScroll";
+import { useTokenCheck } from "../../hook/tokenCheck";
 import getBlogData from "../../hook/getBlogList";
 import Navigation from "../../component/navigation/navigation";
 import LoadingLG from "../../component/loadingLG/loading";
@@ -34,15 +35,7 @@ const AddBlog = () => {
   // hooks
 
   // use this function to validate this page if login or not
-  useEffect(() => {
-    const getSession = async () => {
-      const checkSession = await axios.get("/user/verified");
-      if (!checkSession.data.isLogin) {
-        navigate("/");
-      }
-    };
-    getSession();
-  }, []);
+  useTokenCheck();
   // use this function to validate this page if login or not
 
   // toolbars for quill markdown editor
