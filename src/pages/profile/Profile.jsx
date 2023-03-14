@@ -30,19 +30,21 @@ const Profile = () => {
   }, []);
   // use this function to validate this page if login or not
 
-  console.log(blogList);
-
+  // get user's blog and display to the user's profile page
   useEffect(() => {
     const userBlogList = async () => {
-      const userBlog = await axios.get("/blog/user-blog");
-      if (userBlog.data.msg === "success") {
-        setUserBlog(userBlog.data.userBlog);
-      } else {
-        alert(userBlog.data.msg);
-      }
+      try {
+        const userBlog = await axios.get("/blog/user-blog");
+        if (userBlog.data.msg === "success") {
+          setUserBlog(userBlog.data.userBlog);
+        } else {
+          throw userBlog.data.msg;
+        }
+      } catch (error) {}
     };
     userBlogList();
   }, []);
+  // get user's blog and display to the user's profile page
 
   // blog list component
   const userBlogCom =

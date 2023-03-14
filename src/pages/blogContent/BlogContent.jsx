@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 import DOMPurify from "dompurify";
 import { userContext } from "../../context/userContext";
@@ -23,24 +23,31 @@ const BlogContent = () => {
     blogTitle: "",
     blogContent: "",
   });
-
+  const navigate = useNavigate();
   const search = useLocation().search;
   const blogID = new URLSearchParams(search).get("blogID");
-  console.log(blogID);
 
   useEffect(() => {
     const getBlog = async () => {
-      const blog = await axios.get(`/blog/blog-content?blogID=${blogID}`);
-      setBlogContent({
-        ...blogContent,
-        fname: blog.data.blog[0].fname,
-        lname: blog.data.blog[0].lname,
-        about: blog.data.blog[0].about,
-        profileImage: blog.data.blog[0].profileImage,
-        datePosted: blog.data.blog[0].datePosted,
-        blogTitle: blog.data.blog[0].blogTitle,
-        blogContent: blog.data.blog[0].blogContent,
-      });
+      try {
+        const blog = await axios.get(`/blog/blog-content?blogID=${blogID}`);
+        if (blog.data.blog.length > 0) {
+          setBlogContent({
+            ...blogContent,
+            fname: blog.data.blog[0].fname,
+            lname: blog.data.blog[0].lname,
+            about: blog.data.blog[0].about,
+            profileImage: blog.data.blog[0].profileImage,
+            datePosted: blog.data.blog[0].datePosted,
+            blogTitle: blog.data.blog[0].blogTitle,
+            blogContent: blog.data.blog[0].blogContent,
+          });
+        } else {
+          throw blog.data.msg;
+        }
+      } catch (error) {
+        navigate("/");
+      }
     };
     getBlog();
   }, []);

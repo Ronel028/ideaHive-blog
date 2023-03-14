@@ -59,8 +59,7 @@ const AddBlog = () => {
       [{ color: [] }, { background: [] }],
       [{ font: [] }],
       [{ script: "sub" }, { script: "super" }], // superscript/subscript
-      [{ align: [] }],
-      [("link", "image")], // link and image
+      ["link", "image"], // link and image
       ["clean"], // remove formatting button
     ],
   };
