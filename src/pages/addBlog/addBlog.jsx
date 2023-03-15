@@ -7,7 +7,6 @@ import Form from "react-bootstrap/Form";
 import { userContext } from "../../context/userContext";
 import useResetScroll from "../../hook/useResetScroll";
 import { useTokenCheck } from "../../hook/tokenCheck";
-import getBlogData from "../../hook/getBlogList";
 import Navigation from "../../component/navigation/navigation";
 import LoadingLG from "../../component/loadingLG/loading";
 import ReactQuill from "react-quill";

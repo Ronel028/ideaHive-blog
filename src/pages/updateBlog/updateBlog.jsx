@@ -7,11 +7,11 @@ import Form from "react-bootstrap/Form";
 import { userContext } from "../../context/userContext";
 import useResetScroll from "../../hook/useResetScroll";
 import { useTokenCheck } from "../../hook/tokenCheck";
-import getBlogData from "../../hook/getBlogList";
 import Navigation from "../../component/navigation/navigation";
 import LoadingLG from "../../component/loadingLG/loading";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import "./updateBlog.scss";
 
 const blogPublishMsg = (msg) =>
   toast(msg, {
@@ -30,7 +30,7 @@ const UpdateBlog = () => {
     summary: "",
   });
   const [markdown, setMarkdown] = useState(""); //state for store and getting markdown value
-  const { blogList, setBlogList } = useContext(userContext);
+  const { blogList, setBlogList, setIsBlogUpdate } = useContext(userContext);
   const searchParams = useLocation().search;
   // hooks
 
@@ -91,24 +91,39 @@ const UpdateBlog = () => {
   // save updated blog post
   const saveUpdateBlogPost = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    Object.entries(blogInput).forEach(([name, value]) => {
-      formData.append(name, value);
-    });
-    formData.append("blogContent", markdown);
-    const updateBlog = await axios.post("/blog/update-blog", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    // console.table({ ...blogInput, markdown });
-    console.log(updateBlog);
+    try {
+      const formData = new FormData();
+      Object.entries(blogInput).forEach(([name, value]) => {
+        formData.append(name, value);
+      });
+      formData.append("blogContent", markdown);
+      setLoading(true);
+      const updateBlog = await axios.post(
+        `/blog/update-blog?blogId=${blogId}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      if (updateBlog.data.msg === "success") {
+        setBlogList(updateBlog.data.blogList);
+        setIsBlogUpdate(true);
+        navigate(`/manage-blog?blogId=${blogId}`);
+      } else {
+        throw "Error updating you blog. Please try again";
+      }
+      setLoading(false);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
   // save updated blog post
 
   //loading active while uploading your blog
   const loadingActive = loading ? (
-    <LoadingLG loadingWord="Your blog post is being published, this might take a moment..." />
+    <LoadingLG loadingWord="Your blog post is updating, this might take a moment..." />
   ) : (
     ""
   );
@@ -126,8 +141,8 @@ const UpdateBlog = () => {
       <header>
         <Navigation />
       </header>
-      <main className="main add-blog-main">
-        <div className="wrapper add-blog-container">
+      <main className="main update-blog-main">
+        <div className="wrapper update-blog-container">
           <div className="title title-page">
             <h2>Update blog</h2>
           </div>
@@ -218,7 +233,7 @@ const UpdateBlog = () => {
                 Cancel
               </Link>
               <button type="submit" className="post-btn">
-                Post
+                Update
               </button>
             </div>
           </Form>

@@ -19,6 +19,9 @@ import "./manageBlog.scss";
 const errorMessageAlert = (msg) => {
   toast.error(msg);
 };
+const updateSuccessMsg = (msg) => {
+  toast.success(msg);
+};
 // alert message
 
 const ManageBlog = () => {
@@ -35,9 +38,19 @@ const ManageBlog = () => {
     blogTitle: "",
     blogContent: "",
   });
-  const { setBlogList } = useContext(userContext);
+  const { setBlogList, isBlogUpdate, setIsBlogUpdate } =
+    useContext(userContext);
   const [deleteLoading, setDeleteLoading] = useState(false);
   // hooks
+
+  // check if isBlogUpdate is true to display toast message
+  useEffect(() => {
+    if (isBlogUpdate) {
+      updateSuccessMsg("Blog updated.");
+    }
+    setIsBlogUpdate(false);
+  }, []);
+  // check if isBlogUpdate is true to display toast message
 
   // use this function to validate this page if login or not
   useTokenCheck();
@@ -195,6 +208,7 @@ const ManageBlog = () => {
               </div>
             </div>
             <div className="content">
+              <h1>{blog.blogTitle}</h1>
               <div
                 className="markdown-output"
                 dangerouslySetInnerHTML={{

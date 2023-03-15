@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import axios from "axios";
 import Home from "./pages/home/Home";
 import Register from "./pages/register/Register";
 import Signin from "./pages/signin/Signin";
@@ -18,9 +17,19 @@ import getBlogData from "./hook/getBlogList";
 function App() {
   const [user, setUser] = getUserData("/user/info");
   const [blogList, setBlogList] = getBlogData("/blog/get-blog");
+  const [isBlogUpdate, setIsBlogUpdate] = useState(false);
 
   return (
-    <userContext.Provider value={{ user, setUser, blogList, setBlogList }}>
+    <userContext.Provider
+      value={{
+        user,
+        setUser,
+        blogList,
+        setBlogList,
+        isBlogUpdate,
+        setIsBlogUpdate,
+      }}
+    >
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Register />} />

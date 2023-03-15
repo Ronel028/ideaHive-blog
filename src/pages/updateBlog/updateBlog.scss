@@ -1,0 +1,79 @@
+.update-blog-main {
+  padding: 71px 0;
+  .update-blog-container {
+    .title-page {
+      padding-bottom: 23px;
+      border-bottom: 1px solid var(--line-color);
+      h2 {
+        margin-bottom: 0;
+        font-size: clamp(1.125rem, 0.9897rem + 0.6309vw, 1.25rem);
+        @media screen and (min-width: 744px) {
+          font-size: clamp(1.25rem, 0.8894rem + 0.8741vw, 1.5625rem);
+        }
+      }
+    }
+    .sub-heading {
+      margin-bottom: 31px;
+      h3 {
+        font-size: clamp(1rem, 0.875rem + 0.6061vw, 1.125rem);
+        margin-bottom: 5px;
+      }
+      p {
+        font-size: clamp(0.8125rem, 0.75rem + 0.303vw, 0.875rem);
+      }
+    }
+    // form style
+    .form {
+      .label,
+      .input {
+        font-family: var(--font-Roboto);
+        font-size: 0.875rem;
+        font-weight: var(--fw-regular);
+      }
+      .label {
+        span {
+          font-size: 0.75rem;
+          font-style: italic;
+        }
+      }
+      .input-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, auto);
+        @media screen and (min-width: 800px) {
+          grid-template-columns: repeat(2, 1fr);
+          grid-template-rows: auto;
+          column-gap: 41px;
+        }
+      }
+      .post-btn-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 16px;
+        .post-btn,
+        .cancel-btn {
+          padding: 9px 23px;
+          border-radius: 4px;
+          font-family: var(--font-spaceGrotesk);
+          font-size: 1rem;
+          color: var(--light-gray);
+          font-weight: var(--fw-regular);
+          transition: background 0.2s ease-in-out;
+        }
+        .post-btn {
+          background-color: var(--dark-blue);
+          &:hover {
+            background-color: rgba(10, 75, 136, 0.7);
+          }
+        }
+        .cancel-btn {
+          background-color: var(--error-color);
+          &:hover {
+            background-color: rgb(206, 32, 32, 0.7);
+          }
+        }
+      }
+    }
+  }
+}
