@@ -14,7 +14,7 @@ import "./updateProfile.scss";
 
 const UpdateProfile = () => {
   // hooks
-  const { user, setUser } = useContext(userContext); //call the context api
+  const { user, setUser, setIsBlogUpdate } = useContext(userContext); //call the context api
   const navigate = useNavigate();
   const [inputVal, setInputVal] = getUserData("/user/info"); //getting user data to display in the ui to update
   const [imagePreviewer, setImagePreviewer] = useState(""); //storage for image to preview
@@ -90,6 +90,7 @@ const UpdateProfile = () => {
           Image: tempImage === null ? user.Image : tempImage,
           birthDay: inputVal.birthDay,
         });
+        setIsBlogUpdate(true);
         navigate("/account-settings");
       } else {
         throw updateUser.data.error;

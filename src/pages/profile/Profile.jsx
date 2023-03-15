@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import moment from "moment";
+import toast, { Toaster } from "react-hot-toast";
 import { userContext } from "../../context/userContext";
 import useResetScroll from "../../hook/useResetScroll";
 import { useTokenCheck } from "../../hook/tokenCheck";
@@ -11,17 +12,33 @@ import Navigation from "../../component/navigation/navigation";
 import altProfile from "../../assets/profile-alt.jpeg";
 import "./profile.scss";
 
+// alert message
+const updateSuccessMsg = (msg) => {
+  toast.success(msg);
+};
+// alert message
+
 const Profile = () => {
   // hooks
   useResetScroll(); // reset the window location set to top when this page is active
   const navigate = useNavigate();
-  const { user, blogList } = useContext(userContext); //call the context api
+  const { user, blogList, isBlogUpdate, setIsBlogUpdate } =
+    useContext(userContext); //call the context api
   const [userBlog, setUserBlog] = useState([]); // storage for user blog post
   // hooks
 
   // use this function to validate this page if login or not
   useTokenCheck();
   // use this function to validate this page if login or not
+
+  // check if isBlogUpdate is true to display toast message
+  useEffect(() => {
+    if (isBlogUpdate) {
+      updateSuccessMsg("Profile updated.");
+    }
+    setIsBlogUpdate(false);
+  }, []);
+  // check if isBlogUpdate is true to display toast message
 
   // get user's blog and display to the user's profile page
   useEffect(() => {
@@ -70,6 +87,11 @@ const Profile = () => {
       {/* <header> */}
       <Navigation />
       {/* </header> */}
+
+      {/* alert error message */}
+      <Toaster position="top-right" reverseOrder={false} />
+      {/* alert error message */}
+
       <main className="profile-main">
         <div className="wrapper profile-container">
           <div className="profile-title">
