@@ -86,7 +86,7 @@ const UpdateProfile = () => {
           fname: inputVal.fname,
           lname: inputVal.lname,
           email: inputVal.email,
-          about: inputVal.about,
+          about: inputVal.about === "" ? "N/A" : inputVal.about,
           Image: tempImage === null ? user.Image : tempImage,
           birthDay: inputVal.birthDay,
         });

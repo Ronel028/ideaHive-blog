@@ -88,7 +88,7 @@ const BlogContent = () => {
               <div className="image-container">
                 <img src={blogContent.profileImage} alt="" />
               </div>
-              <h5>John Doe</h5>
+              <h5>{`${blogContent.fname} ${blogContent.lname}`}</h5>
               <p className="about">{blogContent.about}</p>
             </div>
           </div>
