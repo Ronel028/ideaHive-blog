@@ -10,6 +10,7 @@ import ManageBlog from "./pages/manageBlog/manageBlog";
 import UpdateProfile from "./pages/updateProfile/updateProfile";
 import AddBlog from "./pages/addBlog/addBlog";
 import UpdateBlog from "./pages/updateBlog/updateBlog";
+import Category from "./pages/category/category";
 import { userContext } from "./context/userContext";
 import getUserData from "./hook/getUserData";
 import getBlogData from "./hook/getBlogList";
@@ -35,6 +36,7 @@ function App() {
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/story" element={<Story />} />
+        <Route path="/category" element={<Category />} />
         <Route path="/blog-content" element={<BlogContent />} />
         <Route path="/account-settings" element={<Profile />} />
         <Route path="/update-profile" element={<UpdateProfile />} />

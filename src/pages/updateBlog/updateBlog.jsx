@@ -195,14 +195,16 @@ const UpdateBlog = () => {
                 onChange={getInputValue}
               >
                 <option value="">Select Category</option>
-                <option value="Programming">Programming</option>
-                <option value="Technology">Technology</option>
-                <option value="Space">Space</option>
-                <option value="Self Improvement">Self Improvement</option>
-                <option value="Daily Life">Daily Life</option>
-                <option value="Artificial Inteligence">
+                <option value="programming">Programming</option>
+                <option value="technology">Technology</option>
+                <option value="space">Space</option>
+                <option value="self-improvement">Self Improvement</option>
+                <option value="daily-life">Daily Life</option>
+                <option value="artificial-inteligence">
                   Artificial Inteligence
                 </option>
+                <option value="anime">Anime</option>
+                <option value="movies">Movies</option>
               </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3" controlId="summary">

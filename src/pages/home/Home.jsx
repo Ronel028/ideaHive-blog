@@ -8,6 +8,7 @@ import Navigation from "../../component/navigation/navigation";
 import FeaturedBlog from "../../component/featured-blog/Featured-blog";
 import Blog from "../../component/blog/Blog";
 import featureBlogLogo from "../../assets/featured-blog.svg";
+import backgroundHeader from "../../assets/background-header.jpg";
 import "./home.scss";
 
 const Home = () => {
@@ -70,10 +71,17 @@ const Home = () => {
     >
       <header className="header">
         <Navigation />
-        <main className="hero">
+        <main
+          className="hero"
+          style={{
+            backgroundImage: `url(${backgroundHeader})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center center",
+          }}
+        >
           <div className="wrapper">
-            <h1>Discover insights and inspiration</h1>
-            <p>Sharing stories that inspire change</p>
+            <h1>Your daily dose of News, Life Experiences, and More</h1>
+            <p>Expand your knowledge and learn something new every day.</p>
             <div className="cta-container">
               <Link to="/story" className="hero-cta" id="btn">
                 Start Reading
@@ -99,23 +107,35 @@ const Home = () => {
             <div className="sticky">
               <h3>Discover more what matters to you</h3>
               <div className="topic-container">
-                <Link to="/programming" className="topic">
+                <Link to="/category?cat=programming" className="topic">
                   Programming
                 </Link>
-                <Link to="/technology" className="topic">
+                <Link to="/category?cat=technology" className="topic">
                   Technology
                 </Link>
-                <Link to="/science" className="topic">
+                <Link to="/category?cat=science" className="topic">
                   Science
                 </Link>
-                <Link to="/space" className="topic">
+                <Link to="/category?cat=space" className="topic">
                   Space
                 </Link>
-                <Link to="/self" className="topic">
+                <Link to="/category?cat=daily-life" className="topic">
+                  Daily life
+                </Link>
+                <Link to="/category?cat=self-improvement" className="topic">
                   Self Improvement
                 </Link>
-                <Link to="/ai" className="topic">
+                <Link
+                  to="/category?cat=artificial-inteligence"
+                  className="topic"
+                >
                   Artificial Inteligence
+                </Link>
+                <Link to="/category?cat=anime" className="topic">
+                  Anime
+                </Link>
+                <Link to="/category?cat=movies" className="topic">
+                  Movies
                 </Link>
               </div>
             </div>

@@ -4,15 +4,29 @@
     .hero {
       margin-top: 71px;
       padding: 144px 36px;
-      background-color: var(--hero-bg);
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
+      position: relative;
+      z-index: 1;
+
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.7
+        ); // the color overlay with 50% opacity
+        z-index: -1;
+      }
       h1 {
         font-family: var(--font-spaceGrotesk);
         font-size: clamp(1.875rem, 0.835rem + 4.8232vw, 2.8125rem);
-        color: var(--dark);
+        color: var(--light-gray);
         font-weight: var(--fw-bold);
         margin-bottom: 18px;
         @media screen and (min-width: 744px) {
@@ -21,7 +35,7 @@
       }
       p {
         font-size: clamp(1.1875rem, 0.9102rem + 1.2862vw, 1.4375rem);
-        color: var(--dark);
+        color: var(--light-gray);
         font-weight: var(--fw-regular);
         margin-bottom: 27px;
       }
