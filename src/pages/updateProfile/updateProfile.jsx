@@ -16,7 +16,7 @@ const UpdateProfile = () => {
   // hooks
   const { user, setUser, setIsBlogUpdate } = useContext(userContext); //call the context api
   const navigate = useNavigate();
-  const [inputVal, setInputVal] = getUserData("/user/info"); //getting user data to display in the ui to update
+  const [inputVal, setInputVal, fetchUserData] = getUserData("/user/info"); //getting user data to display in the ui to update
   const [imagePreviewer, setImagePreviewer] = useState(""); //storage for image to preview
   const [loading, setLoading] = useState(false);
   const [tempImage, setTempImage] = useState(null); //image storage for URL.createObjectURL()
@@ -164,120 +164,125 @@ const UpdateProfile = () => {
             <h3>User information</h3>
             <p>Here you can edit public information about yourself.</p>
           </div>
-          {/* inputs */}
-          <form
-            method="POST"
-            className="update-fields"
-            onSubmit={updateProfile}
-          >
-            <div className="input-container">
-              <div className="update-image-container">
-                <div className="image-container">
-                  <img
-                    src={
-                      imagePreviewer === ""
-                        ? inputVal.Image === "N/A"
-                          ? profileALt
-                          : inputVal.Image
-                        : imagePreviewer
-                    }
-                    alt=""
-                  />
-                </div>
-                <label htmlFor="profile-pic" className="profile-pic">
-                  <svg
-                    width="15"
-                    height="15"
-                    viewBox="0 0 15 15"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M1.98145 10.3308V12.5428H4.19349L10.7175 6.01878L8.50549 3.80673L1.98145 10.3308ZM12.4282 4.30813C12.4829 4.25356 12.5262 4.18874 12.5558 4.11738C12.5854 4.04602 12.6007 3.96952 12.6007 3.89227C12.6007 3.81501 12.5854 3.73852 12.5558 3.66716C12.5262 3.5958 12.4829 3.53098 12.4282 3.4764L11.0479 2.09609C10.9933 2.04141 10.9285 1.99802 10.8571 1.96842C10.7858 1.93882 10.7093 1.92358 10.632 1.92358C10.5547 1.92358 10.4782 1.93882 10.4069 1.96842C10.3355 1.99802 10.2707 2.04141 10.2161 2.09609L9.13666 3.17557L11.3487 5.38761L12.4282 4.30813Z"
-                      fill="#F1F1F1"
-                    />
-                  </svg>
-                  <input
-                    type="file"
-                    name="profileImage"
-                    id="profile-pic"
-                    onChange={handleImage}
-                  />
-                </label>
-              </div>
-              <div className="inputs">
-                <div className="full-name">
-                  <label>Full name</label>
-                  <div className="full-name-input">
-                    <input
-                      type="text"
-                      name="fname"
-                      id="fname"
-                      placeholder="First name"
-                      value={inputVal.fname}
-                      onChange={userInput}
-                    />
-                    <input
-                      type="text"
-                      name="lname"
-                      id="lname"
-                      placeholder="Last name"
-                      value={inputVal.lname}
-                      onChange={userInput}
-                    />
-                  </div>
-                </div>
-                <div className="email-dob">
-                  <div className="email-address">
-                    <label htmlFor="email">Email address</label>
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      placeholder="Email address"
-                      value={inputVal.email}
-                      onChange={userInput}
-                    />
-                  </div>
-                  <div className="birthDay">
-                    <label htmlFor="birthDay">Date of birth</label>
-                    <input
-                      type="date"
-                      name="birthDay"
-                      id="birthDay"
-                      defaultValue={
-                        inputVal.birthDay === "N/A" ? "" : inputVal.birthDay
+
+          {fetchUserData ? (
+            <p>Loading profile. Please wait...</p>
+          ) : (
+            //  input form
+            <form
+              method="POST"
+              className="update-fields"
+              onSubmit={updateProfile}
+            >
+              <div className="input-container">
+                <div className="update-image-container">
+                  <div className="image-container">
+                    <img
+                      src={
+                        imagePreviewer === ""
+                          ? inputVal.Image === "N/A"
+                            ? profileALt
+                            : inputVal.Image
+                          : imagePreviewer
                       }
-                      onChange={userInput}
+                      alt=""
                     />
                   </div>
+                  <label htmlFor="profile-pic" className="profile-pic">
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 15 15"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M1.98145 10.3308V12.5428H4.19349L10.7175 6.01878L8.50549 3.80673L1.98145 10.3308ZM12.4282 4.30813C12.4829 4.25356 12.5262 4.18874 12.5558 4.11738C12.5854 4.04602 12.6007 3.96952 12.6007 3.89227C12.6007 3.81501 12.5854 3.73852 12.5558 3.66716C12.5262 3.5958 12.4829 3.53098 12.4282 3.4764L11.0479 2.09609C10.9933 2.04141 10.9285 1.99802 10.8571 1.96842C10.7858 1.93882 10.7093 1.92358 10.632 1.92358C10.5547 1.92358 10.4782 1.93882 10.4069 1.96842C10.3355 1.99802 10.2707 2.04141 10.2161 2.09609L9.13666 3.17557L11.3487 5.38761L12.4282 4.30813Z"
+                        fill="#F1F1F1"
+                      />
+                    </svg>
+                    <input
+                      type="file"
+                      name="profileImage"
+                      id="profile-pic"
+                      onChange={handleImage}
+                    />
+                  </label>
                 </div>
-                <div className="about">
-                  <label htmlFor="about">About</label>
-                  <textarea
-                    name="about"
-                    id="about"
-                    rows="5"
-                    placeholder="Tell me something a little bit about yourself"
-                    value={inputVal.about === "N/A" ? "" : inputVal.about}
-                    onChange={userInput}
-                  ></textarea>
+                <div className="inputs">
+                  <div className="full-name">
+                    <label>Full name</label>
+                    <div className="full-name-input">
+                      <input
+                        type="text"
+                        name="fname"
+                        id="fname"
+                        placeholder="First name"
+                        value={inputVal.fname}
+                        onChange={userInput}
+                      />
+                      <input
+                        type="text"
+                        name="lname"
+                        id="lname"
+                        placeholder="Last name"
+                        value={inputVal.lname}
+                        onChange={userInput}
+                      />
+                    </div>
+                  </div>
+                  <div className="email-dob">
+                    <div className="email-address">
+                      <label htmlFor="email">Email address</label>
+                      <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="Email address"
+                        value={inputVal.email}
+                        onChange={userInput}
+                      />
+                    </div>
+                    <div className="birthDay">
+                      <label htmlFor="birthDay">Date of birth</label>
+                      <input
+                        type="date"
+                        name="birthDay"
+                        id="birthDay"
+                        defaultValue={
+                          inputVal.birthDay === "N/A" ? "" : inputVal.birthDay
+                        }
+                        onChange={userInput}
+                      />
+                    </div>
+                  </div>
+                  <div className="about">
+                    <label htmlFor="about">About</label>
+                    <textarea
+                      name="about"
+                      id="about"
+                      rows="5"
+                      placeholder="Tell me something a little bit about yourself"
+                      value={inputVal.about === "N/A" ? "" : inputVal.about}
+                      onChange={userInput}
+                    ></textarea>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="profile-btn-container">
-              <button
-                className="change-password-btn"
-                type="button"
-                onClick={showModal}
-              >
-                Change password
-              </button>
-              <button type="submit" className="save-profile-btn">
-                Save profile
-              </button>
-            </div>
-          </form>
+              <div className="profile-btn-container">
+                <button
+                  className="change-password-btn"
+                  type="button"
+                  onClick={showModal}
+                >
+                  Change password
+                </button>
+                <button type="submit" className="save-profile-btn">
+                  Save profile
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </main>
     </motion.div>

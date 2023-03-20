@@ -6,7 +6,7 @@ const FeaturedBlog = (props) => {
     <div className="blog-container">
       <div className="profile-container">
         <div className="image-container">
-          <img src={props.profilePic} alt="" />
+          <img src={props.profilePic} alt={props.bloggerName} />
         </div>
         <h4>{props.bloggerName}</h4>
       </div>

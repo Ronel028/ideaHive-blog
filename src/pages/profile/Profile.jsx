@@ -66,7 +66,7 @@ const Profile = () => {
             contentLink={`manage-blog?blogId=${blog.id}`}
             featuredImage={blog.featuredImage}
             profileImage={blog.profileImage}
-            name={`${blog.fname} ${blog.lname}`}
+            bloggerName={`${blog.fname} ${blog.lname}`}
             blogTitle={blog.blogTitle}
             blogSumary={blog.summary}
             datePosted={blog.datePosted}
@@ -118,7 +118,7 @@ const Profile = () => {
             <div className="profile-image">
               <img
                 src={user.Image === "N/A" ? altProfile : user.Image}
-                alt=""
+                alt={`${user.fname} ${user.lname}`}
               />
             </div>
             <div className="profile-name">

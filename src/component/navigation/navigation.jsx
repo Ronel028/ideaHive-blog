@@ -48,7 +48,7 @@ const Navigation = () => {
               <div className="profile-container">
                 <img
                   src={user.Image === "N/A" ? profileAlt : user.Image}
-                  alt=""
+                  alt={`${user.fname} ${user.lname}`}
                 />
               </div>
               <div className="menu-profile-desktop">

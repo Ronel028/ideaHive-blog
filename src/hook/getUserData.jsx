@@ -12,10 +12,12 @@ const getUserData = (url) => {
     Image: "",
     birthDay: "",
   });
+  const [fetchUserData, setFetchUserData] = useState(false);
 
   useEffect(() => {
     const getUser = async () => {
       try {
+        setFetchUserData(true);
         const userData = await axios.get(url);
         if (
           userData.data.isLogin &&
@@ -36,6 +38,7 @@ const getUserData = (url) => {
         } else {
           throw new Error("Invalid");
         }
+        setFetchUserData(false);
       } catch (error) {
         console.log(error.message);
       }
@@ -43,7 +46,7 @@ const getUserData = (url) => {
     getUser();
   }, []);
 
-  return [user, setUser];
+  return [user, setUser, fetchUserData];
 };
 
 export default getUserData;

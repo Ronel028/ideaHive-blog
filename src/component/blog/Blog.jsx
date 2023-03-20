@@ -14,9 +14,9 @@ const Blog = (props) => {
       <div className="blog-description">
         <div className="blog-profile-container">
           <div className="blog-image-container">
-            <img src={props.profileImage} alt="" />
+            <img src={props.profileImage} alt={props.bloggerName} />
           </div>
-          <h3>{props.name}</h3>
+          <h3>{props.bloggerName}</h3>
         </div>
         <Link to={`/${props.contentLink}`} className="blog-info">
           <h2 className="blog-title">{props.blogTitle}</h2>

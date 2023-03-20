@@ -4,11 +4,8 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 import DOMPurify from "dompurify";
-import ContentLoader from "react-content-loader";
 import { userContext } from "../../context/userContext";
 import useResetScroll from "../../hook/useResetScroll";
-import LoadingLG from "../../component/loadingLG/loading";
-import LoadingData from "../../component/loadingData/loadingData";
 import Navigation from "../../component/navigation/navigation";
 import "./blogContent.scss";
 const BlogContent = () => {
