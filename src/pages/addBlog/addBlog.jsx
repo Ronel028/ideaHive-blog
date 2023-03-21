@@ -75,11 +75,15 @@ const AddBlog = () => {
     });
     formData.append("blogContent", markdown);
     setLoading(true);
-    const insertNewBlog = await axios.post("/blog/add-blog", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    const insertNewBlog = await axios.post(
+      "https://idea-h-ive-blog.vercel.app/blog/add-blog",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
     if (insertNewBlog.data.msg === "success") {
       console.log(insertNewBlog.data.blogList);
       setLoading(false);

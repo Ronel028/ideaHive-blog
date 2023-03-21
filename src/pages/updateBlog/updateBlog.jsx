@@ -45,7 +45,9 @@ const UpdateBlog = () => {
   //get blog by id
   useEffect(() => {
     const getBlogById = async () => {
-      const getBlog = await axios.get(`/blog/blog-content?blogID=${blogId}`);
+      const getBlog = await axios.get(
+        `https://idea-h-ive-blog.vercel.app/blog/blog-content?blogID=${blogId}`
+      );
       setBlogInput({
         ...blogInput,
         blogTitle: getBlog.data.blog[0].blogTitle,

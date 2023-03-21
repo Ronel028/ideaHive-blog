@@ -146,7 +146,9 @@ const Navigation = () => {
   // function for signout user
   const signoutUser = async () => {
     try {
-      const signout = await axios.get("/user/signout");
+      const signout = await axios.get(
+        "https://idea-h-ive-blog.vercel.app/user/signout"
+      );
       if (signout.data.isLogout) {
         setUser({
           ...user,
