@@ -36,7 +36,7 @@ const Category = () => {
               contentLink={`blog-content?blogID=${blog.id}`}
               featuredImage={blog.featuredImage}
               profileImage={blog.profileImage}
-              name={`${blog.fname} ${blog.lname}`}
+              bloggerName={`${blog.fname} ${blog.lname}`}
               blogTitle={blog.blogTitle}
               blogSummary={blog.summary}
               datePosted={blog.datePosted}

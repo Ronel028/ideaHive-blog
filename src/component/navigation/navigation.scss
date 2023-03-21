@@ -26,6 +26,7 @@
       display: none; //flex
       align-items: center;
       gap: 37px;
+      list-style-type: none;
 
       @media screen and (min-width: 744px) {
         display: flex;
@@ -178,6 +179,11 @@
   z-index: 10;
   @media screen and (min-width: 744px) {
     display: none;
+  }
+
+  .links,
+  .auth {
+    list-style-type: none;
   }
 
   .links {
