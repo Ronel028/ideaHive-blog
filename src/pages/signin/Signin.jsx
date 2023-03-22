@@ -54,9 +54,7 @@ const Signin = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "https://ideahive.vercel.app",
           },
-          withCredentials: true,
         }
       );
       if (signinUser.data.isLogin) {
