@@ -55,7 +55,6 @@ const Signin = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          withCredentials: true,
         }
       );
       if (signinUser.data.isLogin) {
