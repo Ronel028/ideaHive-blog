@@ -6,9 +6,7 @@ export const useTokenCheck = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const getSession = async () => {
-      const checkSession = await axios.get(
-        "https://idea-h-ive-blog.vercel.app/user/verified"
-      );
+      const checkSession = await axios.get("/user/verified");
       if (!checkSession.data.isLogin) {
         navigate("/");
       }

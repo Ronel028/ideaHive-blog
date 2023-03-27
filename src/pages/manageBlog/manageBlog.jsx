@@ -66,9 +66,7 @@ const ManageBlog = () => {
     const getBlogDataById = async () => {
       try {
         setFetchingData(true);
-        const blogData = await axios.get(
-          `https://idea-h-ive-blog.vercel.app/blog/blog-content?blogID=${blogId}`
-        );
+        const blogData = await axios.get(`/blog/blog-content?blogID=${blogId}`);
         if (blogData.data.blog.length > 0) {
           setBlog({
             ...blog,
@@ -104,7 +102,7 @@ const ManageBlog = () => {
             onClick: async () => {
               setDeleteLoading(true);
               const deleteBlog = await axios.delete(
-                `https://idea-h-ive-blog.vercel.app/blog/delete-blog?blogId=${blogId}`
+                `/blog/delete-blog?blogId=${blogId}`
               );
               if (deleteBlog.data.msg === "success") {
                 setBlogList(deleteBlog.data.blogList);

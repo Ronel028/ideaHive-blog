@@ -44,9 +44,7 @@ const Profile = () => {
   useEffect(() => {
     const userBlogList = async () => {
       try {
-        const userBlog = await axios.get(
-          "https://idea-h-ive-blog.vercel.app/blog/user-blog"
-        );
+        const userBlog = await axios.get("/blog/user-blog");
         if (userBlog.data.msg === "success") {
           setUserBlog(userBlog.data.userBlog);
         } else {

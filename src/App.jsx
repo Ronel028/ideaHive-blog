@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import axios from "axios";
 import Home from "./pages/home/Home";
 import Register from "./pages/register/Register";
 import Signin from "./pages/signin/Signin";
@@ -16,13 +17,16 @@ import getUserData from "./hook/getUserData";
 import getBlogData from "./hook/getBlogList";
 
 function App() {
-  const [user, setUser] = getUserData(
-    "https://idea-h-ive-blog.vercel.app/user/info"
-  );
-  const [blogList, setBlogList] = getBlogData(
-    "https://idea-h-ive-blog.vercel.app/blog/get-blog"
-  );
+  const [user, setUser] = getUserData("/user/info");
+  const [blogList, setBlogList] = getBlogData("/blog/get-blog");
   const [isBlogUpdate, setIsBlogUpdate] = useState(false);
+  useEffect(() => {
+    const verifyLogin = async () => {
+      const verify = await axios.get("/user/verified");
+      console.log(verify);
+    };
+    verifyLogin();
+  }, []);
 
   return (
     <userContext.Provider

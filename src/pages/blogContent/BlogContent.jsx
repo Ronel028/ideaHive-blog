@@ -31,9 +31,7 @@ const BlogContent = () => {
     const getBlog = async () => {
       try {
         setDataFetching(true);
-        const blog = await axios.get(
-          `https://idea-h-ive-blog.vercel.app/blog/blog-content?blogID=${blogID}`
-        );
+        const blog = await axios.get(`/blog/blog-content?blogID=${blogID}`);
         if (blog.data.blog.length > 0) {
           setBlogContent({
             ...blogContent,
