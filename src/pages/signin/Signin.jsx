@@ -49,7 +49,7 @@ const Signin = () => {
     try {
       setLoader(true);
       const signinUser = await axios.post(
-        "https://api-ideahive.onrender.com/user/signin",
+        "https://idea-h-ive-blog.vercel.app/user/signin",
         inputVal,
         {
           headers: {

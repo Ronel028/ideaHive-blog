@@ -147,7 +147,7 @@ const Navigation = () => {
   const signoutUser = async () => {
     try {
       const signout = await axios.get(
-        "https://api-ideahive.onrender.com/user/signout"
+        "https://idea-h-ive-blog.vercel.app/user/signout"
       );
       if (signout.data.isLogout) {
         setUser({

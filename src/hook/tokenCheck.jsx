@@ -7,7 +7,7 @@ export const useTokenCheck = () => {
   useEffect(() => {
     const getSession = async () => {
       const checkSession = await axios.get(
-        "https://api-ideahive.onrender.com/user/verified"
+        "https://idea-h-ive-blog.vercel.app/user/verified"
       );
       if (!checkSession.data.isLogin) {
         navigate("/");
