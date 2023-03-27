@@ -13,7 +13,14 @@ export default defineConfig({
       "/user/update": "https://idea-h-ive-blog.vercel.app",
       "/user/update-password": "https://idea-h-ive-blog.vercel.app",
       "/blog/add-blog": "https://idea-h-ive-blog.vercel.app",
-      "/blog/get-blog": "https://idea-h-ive-blog.vercel.app",
+      "/blog/get-blog": {
+        target: "https://idea-h-ive-blog.vercel.app",
+        changeOrigin: true,
+        secure: true,
+        cookieDomainRewrite: {
+          "*": ".ideahive.vercel.app",
+        },
+      },
       "/blog/user-blog": "https://idea-h-ive-blog.vercel.app",
       "/blog/blog-content": "https://idea-h-ive-blog.vercel.app",
       "/blog/delete-blog": "https://idea-h-ive-blog.vercel.app",
