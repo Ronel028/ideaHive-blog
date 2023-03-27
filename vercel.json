@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/user/:path*",
+      "destination": "https://api-ideahive.onrender.com/:path*"
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "https://api-ideahive.onrender.com/:path*"
+    }
+  ]
+}
