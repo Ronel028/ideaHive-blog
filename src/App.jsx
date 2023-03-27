@@ -17,10 +17,10 @@ import getBlogData from "./hook/getBlogList";
 
 function App() {
   const [user, setUser] = getUserData(
-    "https://idea-h-ive-blog.vercel.app/user/info"
+    "https://api-ideahive.onrender.com/user/info"
   );
   const [blogList, setBlogList] = getBlogData(
-    "https://idea-h-ive-blog.vercel.app/blog/get-blog"
+    "https://api-ideahive.onrender.com/blog/get-blog"
   );
   const [isBlogUpdate, setIsBlogUpdate] = useState(false);
 
