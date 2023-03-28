@@ -20,11 +20,13 @@ export default defineConfig({
         target: "https://api-ideahive.onrender.com",
         changeOrigin: true,
         pathRewrite: { "^/user": "" },
+        secure: false,
       },
       "/blog": {
         target: "https://api-ideahive.onrender.com",
         changeOrigin: true,
         pathRewrite: { "^/blog": "" },
+        secure: false,
       },
     },
   },
