@@ -16,10 +16,13 @@ export default defineConfig({
   server: {
     proxy: {
       "/user": {
-        target: "https://idea-h-ive-blog.vercel.app",
+        target: "https://api-ideahive.onrender.com",
         rewrite: (path) => path.replace(/^\/user/, ""),
       },
-      "/": "https://idea-h-ive-blog.vercel.app",
+      "/blog": {
+        target: "https://api-ideahive.onrender.com",
+        rewrite: (path) => path.replace(/^\/blog/, ""),
+      },
     },
   },
   // server: {
