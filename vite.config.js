@@ -17,7 +17,11 @@ export default defineConfig({
   server: {
     proxy: {
       "/user/user": "https://idea-h-ive-blog.vercel.app",
-      "/blog": "https://idea-h-ive-blog.vercel.app",
+      "/blog": {
+        target: "https://idea-h-ive-blog.vercel.app",
+        pathRewrite: { "^/blog": "/blog/blog" },
+        changeOrigin: true,
+      },
     },
   },
   // server: {
