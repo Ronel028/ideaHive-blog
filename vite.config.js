@@ -16,8 +16,8 @@ export default defineConfig({
   // },
   server: {
     proxy: {
-      "/user": "https://idea-h-ive-blog.vercel.app/user",
-      "/blog": "https://idea-h-ive-blog.vercel.app/blog",
+      "/user/user": "https://idea-h-ive-blog.vercel.app",
+      "/blog/blog": "https://idea-h-ive-blog.vercel.app",
     },
   },
   // server: {
