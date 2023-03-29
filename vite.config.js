@@ -1,6 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { createProxyMiddleware } from "http-proxy-middleware";
+import proxyPlugin from "vite-plugin-proxy";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -14,15 +14,18 @@ export default defineConfig({
   //     }),
   //   ],
   // },
-  server: {
-    proxy: {
-      "/user/user": "https://idea-h-ive-blog.vercel.app",
-      "^/blog/.*": {
-        target: "https://idea-h-ive-blog.vercel.app",
-        rewrite: (path) => path.replace(/^\/blog/, "/blog/blog"),
-      },
-    },
-  },
+  // server: {
+  //   proxy: {
+  //     "/user": {
+  //       target: "https://idea-h-ive-blog.vercel.app",
+  //       rewrite: (path) => path.replace(/^\/user/, ""),
+  //     },
+  //     "/blog": {
+  //       target: "https://idea-h-ive-blog.vercel.app/",
+  //       rewrite: (path) => path.replace(/^\/blog/, ""),
+  //     },
+  //   },
+  // },
   // server: {
   //   proxy: {
   //     "/user/register": "https://api-ideahive.onrender.com/",
@@ -40,6 +43,7 @@ export default defineConfig({
   //     "/blog/update-blog": "https://api-ideahive.onrender.com/",
   //   },
   //},
+
   css: {
     preprocessorOptions: {
       scss: {
@@ -47,5 +51,24 @@ export default defineConfig({
       },
     },
   },
-  plugins: [react()],
+  plugins: [
+    react(
+      proxyPlugin({
+        "/blog": {
+          // for option docs see https://github.com/chimurai/http-proxy-middleware#options
+          target: "https://idea-h-ive-blog.vercel.app",
+          changeOrigin: true,
+          onProxyRes: (proxyRes) => {
+            // cache all responses for faster development
+            // use browser's "Disable cache" in dev tools when you need to update API responses
+            proxyRes.headers[
+              "Cache-Control"
+            ] = `public, max-age=${ONE_YEAR_IN_SECONDS}`;
+            // delete headers you don't want
+            delete proxyRes.headers["expires"];
+          },
+        },
+      })
+    ),
+  ],
 });
