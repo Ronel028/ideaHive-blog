@@ -16,8 +16,8 @@ export default defineConfig({
   // },
   server: {
     proxy: {
-      "/user": "https://api-ideahive.onrender.com",
-      "/blog/*": "https://api-ideahive.onrender.com",
+      "/user": "https://api-ideahive.onrender.com/user",
+      "/blog": "https://api-ideahive.onrender.com/blog",
     },
   },
   // server: {
