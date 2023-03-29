@@ -20,7 +20,7 @@ export default defineConfig({
       "/blog": {
         target: "https://idea-h-ive-blog.vercel.app",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/blog/, ""),
+        rewrite: (path) => path.replace(/^\/blog/, "/blog/blog"),
       },
     },
   },
