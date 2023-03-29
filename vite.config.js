@@ -17,10 +17,12 @@ export default defineConfig({
     proxy: {
       "/user": {
         target: "https://api-ideahive.onrender.com",
+        changeOrigin: true,
         rewrite: (path) => path.replace(/^\/user/, ""),
       },
       "/blog": {
         target: "https://api-ideahive.onrender.com",
+        changeOrigin: true,
         rewrite: (path) => path.replace(/^\/blog/, ""),
       },
     },
