@@ -16,12 +16,12 @@ export default defineConfig({
   server: {
     proxy: {
       "/user": {
-        target: "https://api-ideahive.onrender.com",
+        target: "https://idea-h-ive-blog.vercel.app",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/user/, ""),
       },
       "/blog": {
-        target: "https://api-ideahive.onrender.com",
+        target: "https://idea-h-ive-blog.vercel.app",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/blog/, ""),
       },
