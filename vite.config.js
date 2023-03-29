@@ -16,18 +16,8 @@ export default defineConfig({
   // },
   server: {
     proxy: {
-      "/user": {
-        target: "https://api-ideahive.onrender.com",
-        changeOrigin: true,
-        pathRewrite: { "^/user": "" },
-        secure: true,
-      },
-      "/blog": {
-        target: "https://api-ideahive.onrender.com",
-        changeOrigin: true,
-        pathRewrite: { "^/blog": "" },
-        secure: true,
-      },
+      "/user": "https://api-ideahive.onrender.com",
+      "/blog": "https://api-ideahive.onrender.com",
     },
   },
   // server: {
