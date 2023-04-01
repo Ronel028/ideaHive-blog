@@ -48,11 +48,15 @@ const Signin = () => {
     e.preventDefault();
     try {
       setLoader(true);
-      const signinUser = await axios.post("/user/signin", inputVal, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const signinUser = await axios.post(
+        "https://api-ideahive.onrender.com/user/signin",
+        inputVal,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (signinUser.data.isLogin) {
         setLoader(false);
         setUser({
