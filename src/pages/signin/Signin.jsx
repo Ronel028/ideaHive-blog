@@ -22,7 +22,9 @@ const Signin = () => {
   // use this function to validate this page if login or not
   useEffect(() => {
     const getSession = async () => {
-      const checkSession = await axios.get("/user/verified");
+      const checkSession = await axios.get(
+        "https://api-ideahive.onrender.com/user/verified"
+      );
       if (checkSession.data.isLogin) {
         navigate("/");
       }
