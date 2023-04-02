@@ -22,7 +22,9 @@ const Signin = () => {
   // use this function to validate this page if login or not
   useEffect(() => {
     const getSession = async () => {
-      const checkSession = await axios.get("/user/verified");
+      const checkSession = await axios.get(
+        "https://idea-h-ive-blog.vercel.app/user/verified"
+      );
       if (checkSession.data.isLogin) {
         navigate("/");
       }
@@ -46,11 +48,15 @@ const Signin = () => {
     e.preventDefault();
     try {
       setLoader(true);
-      const signinUser = await axios.post("/user/signin", inputVal, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const signinUser = await axios.post(
+        "https://idea-h-ive-blog.vercel.app/user/signin",
+        inputVal,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (signinUser.data.isLogin) {
         setLoader(false);
         setUser({
