@@ -5,8 +5,8 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   server: {
     proxy: {
-      "/user": "https://api-ideahive.onrender.com",
-      "/blog": "https://api-ideahive.onrender.com",
+      "/user": "https://idea-h-ive-blog.vercel.app",
+      "/blog": "https://idea-h-ive-blog.vercel.app",
     },
   },
   css: {

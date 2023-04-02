@@ -18,7 +18,7 @@ import getBlogData from "./hook/getBlogList";
 
 function App() {
   const [user, setUser] = getUserData("/user/info");
-  const [blogList, setBlogList] = getBlogData("/blog/blog/get-blog");
+  const [blogList, setBlogList] = getBlogData("/blog/get-blog");
   const [isBlogUpdate, setIsBlogUpdate] = useState(false);
 
   return (
