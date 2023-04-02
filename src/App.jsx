@@ -17,12 +17,8 @@ import getUserData from "./hook/getUserData";
 import getBlogData from "./hook/getBlogList";
 
 function App() {
-  const [user, setUser] = getUserData(
-    "https://api-ideahive.onrender.com/user/info"
-  );
-  const [blogList, setBlogList] = getBlogData(
-    "https://api-ideahive.onrender.com/blog/get-blog"
-  );
+  const [user, setUser] = getUserData("/user/info");
+  const [blogList, setBlogList] = getBlogData("/blog/get-blog");
   const [isBlogUpdate, setIsBlogUpdate] = useState(false);
 
   return (
