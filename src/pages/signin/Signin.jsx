@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import cookies from "js-cookie";
 import { motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
 import { userContext } from "../../context/userContext";
@@ -55,7 +56,6 @@ const Signin = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          withCredentials: true,
         }
       );
       if (signinUser.data.isLogin) {
@@ -69,6 +69,10 @@ const Signin = () => {
           about: signinUser.data.userData[0].about,
           Image: signinUser.data.userData[0].profileImage,
           birthDay: signinUser.data.userData[0].birthDay,
+        });
+        cookies.set("access_token", signinUser.data.token, {
+          expires: 7,
+          path: "/",
         });
         navigate("/");
       } else {

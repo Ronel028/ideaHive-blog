@@ -105,6 +105,7 @@ const UpdateBlog = () => {
           headers: {
             "Content-Type": "multipart/form-data",
           },
+          withCredentials: true,
         }
       );
       if (updateBlog.data.msg === "success") {
