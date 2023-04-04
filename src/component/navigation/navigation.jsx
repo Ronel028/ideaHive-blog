@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
+import cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import { userContext } from "../../context/userContext";
 import profileAlt from "../../assets/profile-alt.jpeg";
@@ -146,11 +147,7 @@ const Navigation = () => {
   // function for signout user
   const signoutUser = async () => {
     try {
-      const signout = await axios.get(
-        "https://idea-h-ive-blog.vercel.app/user/signout",
-        { withCredentials: true }
-      );
-      if (signout.data.isLogout) {
+      if (cookies.remove("access_token")) {
         setUser({
           ...user,
           isLogin: false,
