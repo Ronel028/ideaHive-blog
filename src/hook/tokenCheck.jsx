@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import axios from "axios";
+import cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
 export const useTokenCheck = () => {
@@ -8,7 +9,11 @@ export const useTokenCheck = () => {
     const getSession = async () => {
       const checkSession = await axios.get(
         "https://idea-h-ive-blog.vercel.app/user/verified",
-        { withCredentials: true }
+        {
+          headers: {
+            Authorization: `Bearer ${cookies.get("access_token")}`,
+          },
+        }
       );
       if (!checkSession.data.isLogin) {
         navigate("/");

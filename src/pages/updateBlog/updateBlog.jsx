@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import cookies from "js-cookie";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
@@ -107,8 +108,8 @@ const UpdateBlog = () => {
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${cookies.get("access_token")}`,
           },
-          withCredentials: true,
         }
       );
       if (updateBlog.data.msg === "success") {

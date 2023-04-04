@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import cookies from "js-cookie";
 import { motion } from "framer-motion";
 import { userContext } from "../../context/userContext";
 import getUserData from "../../hook/getUserData";
@@ -82,8 +83,8 @@ const UpdateProfile = () => {
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${cookies.get("access_token")}`,
           },
-          withCredentials: true,
         }
       );
       if (updateUser.data.msg) {

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import cookies from "js-cookie";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Loading from "../spinner/spinner";
@@ -29,8 +30,8 @@ const ChangePassword = (props) => {
       {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${cookies.get("access_token")}`,
         },
-        withCredentials: true,
       }
     );
     if (updatePass.data.msg === "success") {

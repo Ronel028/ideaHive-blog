@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
+import cookies from "js-cookie";
 import moment from "moment";
 import toast, { Toaster } from "react-hot-toast";
 import DOMPurify from "dompurify";
@@ -67,8 +68,7 @@ const ManageBlog = () => {
       try {
         setFetchingData(true);
         const blogData = await axios.get(
-          `https://idea-h-ive-blog.vercel.app/blog/blog-content?blogID=${blogId}`,
-          { withCredentials: true }
+          `https://idea-h-ive-blog.vercel.app/blog/blog-content?blogID=${blogId}`
         );
         if (blogData.data.blog.length > 0) {
           setBlog({
@@ -106,7 +106,11 @@ const ManageBlog = () => {
               setDeleteLoading(true);
               const deleteBlog = await axios.delete(
                 `https://idea-h-ive-blog.vercel.app/blog/delete-blog?blogId=${blogId}`,
-                { withCredentials: true }
+                {
+                  headers: {
+                    Authorization: `Bearer ${cookies.get("access_token")}`,
+                  },
+                }
               );
               if (deleteBlog.data.msg === "success") {
                 setBlogList(deleteBlog.data.blogList);
