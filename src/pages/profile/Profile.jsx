@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import moment from "moment";
@@ -46,7 +47,11 @@ const Profile = () => {
       try {
         const userBlog = await axios.get(
           "https://idea-h-ive-blog.vercel.app/blog/user-blog",
-          { withCredentials: true }
+          {
+            headers: {
+              Authorization: `Bearer ${cookies.get("access_token")}`,
+            },
+          }
         );
         if (userBlog.data.msg === "success") {
           setUserBlog(userBlog.data.userBlog);
