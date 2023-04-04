@@ -18,7 +18,7 @@ const getUserData = (url) => {
     const getUser = async () => {
       try {
         setFetchUserData(true);
-        const userData = await axios.get(url, { withCredentials: true });
+        const userData = await axios.get(url);
         if (
           userData.data.isLogin &&
           userData.data.userData &&

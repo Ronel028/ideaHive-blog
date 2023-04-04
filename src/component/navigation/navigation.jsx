@@ -147,7 +147,8 @@ const Navigation = () => {
   const signoutUser = async () => {
     try {
       const signout = await axios.get(
-        "https://idea-h-ive-blog.vercel.app/user/signout"
+        "https://idea-h-ive-blog.vercel.app/user/signout",
+        { withCredentials: true }
       );
       if (signout.data.isLogout) {
         setUser({

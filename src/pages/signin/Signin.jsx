@@ -24,7 +24,8 @@ const Signin = () => {
   useEffect(() => {
     const getSession = async () => {
       const checkSession = await axios.get(
-        "https://idea-h-ive-blog.vercel.app/user/verified"
+        "https://idea-h-ive-blog.vercel.app/user/verified",
+        { withCredentials: true }
       );
       if (checkSession.data.isLogin) {
         navigate("/");
