@@ -71,10 +71,6 @@ const Signin = () => {
           Image: signinUser.data.userData[0].profileImage,
           birthDay: signinUser.data.userData[0].birthDay,
         });
-        cookies.set("access_token", signinUser.data.token, {
-          expires: 7,
-          path: "/",
-        });
         navigate("/");
       } else {
         throw signinUser.data.error;
