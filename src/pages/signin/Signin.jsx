@@ -5,7 +5,6 @@ import cookies from "js-cookie";
 import { motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
 import { userContext } from "../../context/userContext";
-import { useTokenCheck } from "../../hook/tokenCheck";
 import "./signin.scss";
 
 const signInErr = (errorMsg) => toast.error(errorMsg);
@@ -22,7 +21,18 @@ const Signin = () => {
   // hooks
 
   // use this function to validate this page if login or not
-  useTokenCheck();
+  useEffect(() => {
+    const getSession = async () => {
+      const checkSession = await axios.get(
+        "https://idea-h-ive-blog.vercel.app/user/verified",
+        { withCredentials: true }
+      );
+      if (checkSession.data.isLogin) {
+        navigate("/");
+      }
+    };
+    getSession();
+  }, []);
   // use this function to validate this page if login or not
 
   // get the input value and save to state
