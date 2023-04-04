@@ -12,7 +12,7 @@ const userAuth = (url) => {
 
   useEffect(() => {
     const getSession = async () => {
-      const checkSession = await axios.get(url);
+      const checkSession = await axios.get(url, { withCredentials: true });
       if (checkSession.data.isLogin) {
         setUserLogin({
           ...userLogin,
