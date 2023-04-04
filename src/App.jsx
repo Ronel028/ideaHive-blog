@@ -12,6 +12,7 @@ import UpdateProfile from "./pages/updateProfile/updateProfile";
 import AddBlog from "./pages/addBlog/addBlog";
 import UpdateBlog from "./pages/updateBlog/updateBlog";
 import Category from "./pages/category/category";
+import NotAvailablePage from "./pages/notAvailable/notAvailable";
 import { userContext } from "./context/userContext";
 import getUserData from "./hook/getUserData";
 import getBlogData from "./hook/getBlogList";
@@ -48,6 +49,7 @@ function App() {
         <Route path="/manage-blog" element={<ManageBlog />} />
         <Route path="/post-blog" element={<AddBlog />} />
         <Route path="/update-blog" element={<UpdateBlog />} />
+        <Route path="/page-not-availble" element={<NotAvailablePage />} />
       </Routes>
     </userContext.Provider>
   );

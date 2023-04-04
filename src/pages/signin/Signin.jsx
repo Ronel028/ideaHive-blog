@@ -73,6 +73,7 @@ const Signin = () => {
           birthDay: signinUser.data.userData[0].birthDay,
         });
         cookies.set("access_token", signinUser.data.token, {
+          expires: 1,
           secure: true,
           sameSite: "none",
         });
