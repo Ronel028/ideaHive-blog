@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import cookies from "js-cookie";
 import axios from "axios";
 
 const getUserData = (url) => {
@@ -18,7 +19,11 @@ const getUserData = (url) => {
     const getUser = async () => {
       try {
         setFetchUserData(true);
-        const userData = await axios.get(url, { withCredentials: true });
+        const userData = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${cookies.get("access_token")}`,
+          },
+        });
         if (
           userData.data.isLogin &&
           userData.data.userData &&
