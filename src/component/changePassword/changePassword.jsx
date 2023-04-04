@@ -23,11 +23,16 @@ const ChangePassword = (props) => {
   const updatePassword = async (e) => {
     e.preventDefault();
     setIsLoad(true);
-    const updatePass = await axios.post("/user/update-password", password, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const updatePass = await axios.post(
+      "https://idea-h-ive-blog.vercel.app/user/update-password",
+      password,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      }
+    );
     if (updatePass.data.msg === "success") {
       setPassword({
         ...password,
