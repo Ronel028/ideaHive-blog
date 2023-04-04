@@ -49,7 +49,7 @@ function App() {
         <Route path="/manage-blog" element={<ManageBlog />} />
         <Route path="/post-blog" element={<AddBlog />} />
         <Route path="/update-blog" element={<UpdateBlog />} />
-        <Route path="/page-not-availble" element={<NotAvailablePage />} />
+        <Route path="/page-not-available" element={<NotAvailablePage />} />
       </Routes>
     </userContext.Provider>
   );

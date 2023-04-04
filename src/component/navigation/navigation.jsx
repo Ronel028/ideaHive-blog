@@ -174,12 +174,12 @@ const Navigation = () => {
               </Link>
             </li>
             <li>
-              <Link to="/page-not-availble" className="link-desktop">
+              <Link to="/page-not-available" className="link-desktop">
                 About
               </Link>
             </li>
             <li>
-              <Link to="/page-not-availble" className="link-desktop">
+              <Link to="/page-not-available" className="link-desktop">
                 Contact
               </Link>
             </li>
