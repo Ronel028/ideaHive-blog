@@ -72,7 +72,10 @@ const Signin = () => {
           Image: signinUser.data.userData[0].profileImage,
           birthDay: signinUser.data.userData[0].birthDay,
         });
-        cookies.set("access_token", signinUser.data.token);
+        cookies.set("access_token", signinUser.data.token, {
+          secure: true,
+          sameSite: "none",
+        });
         navigate("/");
       } else {
         throw signinUser.data.error;
