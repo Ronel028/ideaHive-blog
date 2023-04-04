@@ -147,17 +147,14 @@ const Navigation = () => {
   // function for signout user
   const signoutUser = async () => {
     try {
-      if (cookies.remove("access_token")) {
-        setUser({
-          ...user,
-          isLogin: false,
-        });
-        navigate("/signin");
-      } else {
-        throw "Something's went wrong. Please try again";
-      }
+      cookies.remove("access_token");
+      setUser({
+        ...user,
+        isLogin: false,
+      });
+      navigate("/signin");
     } catch (error) {
-      window.alert(error);
+      window.alert("Something's went wrong. Please try again");
     }
   };
 
