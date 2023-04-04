@@ -154,7 +154,7 @@ const Navigation = () => {
         });
         navigate("/signin");
       } else {
-        throw signout.data.error;
+        throw "Something's went wrong. Please try again";
       }
     } catch (error) {
       window.alert(error);
