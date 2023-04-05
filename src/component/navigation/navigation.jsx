@@ -214,12 +214,12 @@ const Navigation = () => {
             </Link>
           </li>
           <li>
-            <Link to="/about" className="link-mobile">
+            <Link to="/page-not-available" className="link-mobile">
               About
             </Link>
           </li>
           <li>
-            <Link to="contact" className="link-mobile">
+            <Link to="/page-not-available" className="link-mobile">
               Contact
             </Link>
           </li>
