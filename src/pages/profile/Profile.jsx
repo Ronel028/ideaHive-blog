@@ -26,6 +26,7 @@ const Profile = () => {
   const { user, blogList, isBlogUpdate, setIsBlogUpdate } =
     useContext(userContext); //call the context api
   const [userBlog, setUserBlog] = useState([]); // storage for user blog post
+  const [userBlogLoad, setUserBlogLoad] = useState(false);
   // hooks
 
   // use this function to validate this page if login or not
@@ -45,6 +46,7 @@ const Profile = () => {
   useEffect(() => {
     const userBlogList = async () => {
       try {
+        setUserBlogLoad(true);
         const userBlog = await axios.get(
           "https://api-ideahive.vercel.app/blog/user-blog",
           {
@@ -58,6 +60,7 @@ const Profile = () => {
         } else {
           throw userBlog.data.msg;
         }
+        setUserBlogLoad(false);
       } catch (error) {}
     };
     userBlogList();
@@ -143,7 +146,13 @@ const Profile = () => {
           </div>
           <div className="profile-blog">
             <h2>Blog</h2>
-            <main className="blog">{userBlogCom}</main>
+            <main className="blog">
+              {userBlogLoad ? (
+                <p>Loading your blog. Please wait...</p>
+              ) : (
+                userBlogCom
+              )}
+            </main>
           </div>
         </div>
       </main>
