@@ -47,7 +47,7 @@ const UpdateBlog = () => {
   useEffect(() => {
     const getBlogById = async () => {
       const getBlog = await axios.get(
-        `https://idea-h-ive-blog.vercel.app/blog/blog-content?blogID=${blogId}`,
+        `https://api-ideahive.vercel.app/blog/blog-content?blogID=${blogId}`,
         { withCredentials: true }
       );
       setBlogInput({
@@ -103,7 +103,7 @@ const UpdateBlog = () => {
       formData.append("blogContent", markdown);
       setLoading(true);
       const updateBlog = await axios.post(
-        `https://idea-h-ive-blog.vercel.app/blog/update-blog?blogId=${blogId}`,
+        `https://api-ideahive.vercel.app/blog/update-blog?blogId=${blogId}`,
         formData,
         {
           headers: {

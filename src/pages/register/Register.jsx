@@ -27,11 +27,15 @@ const Register = () => {
     Object.entries(inputVal).forEach(([name, value]) => {
       formData.append(name, value);
     });
-    const regUser = await axios.post("/user/register", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    const regUser = await axios.post(
+      "https://api-ideahive.vercel.app/user/register",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
     if (regUser.data.error) {
       setError(regUser.data.error);
     } else {

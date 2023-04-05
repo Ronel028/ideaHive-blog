@@ -8,7 +8,7 @@ export const useTokenCheck = () => {
   useEffect(() => {
     const getSession = async () => {
       const checkSession = await axios.get(
-        "https://idea-h-ive-blog.vercel.app/user/verified",
+        "https://api-ideahive.vercel.app/user/verified",
         {
           headers: {
             Authorization: `Bearer ${cookies.get("access_token")}`,

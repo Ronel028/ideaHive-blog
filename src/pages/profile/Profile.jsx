@@ -46,7 +46,7 @@ const Profile = () => {
     const userBlogList = async () => {
       try {
         const userBlog = await axios.get(
-          "https://idea-h-ive-blog.vercel.app/blog/user-blog",
+          "https://api-ideahive.vercel.app/blog/user-blog",
           {
             headers: {
               Authorization: `Bearer ${cookies.get("access_token")}`,

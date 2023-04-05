@@ -25,7 +25,7 @@ const ChangePassword = (props) => {
     e.preventDefault();
     setIsLoad(true);
     const updatePass = await axios.post(
-      "https://idea-h-ive-blog.vercel.app/user/update-password",
+      "https://api-ideahive.vercel.app/user/update-password",
       password,
       {
         headers: {

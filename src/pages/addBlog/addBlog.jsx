@@ -77,7 +77,7 @@ const AddBlog = () => {
     formData.append("blogContent", markdown);
     setLoading(true);
     const insertNewBlog = await axios.post(
-      "https://idea-h-ive-blog.vercel.app/blog/add-blog",
+      "https://api-ideahive.vercel.app/blog/add-blog",
       formData,
       {
         headers: {

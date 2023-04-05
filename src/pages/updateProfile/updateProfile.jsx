@@ -18,7 +18,7 @@ const UpdateProfile = () => {
   const { user, setUser, setIsBlogUpdate } = useContext(userContext); //call the context api
   const navigate = useNavigate();
   const [inputVal, setInputVal, fetchUserData] = getUserData(
-    "https://idea-h-ive-blog.vercel.app/user/info"
+    "https://api-ideahive.vercel.app/user/info"
   ); //getting user data to display in the ui to update
   const [imagePreviewer, setImagePreviewer] = useState(""); //storage for image to preview
   const [loading, setLoading] = useState(false);
@@ -78,7 +78,7 @@ const UpdateProfile = () => {
 
       setLoading(true);
       const updateUser = await axios.post(
-        "https://idea-h-ive-blog.vercel.app/user/update",
+        "https://api-ideahive.vercel.app/user/update",
         formData,
         {
           headers: {

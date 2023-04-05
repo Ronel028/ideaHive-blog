@@ -24,8 +24,12 @@ const Signin = () => {
   useEffect(() => {
     const getSession = async () => {
       const checkSession = await axios.get(
-        "https://idea-h-ive-blog.vercel.app/user/verified",
-        { withCredentials: true }
+        "https://api-ideahive.vercel.app/user/verified",
+        {
+          headers: {
+            Authorization: `Bearer ${cookies.get("access_token")}`,
+          },
+        }
       );
       if (checkSession.data.isLogin) {
         navigate("/");
@@ -51,7 +55,7 @@ const Signin = () => {
     try {
       setLoader(true);
       const signinUser = await axios.post(
-        "https://idea-h-ive-blog.vercel.app/user/signin",
+        "https://api-ideahive.vercel.app/user/signin",
         inputVal,
         {
           headers: {
