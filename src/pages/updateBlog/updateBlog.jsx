@@ -24,6 +24,7 @@ const UpdateBlog = () => {
   useResetScroll(); // reset the window location set to top when this page is active
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [blogDataLoad, setBlogDataLoad] = useState(false);
   const [blogInput, setBlogInput] = useState({
     blogTitle: "",
     Image: "N/A",
@@ -46,6 +47,7 @@ const UpdateBlog = () => {
   //get blog by id
   useEffect(() => {
     const getBlogById = async () => {
+      setBlogDataLoad(true);
       const getBlog = await axios.get(
         `https://api-ideahive.vercel.app/blog/blog-content?blogID=${blogId}`,
         { withCredentials: true }
@@ -58,6 +60,7 @@ const UpdateBlog = () => {
         summary: getBlog.data.blog[0].summary,
       });
       setMarkdown(getBlog.data.blog[0].blogContent);
+      setBlogDataLoad(false);
     };
     getBlogById();
   }, []);
@@ -165,85 +168,89 @@ const UpdateBlog = () => {
             <p>Here you can update your own blog.</p>
           </div>
           {/* form */}
-          <Form className="form" onSubmit={saveUpdateBlogPost}>
-            <div className="input-container">
-              <Form.Group className="mb-3" controlId="blogTitle">
-                <Form.Label className="label">Blog title</Form.Label>
+          {blogDataLoad ? (
+            <p>Loading blog data. Please wait...</p>
+          ) : (
+            <Form className="form" onSubmit={saveUpdateBlogPost}>
+              <div className="input-container">
+                <Form.Group className="mb-3" controlId="blogTitle">
+                  <Form.Label className="label">Blog title</Form.Label>
+                  <Form.Control
+                    type="text"
+                    className="input"
+                    name="blogTitle"
+                    placeholder="Blog title..."
+                    value={blogInput.blogTitle}
+                    onChange={getInputValue}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="featuredImage">
+                  <Form.Label className="label">Featured image</Form.Label>
+                  <Form.Control
+                    type="file"
+                    className="input"
+                    name="Image"
+                    placeholder="featured image..."
+                    onChange={getInputValue}
+                  />
+                </Form.Group>
+              </div>
+              <Form.Group className="mb-3" controlId="category">
+                <Form.Label className="label">Category</Form.Label>
+                <Form.Select
+                  aria-label="Default select example"
+                  className="input"
+                  name="category"
+                  value={blogInput.category}
+                  onChange={getInputValue}
+                >
+                  <option value="">Select Category</option>
+                  <option value="programming">Programming</option>
+                  <option value="technology">Technology</option>
+                  <option value="space">Space</option>
+                  <option value="self-improvement">Self Improvement</option>
+                  <option value="daily-life">Daily Life</option>
+                  <option value="artificial-inteligence">
+                    Artificial Inteligence
+                  </option>
+                  <option value="anime">Anime</option>
+                  <option value="movies">Movies</option>
+                </Form.Select>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="summary">
+                <Form.Label className="label">
+                  Excerpt <span>(short summary of your blog post)</span>
+                </Form.Label>
                 <Form.Control
                   type="text"
                   className="input"
-                  name="blogTitle"
-                  placeholder="Blog title..."
-                  value={blogInput.blogTitle}
+                  name="summary"
+                  placeholder="Short summary..."
+                  value={blogInput.summary}
                   onChange={getInputValue}
                   required
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="featuredImage">
-                <Form.Label className="label">Featured image</Form.Label>
-                <Form.Control
-                  type="file"
-                  className="input"
-                  name="Image"
-                  placeholder="featured image..."
-                  onChange={getInputValue}
+              <Form.Group className="mb-3">
+                <Form.Label className="label">Blog content</Form.Label>
+                <ReactQuill
+                  modules={modules}
+                  theme="snow"
+                  value={markdown}
+                  onChange={setMarkdown}
                 />
               </Form.Group>
-            </div>
-            <Form.Group className="mb-3" controlId="category">
-              <Form.Label className="label">Category</Form.Label>
-              <Form.Select
-                aria-label="Default select example"
-                className="input"
-                name="category"
-                value={blogInput.category}
-                onChange={getInputValue}
-              >
-                <option value="">Select Category</option>
-                <option value="programming">Programming</option>
-                <option value="technology">Technology</option>
-                <option value="space">Space</option>
-                <option value="self-improvement">Self Improvement</option>
-                <option value="daily-life">Daily Life</option>
-                <option value="artificial-inteligence">
-                  Artificial Inteligence
-                </option>
-                <option value="anime">Anime</option>
-                <option value="movies">Movies</option>
-              </Form.Select>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="summary">
-              <Form.Label className="label">
-                Excerpt <span>(short summary of your blog post)</span>
-              </Form.Label>
-              <Form.Control
-                type="text"
-                className="input"
-                name="summary"
-                placeholder="Short summary..."
-                value={blogInput.summary}
-                onChange={getInputValue}
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label className="label">Blog content</Form.Label>
-              <ReactQuill
-                modules={modules}
-                theme="snow"
-                value={markdown}
-                onChange={setMarkdown}
-              />
-            </Form.Group>
-            <div className="post-btn-container">
-              <Link to="/" className="cancel-btn">
-                Cancel
-              </Link>
-              <button type="submit" className="post-btn">
-                Update
-              </button>
-            </div>
-          </Form>
+              <div className="post-btn-container">
+                <Link to="/" className="cancel-btn">
+                  Cancel
+                </Link>
+                <button type="submit" className="post-btn">
+                  Update
+                </button>
+              </div>
+            </Form>
+          )}
           {/* form */}
         </div>
       </main>
