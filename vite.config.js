@@ -11,13 +11,17 @@ export default defineConfig({
     emptyOutDir: true,
     brotliSize: false,
     sourcemap: true,
+    rollupOptions: {
+      output: {
+        format: "es",
+      },
+    },
   },
   server: {
-    middlewareMode: true,
+    middlewareMode: "html",
     fs: {
       strict: true,
     },
-    fallback: "index.html",
   },
   css: {
     preprocessorOptions: {
