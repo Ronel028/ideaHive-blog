@@ -5,20 +5,16 @@ import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/",
   plugins: [react(), splitVendorChunkPlugin()],
   build: {
     outDir: "dist",
     emptyOutDir: true,
     brotliSize: false,
     sourcemap: true,
-    rollupOptions: {
-      output: {
-        format: "es",
-      },
-    },
   },
   server: {
-    middlewareMode: "html",
+    middlewareMode: true,
     fs: {
       strict: true,
     },
