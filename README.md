@@ -3,6 +3,7 @@
 
 IdeaHive is a blog website where writers can publish articles and readers can explore interesting ideas, news and more.
 
+![ideaHive screenshot](IdeaHive.png)
 
 ## Technologies Used
 
