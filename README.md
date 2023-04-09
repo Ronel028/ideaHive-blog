@@ -1,9 +1,10 @@
-
 # IdeaHive Blog Website
 
 IdeaHive is a blog website where writers can publish articles and readers can explore interesting ideas, news and more.
 
-![ideaHive screenshot](IdeaHive.png)
+## Screenshot
+
+![ideaHive screenshot](ideaHive.png)
 
 ## Technologies Used
 
@@ -11,14 +12,12 @@ IdeaHive is a blog website where writers can publish articles and readers can ex
 - Nodejs, Express for the Back-end
 - MySql for Database
 
-
 ## Acknowledgements
 
- - [Vite](https://vitejs.dev/)
- - [Bootstrap](https://getbootstrap.com/)
- - [Moment](https://momentjs.com/)
- - [React Bootstrap](https://react-bootstrap.github.io/)
- - [React Hot Toast](https://react-hot-toast.com/)
-  - [React Quill](https://github.com/zenoamaro/react-quill)
-   - [Sass](https://sass-lang.com/)
-
+- [Vite](https://vitejs.dev/)
+- [Bootstrap](https://getbootstrap.com/)
+- [Moment](https://momentjs.com/)
+- [React Bootstrap](https://react-bootstrap.github.io/)
+- [React Hot Toast](https://react-hot-toast.com/)
+- [React Quill](https://github.com/zenoamaro/react-quill)
+- [Sass](https://sass-lang.com/)
