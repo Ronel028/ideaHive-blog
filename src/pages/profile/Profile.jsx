@@ -57,10 +57,10 @@ const Profile = () => {
         );
         if (userBlog.data.msg === "success") {
           setUserBlog(userBlog.data.userBlog);
+          setUserBlogLoad(false);
         } else {
           throw userBlog.data.msg;
         }
-        setUserBlogLoad(false);
       } catch (error) {}
     };
     userBlogList();
