@@ -8,7 +8,7 @@ IdeaHive is a blog website where writers can publish articles and readers can ex
 
 ## Technologies Used
 
-- ReactJS, Sass, and Bootstrap for the front-end
+- Vite React, Sass, and Bootstrap for the front-end
 - Nodejs, Express for the Back-end
 - MySql for Database
 
