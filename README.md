@@ -21,3 +21,4 @@ IdeaHive is a blog website where writers can publish articles and readers can ex
 - [React Hot Toast](https://react-hot-toast.com/)
 - [React Quill](https://github.com/zenoamaro/react-quill)
 - [Sass](https://sass-lang.com/)
+- [Vercel](https://vercel.com/)
