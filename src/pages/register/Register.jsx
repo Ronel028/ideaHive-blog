@@ -12,6 +12,7 @@ const Register = () => {
     password: "",
   });
   const [error, setError] = useState([]);
+  const [loader, setLoader] = useState(false);
 
   const getInputVal = (e) => {
     const { name, value } = e.target;
@@ -23,24 +24,28 @@ const Register = () => {
 
   const registerUser = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    Object.entries(inputVal).forEach(([name, value]) => {
-      formData.append(name, value);
-    });
-    const regUser = await axios.post(
-      "https://api-ideahive.vercel.app/user/register",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+    try {
+      const formData = new FormData();
+      Object.entries(inputVal).forEach(([name, value]) => {
+        formData.append(name, value);
+      });
+      setLoader(true);
+      const regUser = await axios.post(
+        "https://api-ideahive.vercel.app/user/register",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      if (regUser.data.error) {
+        setError(regUser.data.error);
+      } else {
+        navigate("/signin");
       }
-    );
-    if (regUser.data.error) {
-      setError(regUser.data.error);
-    } else {
-      navigate("/signin");
-    }
+      setLoader(false);
+    } catch (error) {}
   };
 
   // render error message
@@ -62,6 +67,16 @@ const Register = () => {
       return "";
     }
   };
+
+  // loader
+  const displayLoader = () => {
+    if (loader) {
+      return <span className="loader"></span>;
+    } else {
+      return "";
+    }
+  };
+  // loader
 
   return (
     <motion.main
@@ -111,6 +126,7 @@ const Register = () => {
           <div className="register-btn">
             <button type="submit" id="btn">
               Create account
+              {displayLoader()}
             </button>
           </div>
         </form>
