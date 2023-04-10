@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import moment from "moment";
 import altImage from "../../assets/imgNotAvailable.jpeg";
+import altProfilePic from "../../assets/profile-alt.jpeg";
 import "./blog.scss";
 const Blog = (props) => {
   return (
@@ -14,7 +15,14 @@ const Blog = (props) => {
       <div className="blog-description">
         <div className="blog-profile-container">
           <div className="blog-image-container">
-            <img src={props.profileImage} alt={props.bloggerName} />
+            <img
+              src={
+                props.profileImage === "N/A"
+                  ? altProfilePic
+                  : props.profileImage
+              }
+              alt={props.bloggerName}
+            />
           </div>
           <h3>{props.bloggerName}</h3>
         </div>

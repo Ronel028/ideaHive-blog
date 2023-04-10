@@ -7,6 +7,7 @@ import DOMPurify from "dompurify";
 import { userContext } from "../../context/userContext";
 import useResetScroll from "../../hook/useResetScroll";
 import Navigation from "../../component/navigation/navigation";
+import altProfilePic from "../../assets/profile-alt.jpeg";
 import "./blogContent.scss";
 const BlogContent = () => {
   useResetScroll();
@@ -74,7 +75,14 @@ const BlogContent = () => {
               <div className="blog-content-left">
                 <div className="profile-container">
                   <div className="image-container">
-                    <img src={blogContent.profileImage} alt="" />
+                    <img
+                      src={
+                        blogContent.profileImage === "N/A"
+                          ? altProfilePic
+                          : blogContent.profileImage
+                      }
+                      alt={`${blogContent.fname} ${blogContent.lname}`}
+                    />
                   </div>
                   <div className="name-container">
                     <h5>{`${blogContent.fname} ${blogContent.lname}`}</h5>
@@ -96,7 +104,14 @@ const BlogContent = () => {
               <div className="blog-content-right">
                 <div className="sticky">
                   <div className="image-container">
-                    <img src={blogContent.profileImage} alt="" />
+                    <img
+                      src={
+                        blogContent.profileImage === "N/A"
+                          ? altProfilePic
+                          : blogContent.profileImage
+                      }
+                      alt={`${blogContent.fname} ${blogContent.lname}`}
+                    />
                   </div>
                   <h5>{`${blogContent.fname} ${blogContent.lname}`}</h5>
                   <p className="about">{blogContent.about}</p>
